@@ -1,0 +1,32 @@
+/* 透明度 opacity */
+
+$opacity: 1;
+$opacitys: ();
+$opacitys: map-merge(
+    (
+        0: 0,
+        1: (
+            $opacity * 0.2,
+        ),
+        2: (
+            $opacity * 0.4,
+        ),
+        3: (
+            $opacity * 0.6,
+        ),
+        4: (
+            $opacity * 0.8,
+        ),
+        5: $opacity,
+    ),
+    $opacitys
+);
+
+// ex. opacity-1 , opacity-2 , ...
+@each $prop, $abbrev in (opacity: 'opacity') {
+    @each $opacity, $length in $opacitys {
+        .#{$abbrev}-#{$opacity} {
+            #{$prop}: $length !important;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@import './helper/_opacity';
+@import './helper/_articalgrid';
+@import './helper/_custpagination';
+@import './helper/_productcard';
+@import './helper/_heightnwidth';
+@import './img/_img';
+
+/* html tag 滿版尺寸 */
+
+.section {
+    min-height: 100vh;
+}
+
+.section-footer {
+    min-height: 88vh;
+}

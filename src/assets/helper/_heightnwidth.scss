@@ -1,0 +1,370 @@
+// wrem 以及 hrem 的起始直接為 1rem , 其餘單位皆以 10 為基準( 10vh , 10px)(因為 rem 的變化比較大)
+
+/* 高度 ( height ) */
+
+// 單位(unit): px
+$hpx: 10px;
+$hpxs: ();
+$hpxs: map-merge(
+    (
+        0: 0,
+        1: $hpx,
+        2: (
+            $hpx * 2,
+        ),
+        3: (
+            $hpx * 3,
+        ),
+        4: (
+            $hpx * 4,
+        ),
+        5: (
+            $hpx * 5,
+        ),
+        6: (
+            $hpx * 6,
+        ),
+        7: (
+            $hpx * 7,
+        ),
+        8: (
+            $hpx * 8,
+        ),
+        9: (
+            $hpx * 9,
+        ),
+        10: (
+            $hpx * 10,
+        ),
+        15: (
+            $hpx * 15,
+        ),
+        20: (
+            $hpx * 20,
+        ),
+        30: (
+            $hpx * 30,
+        ),
+        60: (
+            $hpx * 60,
+        ),
+        90: (
+            $hpx * 90,
+        ),
+    ),
+    $hpxs
+);
+
+// ex. hpx-1 , hpx-2 , ...
+@each $prop, $abbrev in (height: hpx) {
+    @each $hpx, $length in $hpxs {
+        .#{$abbrev}-#{$hpx} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): rem
+$hrem: 1rem;
+$hrems: ();
+$hrems: map-merge(
+    (
+        0: 0,
+        1: $hrem,
+        2: (
+            $hrem * 2,
+        ),
+        3: (
+            $hrem * 3,
+        ),
+        4: (
+            $hrem * 4,
+        ),
+        5: (
+            $hrem * 5,
+        ),
+        6: (
+            $hrem * 6,
+        ),
+        7: (
+            $hrem * 7,
+        ),
+        8: (
+            $hrem * 8,
+        ),
+        9: (
+            $hrem * 9,
+        ),
+        10: (
+            $hrem * 10,
+        ),
+        20: (
+            $hrem * 20,
+        ),
+        55: (
+            $hrem * 55,
+        ),
+        75: (
+            $hrem * 75,
+        ),
+    ),
+    $hrems
+);
+
+// ex. hrem-1 , hrem-2 , ...
+@each $prop, $abbrev in (height: hrem) {
+    @each $hrem, $length in $hrems {
+        .#{$abbrev}-#{$hrem} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): vh
+$hvh: 10vh;
+$hvhs: ();
+$hvhs: map-merge(
+    (
+        0: 0,
+        1: $hvh,
+        2: (
+            $hvh * 2,
+        ),
+        3: (
+            $hvh * 3,
+        ),
+        4: (
+            $hvh * 4,
+        ),
+        5: (
+            $hvh * 5,
+        ),
+        6: (
+            $hvh * 6,
+        ),
+        7: (
+            $hvh * 7,
+        ),
+        8: (
+            $hvh * 8,
+        ),
+        9: (
+            $hvh * 9,
+        ),
+    ),
+    $hvhs
+);
+
+// ex. hvh-1 , hvh-2 , ...
+@each $prop, $abbrev in (height: hvh) {
+    @each $hvh, $length in $hvhs {
+        .#{$abbrev}-#{$hvh} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): %
+$hpercent: 10%;
+$hpercents: ();
+$hpercents: map-merge(
+    (
+        0: 0,
+        10: $hpercent,
+        20: (
+            $hpercent * 2,
+        ),
+        30: (
+            $hpercent * 3,
+        ),
+        40: (
+            $hpercent * 4,
+        ),
+        50: (
+            $hpercent * 5,
+        ),
+        60: (
+            $hpercent * 6,
+        ),
+        70: (
+            $hpercent * 7,
+        ),
+        80: (
+            $hpercent * 8,
+        ),
+        90: (
+            $hpercent * 9,
+        ),
+        100: (
+            $hpercent * 10,
+        ),
+    ),
+    $hpercents
+);
+
+// ex. h-10 , h-20 , ...
+@each $prop, $abbrev in (height: h) {
+    @each $hpercent, $length in $hpercents {
+        .#{$abbrev}-#{$hpercent} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+/* 寬度 ( width ) */
+
+// 單位(unit): px
+$wpx: 10px;
+$wpxs: ();
+$wpxs: map-merge(
+    (
+        0: 0,
+        1: $wpx,
+        2: (
+            $wpx * 2,
+        ),
+        3: (
+            $wpx * 3,
+        ),
+        4: (
+            $wpx * 4,
+        ),
+        5: (
+            $wpx * 5,
+        ),
+        6: (
+            $wpx * 6,
+        ),
+        7: (
+            $wpx * 7,
+        ),
+        8: (
+            $wpx * 8,
+        ),
+        9: (
+            $wpx * 9,
+        ),
+        10: (
+            $wpx * 10,
+        ),
+        15: (
+            $wpx * 15,
+        ),
+        20: (
+            $wpx * 20,
+        ),
+        30: (
+            $wpx * 30,
+        ),
+        60: (
+            $wpx * 60,
+        ),
+        90: (
+            $wpx * 90,
+        ),
+    ),
+    $wpxs
+);
+
+// ex. hpx-1 , hpx-2 , ...
+@each $prop, $abbrev in (width: wpx) {
+    @each $wpx, $length in $wpxs {
+        .#{$abbrev}-#{$wpx} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): rem
+$wrem: 1rem;
+$wrems: ();
+$wrems: map-merge(
+    (
+        0: 0,
+        1: $wrem,
+        2: (
+            $wrem * 2,
+        ),
+        3: (
+            $wrem * 3,
+        ),
+        4: (
+            $wrem * 4,
+        ),
+        5: (
+            $wrem * 5,
+        ),
+        6: (
+            $wrem * 6,
+        ),
+        7: (
+            $wrem * 7,
+        ),
+        8: (
+            $wrem * 8,
+        ),
+        9: (
+            $wrem * 9,
+        ),
+        10: (
+            $wrem * 10,
+        ),
+        20: (
+            $wrem * 20,
+        ),
+    ),
+    $wrems
+);
+
+// ex. hrem-1 , hrem-2 , ...
+@each $prop, $abbrev in (width: wrem) {
+    @each $wrem, $length in $wrems {
+        .#{$abbrev}-#{$wrem} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): vh
+$wvh: 10vh;
+$wvhs: ();
+$wvhs: map-merge(
+    (
+        0: 0,
+        1: $wvh,
+        2: (
+            $wvh * 2,
+        ),
+        3: (
+            $wvh * 3,
+        ),
+        4: (
+            $wvh * 4,
+        ),
+        5: (
+            $wvh * 5,
+        ),
+        6: (
+            $wvh * 6,
+        ),
+        7: (
+            $wvh * 7,
+        ),
+        8: (
+            $wvh * 8,
+        ),
+        9: (
+            $wvh * 9,
+        ),
+    ),
+    $wvhs
+);
+
+// ex. hvh-1 , hvh-2 , ...
+@each $prop, $abbrev in (width: wvh) {
+    @each $wvh, $length in $wvhs {
+        .#{$abbrev}-#{$wvh} {
+            #{$prop}: $length !important;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+.navtext:hover {
+    transition: color cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+
+.heightback {
+    transition: padding ease-in-out 0.5s;
+}
+.navtext a:hover {
+    transition: color ease-in-out 0.1s;
+}
+@media screen and (max-width: 600px) {
+    .heightback {
+        transition: background-color ease-in-out 0.3s;
+    }
+}
+
+//custom navbar hamburger button
+
+.animated-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.animated-icon span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+    background: #faf0d0;
+}
+
+.animated-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.animated-icon span:nth-child(2) {
+    top: 10px;
+}
+
+.animated-icon span:nth-child(3) {
+    top: 20px;
+}
+
+.open span:nth-child(1) {
+    top: 11px;
+    transform: rotate(135deg);
+}
+
+.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.open span:nth-child(3) {
+    top: 11px;
+    transform: rotate(-135deg);
+}

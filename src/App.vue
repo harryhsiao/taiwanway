@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="d-flex flex-column" id="app">
+    <Navbar />
+    <Back2top />
+    <router-view class="position-relative flex-grow-1 flex-shrink-0" v-if="isRouterAlive" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Back2top from '@/components/kit/Back2top';
+import Navbar from '@/components/Navbar';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Navbar,
+    Back2top,
+  },
+  data() {
+    return {
+      isRouterAlive: true,
+    };
+  },
+  provide() {
+    const vm = this;
+    return {
+      reload: vm.reload(),
+    };
+  },
+  methods: {
+    reload() {
+      const vm = this;
+      vm.isRouterAlive = false;
+      vm.$nextTick(function() {
+        vm.isRouterAlive = true;
+      });
+    },
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import './assets/all';
 </style>

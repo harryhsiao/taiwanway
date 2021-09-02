@@ -1,0 +1,45 @@
+/* 圖片(image) */
+
+.main-image {
+    background-image: url('https://upload.cc/i1/2021/07/30/14IAw0.jpg');
+}
+
+.menu-image {
+    background-image: url('https://upload.cc/i1/2021/08/01/Oa1DUE.jpg');
+}
+
+.shop-image {
+    background-image: url('https://upload.cc/i1/2021/07/30/KARFgd.jpg');
+}
+
+//background-img 滿版置中
+.image-cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+//attachment 滾動視差
+.bg-attachment {
+    background-attachment: fixed;
+}
+
+// 文字圖片組合 垂直置中
+.image-text-combo {
+    flex-direction: column;
+}
+
+//文字圖片組合 hover毛玻璃
+.furittext {
+    list-style: none;
+    top: 230px;
+    left: 0;
+    transition: top cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.img-hover-text:hover {
+    .furittext {
+        top: 0;
+        left: 0;
+    }
+}

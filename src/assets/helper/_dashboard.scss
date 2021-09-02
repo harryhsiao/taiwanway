@@ -1,0 +1,116 @@
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+.rankarrow_up {
+    transform: rotate(0deg);
+    transition: 300ms ease all;
+}
+
+.rankarrow_down {
+    transform: rotate(180deg);
+    transition: 300ms ease all;
+}
+
+/*
+ * Content
+ */
+
+[role='main'] {
+    padding-top: 133px; /* Space for fixed navbar */
+}
+
+@media (min-width: 768px) {
+    [role='main'] {
+        padding-top: 48px; /* Space for fixed navbar */
+    }
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.navbar .form-control {
+    padding: 0.75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+/* 表單( table ) RWD */
+
+.rwd-table {
+    background: #fff;
+    overflow: hidden;
+}
+.rwd-table tr:nth-of-type(2n) {
+    background: #eee;
+}
+.rwd-table th,
+.rwd-table td {
+    margin: 0.5em 1em;
+    padding-left: auto;
+    padding-right: auto;
+}
+.rwd-table {
+    min-width: 100%;
+}
+.rwd-table th {
+    display: none;
+}
+.rwd-table td {
+    display: block;
+}
+.rwd-table td:before {
+    content: attr(data-th) ' : ';
+    font-weight: bold;
+    width: 6.5em;
+    display: inline-block;
+}
+.rwd-table th,
+.rwd-table td {
+    text-align: left;
+}
+
+@media (min-width: 480px) {
+    .rwd-table td:before {
+        display: none;
+    }
+    .rwd-table th,
+    .rwd-table td {
+        display: table-cell;
+        padding: 0.25em 0.5em;
+    }
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+        padding-left: 0;
+    }
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+        padding-right: 0;
+    }
+    .rwd-table th,
+    .rwd-table td {
+        padding: 1em !important;
+    }
+}
