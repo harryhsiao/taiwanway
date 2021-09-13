@@ -2,35 +2,32 @@
   <div>
     <router-link
       tag="button"
-      to="/cart"
-      class=" position-fixed border-0 p-3 topbutton rounded-circle"
+      to="/Addcart"
+      class=" position-fixed border-0 p-3 topbutton rounded-circle d-md-block d-none"
     >
       <i class="fas fa-shopping-cart"></i>
       <p class="mb-0">購物車</p>
 
-      <span class="badge badge-pill badge-danger" v-if="cartnum > 0">
+      <span class="position-absolute badge badge-pill badge-danger btnnum" v-if="cartnum > 0">
         {{ cartnum }}
       </span>
+    </router-link>
+    <router-link
+      tag="button"
+      to="/Addcart"
+      class="fixed-bottom border-0 p-3 w-100 d-md-none d-block"
+    >
+      <p class="mb-0">
+        <i class="fas fa-shopping-cart mr-2"></i>購物車<span class="ml-2">({{ cartnum }})</span>
+      </p>
     </router-link>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'pages',
-    props: ['cartnum'],
-    methods: {
-        getpgnums(page, curpage) {
-            const vm = this;
-            if (page === 'pre') {
-                vm.$emit('getpgnum', vm.pgnum.current_page - 1);
-            } else if (page === 'next') {
-                vm.$emit('getpgnum', vm.pgnum.current_page + 1);
-            } else {
-                vm.$emit('getpgnum', curpage);
-            }
-        },
-    },
+  name: 'pages',
+  props: ['cartnum'],
 };
 </script>
 
@@ -43,7 +40,15 @@ export default {
   transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.2s;
 }
 
+.rwdbtn {
+  bottom: 180px;
+}
+
 .topbutton:hover {
   background-color: rgb(57, 231, 217);
+}
+
+.btnnum {
+  right: 10px;
 }
 </style>

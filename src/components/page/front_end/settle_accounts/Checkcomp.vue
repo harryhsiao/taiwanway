@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <Alertnote />
+    <Alertcard />
     <div class="container mb-5">
       <div class="row">
         <div class="col-12 px-0 mb-5">
@@ -39,7 +39,8 @@
                       </tr>
                       <tr>
                         <th scope="row">付款價格</th>
-                        <td>{{ order.total }}</td>
+                        <td v-if="order.total < 3000">{{ order.total + 60 }}</td>
+                        <td v-else>{{ order.total }}</td>
                       </tr>
                       <tr>
                         <th scope="row">收貨地址</th>
@@ -71,7 +72,13 @@
             <button class="btn btn-secondary" @click="$router.push('/cart')">
               回到購物頁
             </button>
-            <button class="btn btn-primary ml-3" v-if="order.is_paid === false" @click="letPay">
+            <button
+              class="btn btn-primary ml-3"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              v-if="order.is_paid === false"
+              @click="letPay"
+            >
               模擬付款
             </button>
           </div>
@@ -82,7 +89,7 @@
 </template>
 
 <script>
-import Alertnote from '@/components/kit/Alertnote';
+import Alertcard from '@/components/kit/Alertcard';
 
 export default {
   data() {
@@ -90,12 +97,15 @@ export default {
       order: {
         user: {},
       },
+      totalPricePack: [],
       orderId: '',
       isLoading: false,
+      total_price: 0,
+      Discount: 100,
     };
   },
   components: {
-    Alertnote,
+    Alertcard,
   },
   methods: {
     getorder() {
@@ -113,11 +123,31 @@ export default {
       vm.isLoading = true;
       vm.$http.post(api).then((resp) => {
         if (resp.data.success) {
-          vm.$bus.$emit('messsage:push', '付款成功', 'success');
           vm.getorder();
         }
         vm.isLoading = false;
+        vm.$infomodal.$emit('messsage:push', '付款成功', 'success');
       });
+    },
+
+    totalPricecal() {
+      const vm = this;
+      vm.totalPricePack = [];
+      vm.order.forEach((item) => {
+        if (item.products.total < 3000) {
+          vm.total_price = item.products.total + 60;
+        } else {
+          vm.total_price = item.products.total;
+        }
+      });
+    },
+    ShippingFee() {
+      const vm = this;
+      if (vm.total_price < 3000) {
+        vm.shipping = 60;
+      } else {
+        vm.shipping = 0;
+      }
     },
   },
   created() {

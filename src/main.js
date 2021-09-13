@@ -25,6 +25,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import router from './router';
 import './bus';
 import './infotext';
+import './infomodal';
 import currencyFilter from './filters/currency';
 import VueI18n from 'vue-i18n';
 

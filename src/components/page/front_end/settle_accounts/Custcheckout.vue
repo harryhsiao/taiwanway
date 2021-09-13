@@ -7,7 +7,10 @@
           <div class="card">
             <div class="card-header" id="headingOne" role="tab">
               <div class="row">
-                <p class="h2 mb-0 ml-md-3 mx-auto" :class="{ 'text-maincolor': Discount !== 100 }">
+                <p class="h2 mb-0 ml-md-3 mx-auto" v-if="Discount == 100">
+                  {{ (total_price + shipping) | currency }}
+                </p>
+                <p class="h2 mb-0 ml-md-3 mx-auto" :class="{ 'text-maincolor': Discount !== 100 }" v-else>
                   {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
                 </p>
                 <a
@@ -144,6 +147,7 @@ export default {
   },
   created() {
     this.getcart();
+    this.totalPricecal();
   },
   methods: {
     postinfo() {
@@ -157,7 +161,6 @@ export default {
         }
       });
     },
-
     totalPricecal() {
       const vm = this;
       vm.totalPricePack = [];

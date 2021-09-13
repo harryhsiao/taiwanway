@@ -3,6 +3,104 @@
     <loading :active.sync="isLoading"></loading>
     <section class="container mt-8">
       <div class="row">
+        <div class="col-lg-4 d-block d-md-none">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="mb-3">結帳</h5>
+
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                >
+                  金額
+                  <span>{{ mytotalprice | currency }}</span>
+                </li>
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                    px-0
+                  "
+                  v-if="mytotalprice < 3000 && mytotalprice > 0"
+                >
+                  運費
+                  <span>{{ 60 | currency }}</span>
+                </li>
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                    px-0
+                    text-success
+                  "
+                  v-else
+                >
+                  運費
+                  <span>{{ 0 | currency }}</span>
+                </li>
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                    border-0
+                    px-0
+                    mb-3
+                  "
+                >
+                  <div>
+                    <strong class="h3">總價</strong>
+                    <strong>
+                      <p class="mb-0">(含稅)</p>
+                    </strong>
+                  </div>
+                  <span class="h2" v-if="mytotalprice < 5000 && mytotalprice > 0">
+                    <strong>{{ (mytotalprice + 60) | currency }}</strong>
+                  </span>
+                  <span class="h2" v-else>
+                    <strong>{{ mytotalprice | currency }}</strong>
+                  </span>
+                </li>
+              </ul>
+
+              <button class="btn btn-maincolor py-3 btn-block" @click="postcart()">
+                結帳去
+              </button>
+              <router-link to="/cart" class="btn btn-secondary py-2 btn-block">
+                繼續購物
+              </router-link>
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="mb-4">我們接受以下付款方式</h5>
+
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa"
+              />
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                alt="American Express"
+              />
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard"
+              />
+            </div>
+          </div>
+        </div>
         <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-header d-md-flex justify-content-between align-items-center">
@@ -20,7 +118,7 @@
                 清空購物車
               </a>
             </div>
-            <div class="card-body overflow-auto hvh-8">
+            <div class="card-body overflow-auto hvh-7">
               <div class="noneProductMessage text-center" v-show="isnone">
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
@@ -99,7 +197,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-none d-md-block">
           <div class="card mb-4">
             <div class="card-body">
               <h5 class="mb-3">結帳</h5>
@@ -249,7 +347,7 @@ export default {
         }
       });
       if (pricepack.length > 0) {
-        vm.mytotalprice = pricepack.reduce((a, b) => a + b,0);
+        vm.mytotalprice = pricepack.reduce((a, b) => a + b, 0);
       } else {
         vm.mytotalprice = 0;
       }

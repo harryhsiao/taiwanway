@@ -14,21 +14,17 @@
       <div class="row">
         <!--商品過濾選項-->
         <div class="col-sm-4">
-          <div class="row align-items-baseline">
-            <div class="col-5">
-              <!--前往購物車頁面按鈕-->
-              <router-link
-                to="/addcart"
-                class="position-relative text-info float-right pr-3 d-block d-md-none"
-              >
-                <i class="fas fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                <span
-                  class="badge badge-pill position-absolute t-20 badge-danger"
-                  v-if="cartlong > 0"
-                  >{{ cartlong }}</span
-                >
-              </router-link>
-              <!--前往購物車頁面按鈕-->
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="輸入想要搜尋的商品"
+              aria-label="輸入想要搜尋的商品"
+              aria-describedby="button-addon2"
+              v-model="productsearch"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">搜尋</span>
             </div>
           </div>
           <div class="list-group d-none d-sm-block">
@@ -42,56 +38,17 @@
               >{{ item }}</a
             >
           </div>
+          <select name="" id="" class="d-sm-none d-block w-100 mb-4 py-2 px-2" @change="changeValue">
+            <option v-for="(item, index) in categorys" :key="index">
+              {{ item }}
+            </option>
+          </select>
         </div>
         <!--商品過濾選項-->
         <!--商品-->
         <div class="col-sm-8">
           <div class="container">
             <div class="row">
-              <div class="col-12 mb-4">
-                <div class="row align-center">
-                  <div class="col-md-6">
-                    <div class="input-group mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="輸入想要搜尋的商品"
-                        aria-label="輸入想要搜尋的商品"
-                        aria-describedby="button-addon2"
-                        v-model="productsearch"
-                      />
-                      <div class="input-group-append">
-                        <span class="input-group-text">搜尋</span>
-                      </div>
-                    </div>
-                    <!--RWD商品過濾選項-->
-                    <select
-                      name=""
-                      id=""
-                      class="d-sm-none d-block w-100 mb-4"
-                      @change="changeValue"
-                    >
-                      <option v-for="(item, index) in categorys" :key="index">
-                        {{ item }}
-                      </option>
-                    </select>
-                    <!--RWD商品過濾選項-->
-                  </div>
-                  <div class="col-md-6 text-right">
-                    <!--前往購物車頁面按鈕-->
-                    <router-link
-                      to="/addcart"
-                      class="badge-pop-up text-maincolor d-none d-md-block"
-                    >
-                      <i class="fas fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                      <span class="badge badge-pill badge-danger" v-if="cartlong > 0">
-                        {{ cartlong }}
-                      </span>
-                    </router-link>
-                    <!--前往購物車頁面按鈕-->
-                  </div>
-                </div>
-              </div>
               <div
                 class="col-md-4 mb-3"
                 :class="{ 'd-none': !isLoading }"

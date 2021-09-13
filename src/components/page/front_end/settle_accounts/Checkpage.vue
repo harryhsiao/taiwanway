@@ -1,9 +1,9 @@
 <template>
   <div>
     <Navbar />
+    <loading :active.sync="isLoading"></loading>
     <div id="v-content" class="container mt-9" :style="{ minHeight: Height + 'px' }">
-      <h2 class="text-center my-4" v-if="CurrentTitle !== ''">{{ CurrentTitle }}</h2>
-      <h2 class="text-center my-4" v-else>購物成功</h2>
+      <h2 class="text-center my-4">{{ currentTitle }}</h2>
       <section class="form-row text-center">
         <div class="col-12 col-sm-4">
           <div
@@ -47,9 +47,10 @@ export default {
   data() {
     return {
       Height: 0,
+      isLoading: false,
       alertopen: '/checkpage/csutinfo',
       orderId: '',
-      CurrentTitle: '',
+      currentTitle: '',
     };
   },
   computed: {
@@ -58,29 +59,32 @@ export default {
       let homePath = vm.$route.path;
       //let IDaddress = `/checkpage/checkcomp/${vm.orderId}`;
       vm.alertopen = homePath;
-      if(vm.alertopen=='/checkpage/csutinfo'){
-        vm.CurrentTitle = '購物訂單';
+      vm.currentTitle = '';
+      //vm.isLoading = true;
+      /*if (vm.alertopen == '/checkpage/csutinfo') {
+        vm.currentTitle = '購物訂單';
+        vm.isLoading = false;
         return 'order';
-      }else if(vm.alertopen=='/checkpage/csutcheckout'){
-        vm.CurrentTitle = '最終確認';
+      } else if (vm.alertopen == '/checkpage/csutcheckout') {
+        vm.currentTitle = '最終確認';
+        vm.isLoading = false;
         return 'check';
-      }else{
-        vm.CurrentTitle = '購物訂單';
+      } else {
+        vm.currentTitle = '購物成功';
+        vm.isLoading = false;
         return 'success';
-      }
-      /*switch (homePath) {
+      }*/
+      switch (homePath) {
         case '/checkpage/csutinfo':
-          vm.CurrentTitle = '購物訂單';
+          vm.currentTitle = '購物訂單';
           return 'order';
         case '/checkpage/csutcheckout':
-          vm.CurrentTitle = '最終確認';
+          vm.currentTitle = '最終確認';
           return 'check';
-        case IDaddress:
-          vm.CurrentTitle = '';
-          return 'success';
         default:
+        vm.currentTitle = '購物成功';
           return 'none';
-      }*/
+      }
     },
   },
   components: {
@@ -88,6 +92,14 @@ export default {
   },
   created() {
     this.orderId = this.$route.params.order_id;
+    this.getcurraddress();
+  },
+  methods: {
+    getcurraddress() {
+      const vm = this;
+      let homePath = vm.$route.path;
+      vm.alertopen = homePath;
+    },
   },
   mounted() {
     //動態設置內容高度 讓footer始終居底   header+footer的高度是100
