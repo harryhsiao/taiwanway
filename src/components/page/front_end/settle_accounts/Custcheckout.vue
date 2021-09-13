@@ -10,7 +10,11 @@
                 <p class="h2 mb-0 ml-md-3 mx-auto" v-if="Discount == 100">
                   {{ (total_price + shipping) | currency }}
                 </p>
-                <p class="h2 mb-0 ml-md-3 mx-auto" :class="{ 'text-maincolor': Discount !== 100 }" v-else>
+                <p
+                  class="h2 mb-0 ml-md-3 mx-auto"
+                  :class="{ 'text-maincolor': Discount !== 100 }"
+                  v-else
+                >
                   {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
                 </p>
                 <a
@@ -150,6 +154,21 @@ export default {
     this.totalPricecal();
   },
   methods: {
+    getcart() {
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      vm.$http
+        .get(api)
+        .then((resp) => {
+          vm.custcart = resp.data.data.carts;
+        })
+        .then(() => {
+          vm.totalPricecal();
+          vm.ShippingFee();
+          vm.isLoading = false;
+        });
+    },
     postinfo() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
@@ -158,6 +177,7 @@ export default {
         if (response.data.success) {
           vm.isLoading = false;
           this.$router.push(`/checkpage/checkcomp/${response.data.orderId}`);
+          localStorage.removeItem('custinfo');
         }
       });
     },
@@ -184,21 +204,6 @@ export default {
       } else {
         vm.shipping = 0;
       }
-    },
-    getcart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      vm.$http
-        .get(api)
-        .then((resp) => {
-          vm.custcart = resp.data.data.carts;
-        })
-        .then(() => {
-          vm.totalPricecal();
-          vm.ShippingFee();
-          vm.isLoading = false;
-        });
     },
   },
 };
