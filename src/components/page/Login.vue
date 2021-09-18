@@ -1,7 +1,7 @@
 <template>
     <div>
         <Navbar />
-        <div class="card text-center w-20 form-signin mt-6">
+        <div class="card text-center w-20 form-signin mt-9">
             <div class="card-body">
                 <form @submit.prevent="login">
                     <h3 class="mb-3 font-weight-normal">登入</h3>

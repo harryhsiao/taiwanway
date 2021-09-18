@@ -14,17 +14,17 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <svg width="400" height="400">
+        <div class="modal-body px-5 mx-auto text-center">
+          <svg width="200" height="200">
             <circle
               class="circle"
               fill="none"
               stroke="#e80"
-              stroke-width="20"
-              cx="200"
-              cy="200"
-              r="190"
-              transform="rotate(-90,200,200)"
+              stroke-width="10"
+              cx="100"
+              cy="100"
+              r="90"
+              transform="rotate(-90,100,100)"
             />
             <polyline
               class="tick"
@@ -34,9 +34,10 @@
               stroke-linecap="round"
               stroke-linejoin="round"
               points="88,214 173,284 304,138"
+              transform="scale(0.5)"
             />
           </svg>
-          <p :class="'text-' + status">
+          <p class="h2" :class="'text-' + status">
             {{ msg }}
           </p>
         </div>
@@ -89,9 +90,27 @@ export default {
 .circle {
   stroke-dasharray: 1194;
   stroke-dashoffset: 0;
+  animation: circle ease-in-out 1s;
 }
-.trick {
+.tick {
   stroke-dasharray: 350;
   stroke-dashoffset: 0;
+  animation: tick ease-out .8s;
+}
+@keyframes circle {
+  from {
+    stroke-dashoffset: 1194;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes tick {
+  from {
+    stroke-dashoffset: 350;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 </style>

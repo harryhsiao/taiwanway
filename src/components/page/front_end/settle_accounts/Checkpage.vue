@@ -2,8 +2,8 @@
   <div>
     <Navbar />
     <loading :active.sync="isLoading"></loading>
-    <div id="v-content" class="container mt-9" :style="{ minHeight: Height + 'px' }">
-      <h2 class="text-center my-4">{{ currentTitle }}</h2>
+    <div id="v-content" class="container mt-8" :style="{ minHeight: Height + 'px' }">
+      <h2 class="text-center my-4">確認結帳步驟</h2>
       <section class="form-row text-center">
         <div class="col-12 col-sm-4">
           <div
@@ -28,7 +28,7 @@
             class="alert rounded-pill py-3"
             role="alert"
             :class="{
-              'alert-earthy': alertopen == `/checkpage/checkcomp/${orderId}`,
+              'alert-earthy': alertopen == 'complete',
             }"
           >
             3. 完成
@@ -53,40 +53,27 @@ export default {
       currentTitle: '',
     };
   },
-  computed: {
+  /*computed: {
     stylechange() {
       const vm = this;
       let homePath = vm.$route.path;
       //let IDaddress = `/checkpage/checkcomp/${vm.orderId}`;
       vm.alertopen = homePath;
       vm.currentTitle = '';
-      //vm.isLoading = true;
-      /*if (vm.alertopen == '/checkpage/csutinfo') {
-        vm.currentTitle = '購物訂單';
+      vm.isLoading = true;
+      if (vm.alertopen == '/checkpage/csutinfo') {
         vm.isLoading = false;
-        return 'order';
+        return (vm.currentTitle = '購物訂單');
       } else if (vm.alertopen == '/checkpage/csutcheckout') {
-        vm.currentTitle = '最終確認';
         vm.isLoading = false;
-        return 'check';
+        return (vm.currentTitle = '最終確認');
       } else {
-        vm.currentTitle = '購物成功';
+        vm.alertopen = 'complete';
         vm.isLoading = false;
-        return 'success';
-      }*/
-      switch (homePath) {
-        case '/checkpage/csutinfo':
-          vm.currentTitle = '購物訂單';
-          return 'order';
-        case '/checkpage/csutcheckout':
-          vm.currentTitle = '最終確認';
-          return 'check';
-        default:
-        vm.currentTitle = '購物成功';
-          return 'none';
+        return (vm.currentTitle = '購物成功');
       }
     },
-  },
+  },*/
   components: {
     Navbar,
   },
@@ -99,6 +86,7 @@ export default {
       const vm = this;
       let homePath = vm.$route.path;
       vm.alertopen = homePath;
+      //vm.$set(vm.alertopen, homePath);
     },
   },
   mounted() {

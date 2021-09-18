@@ -151,7 +151,6 @@ export default {
   },
   created() {
     this.getcart();
-    this.totalPricecal();
   },
   methods: {
     getcart() {

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a class="text-muted" href="#" @click.prevent="onsider" style="margin-top:500px; z-index:99999px;">
+    <!--a class="text-muted" href="#" @click.prevent="onsider" style="margin-top:500px; z-index:99999px;">
       <i class="fas fa-chevron-left"></i>
-    </a>
+    </a-->
     <nav class="col-md-2 bg-light sidebar" :class="{ showSidebar: !tran, hideSidebar: tran }">
       <div class="sidebar-sticky">
         <h6
@@ -13,7 +13,7 @@
             <i class="fas fa-chevron-left"></i>
           </a>
         </h6>
-        <ul class="nav flex-column d-md-block d-none">
+        <ul class="nav flex-column">
           <li class="nav-item border py-4">
             <router-link class="nav-link h4" to="/dashboard/products">
               <i class="fas fa-box-open fa-fw"></i>&nbsp;&nbsp;產品列表
@@ -35,7 +35,7 @@
             </a>
           </li>
         </ul>
-        <ul class="nav flex-column d-md-none d-block">
+        <!--ul class="nav flex-column d-md-none d-block">
           <li class="nav-item border py-4" @click="onsider">
             <router-link class="nav-link h4" to="/dashboard/products">
               <i class="fas fa-box-open fa-fw"></i>&nbsp;&nbsp;產品列表
@@ -56,7 +56,7 @@
               <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;登出
             </a>
           </li>
-        </ul>
+        </ul-->
       </div>
     </nav>
   </div>

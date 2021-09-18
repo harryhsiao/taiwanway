@@ -134,6 +134,7 @@ export default {
       const vm = this;
       vm.totalPricePack = [];
       vm.order.forEach((item) => {
+        console.log(item.products)
         if (item.products.total < 3000) {
           vm.total_price = item.products.total + 60;
         } else {
