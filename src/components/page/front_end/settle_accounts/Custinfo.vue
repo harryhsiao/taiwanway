@@ -347,7 +347,6 @@ export default {
         vm.couponcode = '';
       });
     },
-
     totalPricecal() {
       const vm = this;
       vm.totalPricePack = [];
