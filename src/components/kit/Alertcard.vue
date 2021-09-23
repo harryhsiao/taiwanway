@@ -60,9 +60,9 @@ export default {
       vm.msg = message;
       vm.status = status;
       //vm.isCanUse = isCanUse;
-      vm.removeMessageWithTiming();
+      //vm.removeMessageWithTiming();
     },
-    removeMessage(num) {
+    /*removeMessage(num) {
       const vm = this;
       vm.messages.splice(num, 1);
     },
@@ -75,7 +75,7 @@ export default {
           }
         });
       }, 5000);
-    },
+    },*/
   },
   created() {
     const vm = this;

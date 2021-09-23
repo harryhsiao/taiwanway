@@ -1,7 +1,6 @@
 <template>
   <div>
     <Navbar />
-    <loading :active.sync="isLoading"></loading>
     <div id="v-content" class="container mt-8" :style="{ minHeight: Height + 'px' }">
       <h2 class="text-center my-4">確認結帳步驟</h2>
       <section class="form-row text-center">
@@ -48,45 +47,36 @@ export default {
     return {
       Height: 0,
       isLoading: false,
-      alertopen: '/checkpage/csutinfo',
-      orderId: '',
+      alertopen: '',
+      //orderId: '',
       currentTitle: '',
     };
   },
-  /*computed: {
-    stylechange() {
+  watch: {
+    alertopen() {
       const vm = this;
+      vm.alertopen = '';
       let homePath = vm.$route.path;
-      //let IDaddress = `/checkpage/checkcomp/${vm.orderId}`;
-      vm.alertopen = homePath;
-      vm.currentTitle = '';
-      vm.isLoading = true;
-      if (vm.alertopen == '/checkpage/csutinfo') {
-        vm.isLoading = false;
-        return (vm.currentTitle = '購物訂單');
-      } else if (vm.alertopen == '/checkpage/csutcheckout') {
-        vm.isLoading = false;
-        return (vm.currentTitle = '最終確認');
-      } else {
+      /*if (vm.alertopen == '/checkpage/csutinfo' || vm.alertopen == '/checkpage/csutcheckout') {*/
+        vm.alertopen = homePath;
+      /*} else {
         vm.alertopen = 'complete';
-        vm.isLoading = false;
-        return (vm.currentTitle = '購物成功');
-      }
+      }*/
     },
-  },*/
+  },
   components: {
     Navbar,
   },
   created() {
-    this.orderId = this.$route.params.order_id;
+    //this.orderId = this.$route.params.order_id;
     this.getcurraddress();
   },
   methods: {
     getcurraddress() {
       const vm = this;
       let homePath = vm.$route.path;
+      vm.alertopen = '';
       vm.alertopen = homePath;
-      //vm.$set(vm.alertopen, homePath);
     },
   },
   mounted() {

@@ -29,6 +29,8 @@ import './infomodal';
 import currencyFilter from './filters/currency';
 import VueI18n from 'vue-i18n';
 
+import vuetify from '@/plugins/vuetify';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 AOS.init();
@@ -72,6 +74,10 @@ Vue.config.productionTip = false;
 new Vue({
     router,
     render: (h) => h(App),
+}).$mount('#app');
+
+new Vue({
+  vuetify,
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {

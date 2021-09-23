@@ -6,7 +6,7 @@
         <div
           class="alert rounded-pill py-3"
           role="alert"
-          :class="{ 'alert-earthy': alertopen == '/checkpage/custinfo' }"
+          :class="{ 'alert-earthy': currpath == '/checkpage/custinfo' }"
         >
           1. 確認訂單
         </div>
@@ -15,7 +15,7 @@
         <div
           class="alert rounded-pill py-3"
           role="alert"
-          :class="{ 'alert-earthy': alertopen == '/checkpage/custcheckout' }"
+          :class="{ 'alert-earthy': currpath == '/checkpage/custcheckout' }"
         >
           2. 送出訂單
         </div>
@@ -25,7 +25,7 @@
           class="alert rounded-pill py-3"
           role="alert"
           :class="{
-            'alert-earthy': alertopen == 'complete',
+            'alert-earthy': currpath == 'complete',
           }"
         >
           3. 完成
@@ -37,10 +37,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      alertopen: '',
-    };
-  },
+  name: 'process',
+  props: ['currpath'],
 };
 </script>
