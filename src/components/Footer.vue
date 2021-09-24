@@ -46,7 +46,7 @@
               <li class="mb-2"><a href="#" class="text-dimegray">商品</a></li>
             </ul>
           </div>
-          <div class="col-lg-4 col-md-6 mb-lg-0">
+          <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
             <h6 class="text-uppercase font-weight-bold mb-4">訂閱電子報</h6>
             <p class="text-dimegray mb-4">
               不想錯過優惠以及令人期待的新菜色?馬上訂閱我們以獲取最新的相關資訊

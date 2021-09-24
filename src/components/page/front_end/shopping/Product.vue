@@ -11,7 +11,7 @@
     </nav>
     <header class="py-4 py-lg-5">
       <div class="container mt-7">
-        <router-link class="text-earthy h4 mb-5" to="/Cart">
+        <router-link class="text-secondary h4 mb-5" to="/Cart">
           <i class="fas fa-chevron-left"></i>
           返回上一頁
         </router-link>
@@ -89,7 +89,7 @@
               <p class="small">
                 <span class="badge badge-warning mr-2">活動</span>
                 食慾之秋<br class="d-md-none d-inlineblock" />
-                輸入折扣碼<span class="mx-md-2 mx-1 text-earthy font-weight-bold h5"
+                輸入折扣碼<span class="mx-md-2 mx-1 text-warning font-weight-bold h5"
                   >goodfood999</span
                 >享七折優惠
               </p>
@@ -254,7 +254,6 @@
               </div>
             </div>
 
-            <!--div class="d-md-block d-none"-->
             <div class="input-group my-4">
               <div class="input-group-prepend">
                 <button @click="qty--" class="minus btn btn-maincolor px-3" :disabled="qty < 2">
@@ -278,41 +277,6 @@
             <button type="button" class="btn btn-secondary py-3 w-100" @click="addcart(product)">
               加入購物車
             </button>
-            <!--/div-->
-
-            <!--div class="d-md-none d-block">
-              <div class="input-group my-3">
-                <div class="input-group-prepend">
-                  <button
-                    @click="qty--"
-                    class="minus border-right-0 border border-dark"
-                    :disabled="qty < 2"
-                  >
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-                <input
-                  class="text-center form-control"
-                  min="1"
-                  name="quantity"
-                  :max="product.num"
-                  v-model.number="qty"
-                  type="number"
-                />
-                <div class="input-group-prepend">
-                  <button @click="qty++" class="plus border-left-0 border border-dark">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-              <button
-                type="button"
-                class="btn btn-outline-secondary w-100"
-                @click="addcart(product)"
-              >
-                加入購物車
-              </button>
-            </div-->
           </div>
         </div>
       </div>
@@ -330,7 +294,7 @@
           >
             <div class="card-header" id="headingOne">
               <p class="m-0 text-left d-flex align-items-center font-weight-normal">
-                <span class="numfont text-white bg-earthy p-3 rounded mr-4">Q1</span>
+                <span class="numfont text-white bg-secondary p-3 rounded mr-4">Q1</span>
                 請問保存期限有多久呢?
               </p>
             </div>
@@ -358,7 +322,7 @@
           >
             <div class="card-header" id="headingTwo">
               <p class="m-0 text-left d-flex align-items-center font-weight-normal">
-                <span class="numfont text-white bg-earthy p-3 rounded mr-4">Q2</span>
+                <span class="numfont text-white bg-secondary p-3 rounded mr-4">Q2</span>
                 我買錯東西了，請問可以退款嗎?
               </p>
             </div>
@@ -390,7 +354,7 @@
           >
             <div class="card-header" id="headingThree">
               <p class="m-0 text-left d-flex align-items-center font-weight-normal">
-                <span class="numfont text-white bg-earthy p-3 rounded mr-4">Q3</span>
+                <span class="numfont text-white bg-secondary p-3 rounded mr-4">Q3</span>
                 我的訂單什麼時候會到呢?
               </p>
             </div>
@@ -420,12 +384,7 @@
             </div>
           </div>
           <div class="d-flex">
-            <div
-              class="card thumbnail wpx-20 mr-4"
-              v-for="item in getsameproduct"
-              :key="item.id"
-              @click="sameproductClick"
-            >
+            <div class="card thumbnail wpx-20 mr-4" v-for="item in getsameproduct" :key="item.id">
               <router-link :to="{ path: `/product/${item.id}` }">
                 <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
               </router-link>
@@ -459,16 +418,19 @@
       </div>
     </main>
     <Footer class="flex-shrink-0" />
+    <Cartbtn :cartnum="cartlong" />
   </div>
 </template>
 
 <script>
 import $ from 'jquery';
 import Footer from '@/components/Footer';
+import Cartbtn from '@/components/kit/Cartbtn';
 
 export default {
   components: {
     Footer,
+    Cartbtn,
   },
   inject: ['reload'],
   data() {
@@ -517,6 +479,11 @@ export default {
   created() {
     this.getproduct(this.$route.params.productId);
     this.getproducts();
+  },
+  watch: {
+    $router() {
+      this.sameproductClick();
+    },
   },
   computed: {
     getsameproduct() {

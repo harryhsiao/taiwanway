@@ -32,7 +32,7 @@
           <router-link class="nav-item nav-link" to="/shop">門市據點</router-link>
           <router-link
             tag="button"
-            class="btn btn-dark badge-pill ml-3"
+            class="btn btn-secondary badge-pill ml-3"
             to="/login"
             href="#"
             v-if="memberin == false"

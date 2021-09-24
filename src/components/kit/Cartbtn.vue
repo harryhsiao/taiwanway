@@ -15,7 +15,7 @@
     <router-link
       tag="button"
       to="/Addcart"
-      class="fixed-bottom border-0 p-3 w-100 d-md-none d-block"
+      class="fixed-bottom border-0 bg-secondary p-3 w-100 d-md-none d-block"
     >
       <p class="mb-0">
         <i class="fas fa-shopping-cart mr-2"></i>購物車<span class="ml-2">({{ cartnum }})</span>
@@ -45,7 +45,7 @@ export default {
 }
 
 .topbutton:hover {
-  background-color: rgb(57, 231, 217);
+  background-color: rgb(158, 222, 174);
 }
 
 .btnnum {

@@ -43,32 +43,23 @@
 import Navbar from '@/components/Navbar';
 
 export default {
+  components: {
+    Navbar,
+  },
   data() {
     return {
       Height: 0,
       isLoading: false,
       alertopen: '',
-      //orderId: '',
       currentTitle: '',
     };
   },
   watch: {
-    alertopen() {
-      const vm = this;
-      vm.alertopen = '';
-      let homePath = vm.$route.path;
-      /*if (vm.alertopen == '/checkpage/csutinfo' || vm.alertopen == '/checkpage/csutcheckout') {*/
-        vm.alertopen = homePath;
-      /*} else {
-        vm.alertopen = 'complete';
-      }*/
+    $route() {
+      this.getcurraddress();
     },
   },
-  components: {
-    Navbar,
-  },
   created() {
-    //this.orderId = this.$route.params.order_id;
     this.getcurraddress();
   },
   methods: {
@@ -76,7 +67,11 @@ export default {
       const vm = this;
       let homePath = vm.$route.path;
       vm.alertopen = '';
-      vm.alertopen = homePath;
+      if (homePath === '/checkpage/custinfo' || homePath === '/checkpage/custcheckout') {
+        vm.alertopen = homePath;
+      } else {
+        vm.alertopen = 'complete';
+      }
     },
   },
   mounted() {

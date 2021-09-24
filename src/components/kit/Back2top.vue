@@ -52,6 +52,6 @@ export default {
 }
 
 .topbutton:hover {
-    background-color: rgb(57, 231, 217);
+    background-color: rgb(158, 222, 174);
 }
 </style>

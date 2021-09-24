@@ -29,7 +29,7 @@ import './infomodal';
 import currencyFilter from './filters/currency';
 import VueI18n from 'vue-i18n';
 
-import vuetify from '@/plugins/vuetify';
+//import vuetify from '@/plugins/vuetify';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -76,9 +76,9 @@ new Vue({
     render: (h) => h(App),
 }).$mount('#app');
 
-new Vue({
+/*new Vue({
   vuetify,
-}).$mount('#app');
+}).$mount('#app');*/
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth) {

@@ -16,22 +16,21 @@ export default {
     Navbar,
     Back2top,
   },
+  provide() {
+    return {
+      reload: this.reload(),
+    };
+  },
   data() {
     return {
       isRouterAlive: true,
-    };
-  },
-  provide() {
-    const vm = this;
-    return {
-      reload: vm.reload(),
     };
   },
   methods: {
     reload() {
       const vm = this;
       vm.isRouterAlive = false;
-      vm.$nextTick(function() {
+      vm.$nextTick(() => {
         vm.isRouterAlive = true;
       });
     },
