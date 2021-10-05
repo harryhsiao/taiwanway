@@ -126,10 +126,9 @@ export default {
           vm.getorder();
         }
         vm.isLoading = false;
-        vm.$infomodal.$emit('messsage:push', '付款成功', 'success');
+        vm.$infomodal.$emit('messsage:push', '付款成功', 'success', 'tick');
       });
     },
-
     totalPricecal() {
       const vm = this;
       vm.totalPricePack = [];

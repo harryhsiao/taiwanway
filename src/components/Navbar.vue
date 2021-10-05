@@ -130,10 +130,10 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
       vm.$http.post(api).then((response) => {
-        if (response.data.success) {
-          vm.memberin = true;
-        } else {
+        if (!response.data.success) {
           vm.memberin = false;
+        } else {
+          vm.memberin = true;
         }
       });
     },

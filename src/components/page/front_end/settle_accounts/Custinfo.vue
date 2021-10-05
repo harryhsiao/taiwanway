@@ -7,15 +7,15 @@
           <div class="card">
             <div class="card-header" id="headingOne" role="tab">
               <div class="row">
+                <p class="h2 mb-0 ml-md-3 mx-auto" v-if="Discount == 100">
+                  {{ (total_price + shipping) | currency }}
+                </p>
                 <p
                   class="h2 mb-0 ml-md-3 mx-auto"
                   :class="{ 'text-maincolor': Discount !== 100 }"
-                  v-if="Discount !== 100"
+                  v-else
                 >
-                  {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
-                </p>
-                <p class="h2 mb-0 ml-md-3 mx-auto" v-else>
-                  {{ (total_price + shipping) | currency }}
+                  {{ ((total_price + shipping) * (Discount / 100)) | currency }}
                 </p>
                 <a
                   href="#collapseOne"
@@ -88,7 +88,7 @@
               </p>
               <p class="h3" :class="{ 'text-maincolor': Discount !== 100 }" v-if="Discount !== 100">
                 合計
-                {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
+                {{ ((total_price + shipping) * (Discount / 100)) | currency }}
               </p>
               <p class="h3" :class="{ 'text-maincolor': Discount !== 100 }" v-else>
                 合計
@@ -298,7 +298,7 @@ export default {
   },
   created() {
     this.getcart();
-    this.getcustinfo();
+    //this.getcustinfo();
   },
   components: {
     Alertinfotext,
@@ -316,10 +316,9 @@ export default {
         .then(() => {
           vm.totalPricecal();
           vm.ShippingFee();
-          vm.isLoading = false;
         });
     },
-    getcustinfo() {
+    /*getcustinfo() {
       const vm = this;
       vm.custdata.forEach((item) => {
         vm.form.user.name = item.user.name;
@@ -329,7 +328,7 @@ export default {
         vm.form.user.address = item.user.address;
         vm.form.message = item.message;
       });
-    },
+    },*/
     addcoupon() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
@@ -353,7 +352,7 @@ export default {
       vm.custcart.forEach((item) => {
         if (item.coupon) {
           vm.isCoupon = true;
-          vm.Discount = 100 - item.coupon.percent;
+          vm.Discount = item.coupon.percent;
         }
         if (item.product.price) {
           vm.totalPricePack.push(item.product.price * item.qty);
@@ -370,6 +369,7 @@ export default {
       } else {
         vm.shipping = 0;
       }
+      vm.isLoading = false;
     },
     subOrder() {
       const vm = this;

@@ -87,11 +87,21 @@
             <div class="border p-md-4 pl-2 pt-2 my-3">
               <p>優惠活動:</p>
               <p class="small">
+                <span class="badge badge-danger mr-2">通知</span>
+                產品免運<br class="d-md-none d-inlineblock" />
+                全館消費滿<span class="mx-md-2 mx-1 text-warning font-weight-bold h5">
+                  NT 3000元
+                </span>
+                享免運優惠
+              </p>
+              <p class="small">
                 <span class="badge badge-warning mr-2">活動</span>
                 食慾之秋<br class="d-md-none d-inlineblock" />
-                輸入折扣碼<span class="mx-md-2 mx-1 text-warning font-weight-bold h5"
-                  >goodfood999</span
-                >享七折優惠
+                輸入折扣碼
+                <span class="mx-md-2 mx-1 text-warning font-weight-bold h5">
+                  goodfood999
+                </span>
+                享七折優惠
               </p>
             </div>
 
@@ -385,14 +395,14 @@
           </div>
           <div class="d-flex">
             <div class="card thumbnail wpx-20 mr-4" v-for="item in getsameproduct" :key="item.id">
-              <router-link :to="{ path: `/product/${item.id}` }">
+              <a @click.prevent="getproduct(item.id)">
                 <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
-              </router-link>
+              </a>
               <div class="card-body">
-                <router-link :to="{ path: `/product/${item.id}` }">
+                <a @click.prevent="getproduct(item.id)">
                   <span class="badge badge-info">{{ item.category }}</span>
                   <h5>{{ item.title }}</h5>
-                </router-link>
+                </a>
                 <div class="d-flex justify-content-between">
                   <p v-if="item.price">
                     {{ item.price | currency }}
@@ -480,11 +490,6 @@ export default {
     this.getproduct(this.$route.params.productId);
     this.getproducts();
   },
-  watch: {
-    $router() {
-      this.sameproductClick();
-    },
-  },
   computed: {
     getsameproduct() {
       const vm = this;
@@ -494,10 +499,6 @@ export default {
     },
   },
   methods: {
-    sameproductClick() {
-      const vm = this;
-      vm.reload();
-    },
     getproducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
@@ -514,6 +515,7 @@ export default {
         vm.product = response.data.product;
         vm.product.description = response.data.product.description.replace(/\n/g, '<br/>');
         vm.product.content = response.data.product.content.replace(/\n/g, '<br/>');
+        window.scrollTo({ top: 0, Left: 0, behavior: 'smooth' });
         vm.isLoading = false;
       });
     },

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Alertcard />
     <div class="jumbotron jumbotron-fluid text-white main-image image-cover mt-6">
       <div class="d-flex justify-content-center image-text-combo text-center align-items-center">
         <img
@@ -38,7 +39,12 @@
               >{{ item }}</a
             >
           </div>
-          <select name="" id="" class="d-sm-none d-block w-100 mb-4 py-2 px-2" @change="changeValue">
+          <select
+            name=""
+            id=""
+            class="d-sm-none d-block w-100 mb-4 py-2 px-2"
+            @change="changeValue"
+          >
             <option v-for="(item, index) in categorys" :key="index">
               {{ item }}
             </option>
@@ -100,7 +106,7 @@
                 </div>
                 <!--商品-->
               </div>
-              <Alertnote />
+              <!--Alertnote /-->
               <div class="container">
                 <div class="row justify-content-center">
                   <div class="pagination pg-num pt-4 pl-4 mb-5">
@@ -133,14 +139,11 @@
 </template>
 
 <script>
-import Alertnote from '@/components/kit/Alertnote';
+//import Alertnote from '@/components/kit/Alertnote';
+import Alertcard from '@/components/kit/Alertcard';
 import Cartbtn from '@/components/kit/Cartbtn';
 
 export default {
-  components: {
-    Alertnote,
-    Cartbtn,
-  },
   data() {
     return {
       custproducts: [],
@@ -157,6 +160,11 @@ export default {
       searchtext: '',
       isLoading: false,
     };
+  },
+  components: {
+    Alertcard,
+    //Alertnote,
+    Cartbtn,
   },
   created() {
     this.getproducts();
@@ -221,7 +229,8 @@ export default {
         vm.incart.push(cartContent);
         localStorage.setItem('mycart', JSON.stringify(vm.incart));
       } else {
-        vm.$bus.$emit('messsage:push', '已經在購物車囉~', 'success');
+        //vm.$bus.$emit('messsage:push', '已經在購物車囉~', 'success');
+        vm.$infomodal.$emit('messsage:push', '已經在購物車囉~', 'success', 'tick');
       }
       vm.cartlong = vm.incart.length;
     },

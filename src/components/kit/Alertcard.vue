@@ -15,11 +15,11 @@
           </button>
         </div>
         <div class="modal-body px-5 mx-auto text-center">
-          <svg width="200" height="200">
+          <svg width="200" height="200" :class="{'d-none': icon !== 'tick'}">
             <circle
               class="circle"
               fill="none"
-              stroke="#e80"
+              stroke="#9edeae"
               stroke-width="10"
               cx="100"
               cy="100"
@@ -29,7 +29,7 @@
             <polyline
               class="tick"
               fill="none"
-              stroke="#e80"
+              stroke="#9edeae"
               stroke-width="24"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -52,13 +52,15 @@ export default {
     return {
       msg: '',
       status: '',
+      icon: '',
     };
   },
   methods: {
-    updateMessage(message, status /*, isCanUse*/) {
+    updateMessage(message, status, icon) {
       const vm = this;
       vm.msg = message;
       vm.status = status;
+      vm.icon = icon;
       //vm.isCanUse = isCanUse;
       //vm.removeMessageWithTiming();
     },
@@ -79,8 +81,8 @@ export default {
   },
   created() {
     const vm = this;
-    vm.$infomodal.$on('messsage:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status);
+    vm.$infomodal.$on('messsage:push', (message, status = 'warning', icon) => {
+      vm.updateMessage(message, status, icon);
     });
   },
 };

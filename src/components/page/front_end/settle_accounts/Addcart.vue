@@ -253,7 +253,7 @@
                       <p class="mb-0">(含稅)</p>
                     </strong>
                   </div>
-                  <span class="h2" v-if="mytotalprice < 5000 && mytotalprice > 0">
+                  <span class="h2" v-if="mytotalprice < 3000 && mytotalprice > 0">
                     <strong>{{ (mytotalprice + 60) | currency }}</strong>
                   </span>
                   <span class="h2" v-else>
@@ -344,7 +344,7 @@ export default {
           pricepack.push(item.price * item.qty);
         } else {
           pricepack.push(item.origin_price * item.qty);
-        }
+        }        
       });
       if (pricepack.length > 0) {
         vm.mytotalprice = pricepack.reduce((a, b) => a + b, 0);

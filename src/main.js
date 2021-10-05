@@ -76,10 +76,6 @@ new Vue({
     render: (h) => h(App),
 }).$mount('#app');
 
-/*new Vue({
-  vuetify,
-}).$mount('#app');*/
-
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth) {
         const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;

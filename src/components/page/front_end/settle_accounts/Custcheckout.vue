@@ -78,8 +78,18 @@
             </table>
             <div class="text-right">
               <p v-if="Discount !== 100">
-                已使用<span class="text-earthy">{{ Coupontitle }}</span
-                >優惠碼
+                已使用
+                <span class="text-earthy">{{ Coupontitle }}</span>
+                優惠碼
+              </p>
+              <p v-if="Discount !== 100">
+                本次消費您省了
+                <span class="text-danger">
+                  {{
+                    (total_price + shipping - (total_price + shipping) * ((100 - Discount) / 100))
+                      | currency
+                  }}
+                </span>
               </p>
               <p
                 class="h2 mb-0 ml-md-3 mx-auto"
