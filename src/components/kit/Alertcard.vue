@@ -15,7 +15,7 @@
           </button>
         </div>
         <div class="modal-body px-5 mx-auto text-center">
-          <svg width="200" height="200" :class="{'d-none': icon !== 'tick'}">
+          <svg width="200" height="200">
             <circle
               class="circle"
               fill="none"
@@ -52,37 +52,19 @@ export default {
     return {
       msg: '',
       status: '',
-      icon: '',
     };
   },
   methods: {
-    updateMessage(message, status, icon) {
+    updateMessage(message, status) {
       const vm = this;
       vm.msg = message;
       vm.status = status;
-      vm.icon = icon;
-      //vm.isCanUse = isCanUse;
-      //vm.removeMessageWithTiming();
     },
-    /*removeMessage(num) {
-      const vm = this;
-      vm.messages.splice(num, 1);
-    },
-    removeMessageWithTiming(timestamp) {
-      const vm = this;
-      setTimeout(() => {
-        vm.messages.forEach((item, i) => {
-          if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
-          }
-        });
-      }, 5000);
-    },*/
   },
   created() {
     const vm = this;
-    vm.$infomodal.$on('messsage:push', (message, status = 'warning', icon) => {
-      vm.updateMessage(message, status, icon);
+    vm.$infomodal.$on('messsage:push', (message, status = 'warning') => {
+      vm.updateMessage(message, status);
     });
   },
 };
@@ -97,7 +79,7 @@ export default {
 .tick {
   stroke-dasharray: 350;
   stroke-dashoffset: 0;
-  animation: tick ease-out .8s;
+  animation: tick ease-out 0.8s;
 }
 @keyframes circle {
   from {

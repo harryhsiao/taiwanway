@@ -194,6 +194,7 @@ $spacers: map-merge(
 $sizes: () !default;
 $sizes: map-merge(
   (
+    20: 20%,
     25: 25%,
     30: 30%,
     35: 35%,
@@ -201,6 +202,7 @@ $sizes: map-merge(
     45: 45%,
     50: 50%,
     75: 75%,
+    80: 80%,
     100: 100%,
     auto: auto,
   ),

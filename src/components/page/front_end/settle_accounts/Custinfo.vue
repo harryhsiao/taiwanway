@@ -15,7 +15,7 @@
                   :class="{ 'text-maincolor': Discount !== 100 }"
                   v-else
                 >
-                  {{ ((total_price + shipping) * (Discount / 100)) | currency }}
+                  {{ (total_price * (Discount / 100) + shipping) | currency }}
                 </p>
                 <a
                   href="#collapseOne"
@@ -78,7 +78,6 @@
             </table>
             <div class="text-right">
               <p>總價{{ total_price | currency }}</p>
-              <p>運費{{ shipping | currency }}</p>
               <p>
                 折扣
                 <span :class="{ 'text-danger': Discount !== 100 }" v-if="Discount !== 100"
@@ -86,11 +85,12 @@
                 >
                 <span :class="{ 'text-danger': Discount !== 100 }" v-else>未使用</span>
               </p>
+              <p>運費{{ shipping | currency }}</p>
               <p class="h3" :class="{ 'text-maincolor': Discount !== 100 }" v-if="Discount !== 100">
                 合計
-                {{ ((total_price + shipping) * (Discount / 100)) | currency }}
+                {{ (total_price * (Discount / 100) + shipping) | currency }}
               </p>
-              <p class="h3" :class="{ 'text-maincolor': Discount !== 100 }" v-else>
+              <p class="h3" v-else>
                 合計
                 {{ (total_price + shipping) | currency }}
               </p>
@@ -99,7 +99,7 @@
           <div class="container hpx-10 mt-3">
             <div class="row">
               <div class="col-md-6">
-                <p class="text-danger">輸入 goodfood9999 以獲取 7 折優惠</p>
+                <p class="text-danger">輸入 goodfood9999 以獲取 3 折優惠</p>
               </div>
               <div class="col-md-6">
                 <div class="input-group mb-3">
@@ -233,7 +233,7 @@
                   ></textarea>
                 </div>
               </div>
-              <button class="btn btn-earthy float-right" type="submit" :disabled="invalid">
+              <button class="btn btn-maincolor float-right" type="submit" :disabled="invalid">
                 下一步
               </button>
             </form>
@@ -298,7 +298,7 @@ export default {
   },
   created() {
     this.getcart();
-    //this.getcustinfo();
+    this.getcustinfo();
   },
   components: {
     Alertinfotext,
@@ -318,7 +318,7 @@ export default {
           vm.ShippingFee();
         });
     },
-    /*getcustinfo() {
+    getcustinfo() {
       const vm = this;
       vm.custdata.forEach((item) => {
         vm.form.user.name = item.user.name;
@@ -328,7 +328,7 @@ export default {
         vm.form.user.address = item.user.address;
         vm.form.message = item.message;
       });
-    },*/
+    },
     addcoupon() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;

@@ -15,7 +15,7 @@
                   :class="{ 'text-maincolor': Discount !== 100 }"
                   v-else
                 >
-                  {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
+                  {{ ((total_price * ( Discount / 100)) + shipping) | currency }}
                 </p>
                 <a
                   href="#collapseOne"
@@ -82,11 +82,12 @@
                 <span class="text-earthy">{{ Coupontitle }}</span>
                 優惠碼
               </p>
+              <p>運費{{ shipping | currency }}</p>
               <p v-if="Discount !== 100">
                 本次消費您省了
                 <span class="text-danger">
                   {{
-                    (total_price + shipping - (total_price + shipping) * ((100 - Discount) / 100))
+                    (total_price - (total_price * ( Discount / 100) ))
                       | currency
                   }}
                 </span>
@@ -97,7 +98,7 @@
                 v-if="Discount !== 100"
               >
                 合計
-                {{ ((total_price + shipping) * ((100 - Discount) / 100)) | currency }}
+                {{ ((total_price * ( Discount / 100)) + shipping) | currency }}
               </p>
               <p class="h2 mb-0 ml-md-3 mx-auto" v-else>
                 合計

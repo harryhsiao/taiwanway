@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Alertcard />
+    <Alertnote />
     <div class="jumbotron jumbotron-fluid text-white main-image image-cover mt-6">
       <div class="d-flex justify-content-center image-text-combo text-center align-items-center">
         <img
@@ -139,8 +139,7 @@
 </template>
 
 <script>
-//import Alertnote from '@/components/kit/Alertnote';
-import Alertcard from '@/components/kit/Alertcard';
+import Alertnote from '@/components/kit/Alertnote';
 import Cartbtn from '@/components/kit/Cartbtn';
 
 export default {
@@ -162,8 +161,7 @@ export default {
     };
   },
   components: {
-    Alertcard,
-    //Alertnote,
+    Alertnote,
     Cartbtn,
   },
   created() {
@@ -229,8 +227,7 @@ export default {
         vm.incart.push(cartContent);
         localStorage.setItem('mycart', JSON.stringify(vm.incart));
       } else {
-        //vm.$bus.$emit('messsage:push', '已經在購物車囉~', 'success');
-        vm.$infomodal.$emit('messsage:push', '已經在購物車囉~', 'success', 'tick');
+        vm.$bus.$emit('messsage:push', '已經在購物車囉~', 'warning');
       }
       vm.cartlong = vm.incart.length;
     },

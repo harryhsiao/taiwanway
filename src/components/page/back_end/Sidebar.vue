@@ -1,19 +1,18 @@
 <template>
   <div>
-    <!--a class="text-muted" href="#" @click.prevent="onsider" style="margin-top:500px; z-index:99999px;">
-      <i class="fas fa-chevron-left"></i>
-    </a-->
     <nav class="col-md-2 bg-light sidebar" :class="{ showSidebar: !tran, hideSidebar: tran }">
-      <div class="sidebar-sticky">
-        <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-        >
-          <span class="h2">管理員項目</span>
-          <a class="text-muted" href="#" @click.prevent="onsider">
-            <i class="fas fa-chevron-left"></i>
-          </a>
+      <div class="d-flex justify-content-between align-items-center mt-4">
+        <h6 class="h2 px-3 mb-1 text-muted w-80">
+          管理員項目
         </h6>
-        <ul class="nav flex-column">
+        <div class="w-20">
+          <button class="text-muted py-4 d-md-none d-block w-100 border-0 " @click="onsider">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+      <div class="sidebar-sticky pt-0">
+        <ul class="nav flex-column d-md-block d-none">
           <li class="nav-item border py-4">
             <router-link class="nav-link h4" to="/dashboard/products">
               <i class="fas fa-box-open fa-fw"></i>&nbsp;&nbsp;產品列表
@@ -35,7 +34,7 @@
             </a>
           </li>
         </ul>
-        <!--ul class="nav flex-column d-md-none d-block">
+        <ul class="nav flex-column d-md-none d-block">
           <li class="nav-item border py-4" @click="onsider">
             <router-link class="nav-link h4" to="/dashboard/products">
               <i class="fas fa-box-open fa-fw"></i>&nbsp;&nbsp;產品列表
@@ -56,9 +55,12 @@
               <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;登出
             </a>
           </li>
-        </ul-->
+        </ul>
       </div>
     </nav>
+    <button class="btn btn-light px-0 pl-2 pr-1 scrollbtn-sticky text-muted d-md-none d-block" @click="onsider" :class="{ showSidebarbtn: tran, hideSidebarbtn: !tran }">
+      <i class="fas fa-chevron-right"></i>
+    </button>
   </div>
 </template>
 
@@ -96,7 +98,7 @@ export default {
   z-index: 100;
   padding: 48px 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-  transition: transform ease-in-out 0.5s;
+  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
 }
 
 .hideSidebar {
@@ -111,9 +113,29 @@ export default {
   position: relative;
   top: 0;
   height: calc(100vh - 48px);
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.scrollbtn-sticky {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  height: 100vh;
+  transition: left cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.hideSidebarbtn {
+  left: 100%;
+  transition: left cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.showSidebarbtn {
+  left: 0;
+  transition: left cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {

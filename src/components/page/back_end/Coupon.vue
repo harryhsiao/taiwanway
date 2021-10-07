@@ -105,7 +105,7 @@
                 class="form-control"
                 id="price"
                 v-model="tempcoupon.percent"
-                placeholder="請輸入折扣百分比"
+                placeholder="請輸入折扣百分比(如: 打 3 折輸入30%, 打7折輸入70%)"
               />
             </div>
             <div class="form-group">

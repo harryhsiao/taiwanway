@@ -344,7 +344,7 @@ export default {
           pricepack.push(item.price * item.qty);
         } else {
           pricepack.push(item.origin_price * item.qty);
-        }        
+        }
       });
       if (pricepack.length > 0) {
         vm.mytotalprice = pricepack.reduce((a, b) => a + b, 0);
@@ -369,15 +369,22 @@ export default {
         vm.isLoading = true;
         vm.$http
           .get(api)
-          .then((res) => {
-            const cacheData = res.data.data.carts;
+          .then((resp) => {
+            const cacheData = resp.data.data.carts;
             cacheData.forEach((item) => {
               cacheID.push(item.id);
             });
+            console.log(cacheID);
           })
           .then(() => {
             cacheID.forEach((item) => {
-              vm.$http.delete(`${api}/${item}`);
+              vm.$http
+                .delete(
+                  `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`
+                )
+                .then(() => {
+                  console.log('購物車已經清空');
+                });
             });
           })
           .then(() => {

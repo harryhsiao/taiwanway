@@ -39,8 +39,8 @@
                       </tr>
                       <tr>
                         <th scope="row">付款價格</th>
-                        <td v-if="order.total < 3000">{{ order.total + 60 }}</td>
-                        <td v-else>{{ order.total }}</td>
+                        <td v-if="order.total < 3000">{{ total_price + 60 }}</td>
+                        <td v-else>{{ total_price }}</td>
                       </tr>
                       <tr>
                         <th scope="row">收貨地址</th>
@@ -73,7 +73,7 @@
               回到購物頁
             </button>
             <button
-              class="btn btn-primary ml-3"
+              class="btn btn-maincolor ml-3"
               data-toggle="modal"
               data-target="#exampleModalCenter"
               v-if="order.is_paid === false"
@@ -114,6 +114,7 @@ export default {
       vm.isLoading = true;
       vm.$http.get(api).then((resp) => {
         vm.order = resp.data.order;
+        vm.total_price = Math.ceil(resp.data.order.total);
         vm.isLoading = false;
       });
     },
@@ -126,19 +127,13 @@ export default {
           vm.getorder();
         }
         vm.isLoading = false;
-        vm.$infomodal.$emit('messsage:push', '付款成功', 'success', 'tick');
+        vm.$infomodal.$emit('messsage:push', '付款成功', 'success');
       });
     },
     totalPricecal() {
       const vm = this;
-      vm.totalPricePack = [];
       vm.order.forEach((item) => {
-        console.log(item.products)
-        if (item.products.total < 3000) {
-          vm.total_price = item.products.total + 60;
-        } else {
-          vm.total_price = item.products.total;
-        }
+        vm.total_price = item.total;
       });
     },
     ShippingFee() {

@@ -101,7 +101,7 @@
                 <span class="mx-md-2 mx-1 text-warning font-weight-bold h5">
                   goodfood999
                 </span>
-                享七折優惠
+                享三折優惠
               </p>
             </div>
 
