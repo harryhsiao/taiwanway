@@ -363,18 +363,18 @@ export default {
     },
     postcart() {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const cacheID = [];
       if (vm.incart.length > 0) {
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+        const cacheID = [];
         vm.isLoading = true;
         vm.$http
           .get(api)
           .then((resp) => {
             const cacheData = resp.data.data.carts;
+            console.log(cacheData);
             cacheData.forEach((item) => {
               cacheID.push(item.id);
             });
-            console.log(cacheID);
           })
           .then(() => {
             cacheID.forEach((item) => {
