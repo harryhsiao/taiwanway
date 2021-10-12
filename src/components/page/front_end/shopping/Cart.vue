@@ -77,7 +77,7 @@
                     <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
                   </router-link>
                   <div class="card-body">
-                    <router-link :to="{ path: `/product/${item.id}` }">
+                    <router-link class="text-dark" :to="{ path: `/product/${item.id}` }">
                       <span class="badge badge-info">
                         {{ item.category }}
                       </span>

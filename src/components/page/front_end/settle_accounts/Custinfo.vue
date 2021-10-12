@@ -198,6 +198,7 @@
                     class="form-control"
                     v-model="form.user.city"
                   >
+                  <option value="">選擇一個城市</option>
                     <option v-for="(item, index) in countorys" :key="index">
                       {{ item }}
                     </option>
@@ -316,6 +317,7 @@ export default {
         .then(() => {
           vm.totalPricecal();
           vm.ShippingFee();
+          vm.isLoading = false;
         });
     },
     getcustinfo() {

@@ -186,8 +186,8 @@ export default {
       vm.$http.post(api, { data: vm.custdata[0] }).then((response) => {
         if (response.data.success) {
           vm.isLoading = false;
-          this.$router.push(`/checkpage/checkcomp/${response.data.orderId}`);
           localStorage.removeItem('custinfo');
+          this.$router.push(`/checkpage/checkcomp/${response.data.orderId}`);
         }
       });
     },

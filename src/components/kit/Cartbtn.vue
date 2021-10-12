@@ -17,7 +17,7 @@
       to="/Addcart"
       class="fixed-bottom border-0 bg-secondary p-3 w-100 d-md-none d-block"
     >
-      <p class="mb-0">
+      <p class="mb-0 text-white">
         <i class="fas fa-shopping-cart mr-2"></i>購物車<span class="ml-2">({{ cartnum }})</span>
       </p>
     </router-link>

@@ -13,7 +13,7 @@
       <div class="container mt-7">
         <router-link class="text-secondary h4 mb-5" to="/Cart">
           <i class="fas fa-chevron-left"></i>
-          返回上一頁
+          返回商城
         </router-link>
         <div class="row my-4">
           <div class="col-lg-5 col-md-6 mb-3 mb-md-0">

@@ -123,7 +123,7 @@
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
                   tag="button"
-                  class="btn btn-outline-earthy p-4 mt-5 d-inline-flex align-items-center"
+                  class="btn btn-outline-secondary p-4 mt-5 d-inline-flex align-items-center"
                   to="/cart"
                 >
                   <i class="fas fa-directions fa-2x"></i>
@@ -149,7 +149,7 @@
                         <div class="input-group-prepend">
                           <button
                             @click="minercart(item)"
-                            class="minus border-right-0 border border-dark"
+                            class="btn btn-outline-secondary minus border-right-0 border border-secondary rounded-left"
                             :disabled="item.qty < 2"
                           >
                             <i class="fas fa-minus"></i>
@@ -165,7 +165,7 @@
                         <div class="input-group-prepend">
                           <button
                             @click="pluscart(item)"
-                            class="plus border-left-0 border border-dark"
+                            class="btn btn-outline-secondary plus border border-left-0 border-secondary rounded-right"
                           >
                             <i class="fas fa-plus"></i>
                           </button>
@@ -366,12 +366,12 @@ export default {
       if (vm.incart.length > 0) {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
         const cacheID = [];
+        const cacheData = [];
         vm.isLoading = true;
         vm.$http
           .get(api)
           .then((resp) => {
-            const cacheData = resp.data.data.carts;
-            console.log(cacheData);
+            cacheData.push(resp.data.data.carts);
             cacheData.forEach((item) => {
               cacheID.push(item.id);
             });
@@ -383,7 +383,7 @@ export default {
                   `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`
                 )
                 .then(() => {
-                  console.log('購物車已經清空');
+                  console.log('已清空遠端購物車');
                 });
             });
           })
@@ -400,8 +400,10 @@ export default {
                 vm.isLoading = false;
               });
             });
+          })
+          .then(() => {
+            vm.$router.push('/checkpage/custinfo');
           });
-        this.$router.push('/checkpage/custinfo');
       } else {
         alert('購物車是空的噢');
       }
