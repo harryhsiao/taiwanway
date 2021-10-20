@@ -12,36 +12,33 @@
       </div>
     </div>
     <div class="container">
-      <div class="row">
-        <!--商品過濾選項-->
-        <div class="col-sm-4">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="輸入想要搜尋的商品"
-              aria-label="輸入想要搜尋的商品"
-              aria-describedby="button-addon2"
-              v-model="productsearch"
-            />
-            <div class="input-group-append">
-              <span class="input-group-text">搜尋</span>
-            </div>
-          </div>
-          <div class="list-group d-none d-sm-block">
-            <a
-              href="#"
-              class="list-group-item list-group-item-action border-0 h3 chselection"
-              v-for="(item, index) in categorys"
-              :key="index"
-              :class="{ active: optiontext === item }"
-              @click.prevent="changeoption"
-              >{{ item }}</a
-            >
-          </div>
+      <h3 class="text-center mt-5 mb-6">輸入您要找的商品</h3>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control py-4 px-2"
+          placeholder="輸入想要搜尋的商品"
+          aria-label="輸入想要搜尋的商品"
+          aria-describedby="button-addon2"
+          v-model="productsearch"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">搜尋</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-5">
+        <div class="border-top w-40"></div>
+        <p class="h3">或</p>
+        <div class="border-top w-40"></div>
+      </div>
+    </div>
+    <div class="bg-white sticky-top w-100" style="top: 4rem;">
+      <div class="container">
+        <div class="pt-5 pb-4">
+          <p class="text-center h3 mb-5">看看有什麼好咪亞</p>
           <select
-            name=""
-            id=""
+            name="fliter_option"
+            id="fliter_option"
             class="d-sm-none d-block w-100 mb-4 py-2 px-2"
             @change="changeValue"
           >
@@ -49,88 +46,94 @@
               {{ item }}
             </option>
           </select>
+          <a
+            href="#"
+            class="btn btn-outline-dark d-sm-inline-block d-none py-3 px-5 mr-3 badge-pill rounded-pill h3 chselection"
+            v-for="(item, index) in categorys"
+            :key="index"
+            :class="{ active: optiontext === item }"
+            @click.prevent="changeoption"
+            >{{ item }}</a
+          >
         </div>
-        <!--商品過濾選項-->
-        <!--商品-->
-        <div class="col-sm-8">
-          <div class="container">
-            <div class="row">
-              <div
-                class="col-md-4 mb-3"
-                :class="{ 'd-none': !isLoading }"
-                v-for="index in 10"
-                :key="index"
-              >
-                <div class="cards w-100">
-                  <div class="limage card-img-top hpx-20"></div>
-                  <p class="isload p-3 mt-2"></p>
-                </div>
-              </div>
-              <div
-                class="col-md-6 col-lg-4 mb-3"
-                :class="{ 'd-none': isLoading }"
-                v-for="item in filtersdata[currentpage]"
-                :key="item.id"
-              >
-                <div class="card thumbnail">
-                  <router-link :to="{ path: `/product/${item.id}` }">
-                    <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
-                  </router-link>
-                  <div class="card-body">
-                    <router-link class="text-dark" :to="{ path: `/product/${item.id}` }">
-                      <span class="badge badge-info">
-                        {{ item.category }}
-                      </span>
-                      <h5>{{ item.title }}</h5>
-                    </router-link>
-                    <div class="d-flex justify-content-between">
-                      <p v-if="item.price">
-                        {{ item.price | currency }}
-                        <span class="price-unit"> /{{ item.unit }} </span>
-                      </p>
-                      <p v-else>
-                        {{ item.origin_price | currency }}
-                        <span class="price-unit"> /{{ item.unit }} </span>
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    class="btn btn-outline-secondary rounded-0 cartbtn"
-                    id="add_cart_btn"
-                    type="button"
-                    @click="addcart(item)"
-                  >
-                    <i class="fas fa-tag"></i>
-                    加入購物車
-                  </button>
-                </div>
-                <!--商品-->
-              </div>
-              <!--Alertnote /-->
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="pagination pg-num pt-4 pl-4 mb-5">
-                    <ul class="m-0 p-0">
-                      <a href="#" @click.prevent="prev"
-                        ><li><i class="fas fa-chevron-left"></i></li
-                      ></a>
-                      <a
-                        v-for="(page, key) in filtersdata.length"
-                        :key="key"
-                        :class="{ is_active: currentpage === page - 1 }"
-                        @click.prevent="currentpage = page - 1"
-                        href="#"
-                        ><li>{{ page }}</li></a
-                      >
-                      <a href="#" @click.prevent="next"
-                        ><li><i class="fas fa-chevron-right"></i></li
-                      ></a>
-                    </ul>
-                  </div>
-                </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-md-4 mb-3"
+          :class="{ 'd-none': !isLoading }"
+          v-for="index in 10"
+          :key="index"
+        >
+          <div class="cards w-100">
+            <div class="limage card-img-top hpx-20"></div>
+            <p class="isload p-3 mt-2"></p>
+          </div>
+        </div>
+        <div
+          class="col-md-4 mb-3"
+          :class="{ 'd-none': isLoading }"
+          v-for="item in filtersdata[currentpage]"
+          :key="item.id"
+        >
+          <div class="card thumbnail">
+            <router-link :to="{ path: `/product/${item.id}` }">
+              <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
+            </router-link>
+            <div class="card-body">
+              <router-link class="text-dark" :to="{ path: `/product/${item.id}` }">
+                <span class="badge badge-info">
+                  {{ item.category }}
+                </span>
+                <h5>{{ item.title }}</h5>
+              </router-link>
+              <div class="d-flex justify-content-between">
+                <p v-if="item.price">
+                  {{ item.price | currency }}
+                  <span class="price-unit"> /{{ item.unit }} </span>
+                </p>
+                <p v-else>
+                  {{ item.origin_price | currency }}
+                  <span class="price-unit"> /{{ item.unit }} </span>
+                </p>
               </div>
             </div>
+            <button
+              class="btn btn-outline-secondary rounded-0 cartbtn"
+              id="add_cart_btn"
+              type="button"
+              @click="addcart(item)"
+            >
+              <i class="fas fa-tag"></i>
+              加入購物車
+            </button>
           </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="pagination pg-num my-6">
+          <ul class="d-flex m-0 p-0">
+            <li>
+              <a href="#" @click.prevent="prev">
+                <i class="fas fa-chevron-left"></i>
+              </a>
+            </li>
+            <li>
+              <a
+                v-for="(page, key) in filtersdata.length"
+                :key="key"
+                :class="{ is_active: currentpage === page - 1 }"
+                @click.prevent="currentpage = page - 1"
+                href="#"
+              >
+                {{ page }}
+              </a>
+            </li>
+            <li>
+              <a href="#" @click.prevent="next"> <i class="fas fa-chevron-right"></i></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -152,7 +155,7 @@ export default {
       cartid: [],
       categorys: ['全部商品'],
       selected: 0,
-      currentpage: 0,
+      currentpage: 1,
       productsearch: '',
       cartlong: '',
       optiontext: '全部商品',
@@ -195,9 +198,7 @@ export default {
       vm.$http.get(api).then((resp) => {
         vm.custproducts = resp.data.products;
         vm.getoption(vm.custproducts);
-        setTimeout(() => {
-          vm.isLoading = false;
-        }, 5000);
+        vm.isLoading = false;
       });
     },
     cartnums() {
@@ -314,7 +315,7 @@ export default {
 
 <style scoped>
 .chselection {
-  background: linear-gradient(to left, transparent 50%, #9edeae 50%) right;
+  background: linear-gradient(to left, transparent 50%, #343a40 50%) right;
   background-size: 200%;
   transition: 0.5s ease-out;
   outline: none;
@@ -326,8 +327,6 @@ export default {
 }
 
 .active {
-  color: #9edeae;
-  outline: 0;
-  border: none;
+  color: #343a40;
 }
 </style>

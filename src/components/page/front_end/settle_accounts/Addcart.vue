@@ -118,7 +118,7 @@
                 清空購物車
               </a>
             </div>
-            <div class="card-body overflow-auto hvh-7">
+            <div class="card-body overflow-md-auto hvh-7">
               <div class="noneProductMessage text-center" v-show="isnone">
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
@@ -312,7 +312,6 @@ export default {
       mytotalprice: 0,
     };
   },
-
   mounted() {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
@@ -366,12 +365,11 @@ export default {
       if (vm.incart.length > 0) {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
         const cacheID = [];
-        const cacheData = [];
         vm.isLoading = true;
         vm.$http
           .get(api)
           .then((resp) => {
-            cacheData.push(resp.data.data.carts);
+            const cacheData = resp.data.data.carts;
             cacheData.forEach((item) => {
               cacheID.push(item.id);
             });
@@ -383,7 +381,7 @@ export default {
                   `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`
                 )
                 .then(() => {
-                  console.log('已清空遠端購物車');
+                  console.log('購物車已經清空');
                 });
             });
           })
@@ -396,14 +394,14 @@ export default {
               vm.$http.post(api, { data: cache }).then(() => {
                 vm.incart = [];
                 localStorage.removeItem('mycart');
-                vm.pricecal();
                 vm.isLoading = false;
+                vm.$router.push('/checkpage/custinfo').catch(()=>{});
               });
             });
-          })
+          }) /*
           .then(() => {
             vm.$router.push('/checkpage/custinfo');
-          });
+          })*/;
       } else {
         alert('購物車是空的噢');
       }

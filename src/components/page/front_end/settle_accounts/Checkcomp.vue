@@ -7,21 +7,25 @@
         <div class="col-12 px-0 mb-5">
           <div class="accordion" id="accordionExample">
             <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <button
-                    class="btn btn-link"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    訂單明細
-                  </button>
-                  <span class="text-danger" v-if="!order.is_paid">未付款</span>
-                  <span class="text-success" v-else>已付款</span>
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+                id="headingOne"
+              >
+                <h2 class="text-danger" v-if="!order.is_paid">
+                  <i class="far fa-times-circle"></i>未付款
                 </h2>
+                <h2 class="text-success" v-else><i class="far fa-check-circle"></i>已付款</h2>
+                <button
+                  class="btn btn-link text-earthy"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  style="font-size: 2em;"
+                >
+                  訂單明細 <i class="fas fa-caret-down"></i>
+                </button>
               </div>
 
               <div

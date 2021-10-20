@@ -35,7 +35,7 @@ export default {
 .topbutton {
   bottom: 180px;
   right: 10px;
-  z-index: 999;
+  z-index: 99999;
   outline: none;
   transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.2s;
 }

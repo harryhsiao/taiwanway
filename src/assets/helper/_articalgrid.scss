@@ -112,7 +112,7 @@ $list-styles: map-merge(
   $list-styles
 );
 
-// ex. list-style-1 , list-style-2 , ...
+// ex. list-style-none , list-style-circle , ...
 @each $prop, $abbrev in (list-style: 'list-style') {
   @each $list-style, $length in $list-styles {
     .#{$abbrev}-#{$list-style} {

@@ -468,8 +468,6 @@ export default {
       custproducts: [],
       imagepack: [],
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
-      infobar: 'description',
-      qablock: 'q1',
       cartlong: 0,
       qty: 1,
       isLoading: false,
@@ -482,7 +480,19 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
-
+    $('.collapse')
+      .on('show.bs.collapse', function() {
+        $(this)
+          .parent()
+          .find('.collapseicon')
+          .toggleClass('isopen');
+      })
+      .on('hidden.bs.collapse', function() {
+        $(this)
+          .parent()
+          .find('.collapseicon')
+          .removeClass('isopen');
+      });
     $('#info_accordion').collapse();
     $('.collapse').collapse();
   },

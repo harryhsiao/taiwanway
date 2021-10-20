@@ -23,9 +23,11 @@ import * as rules from 'vee-validate/dist/rules';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import router from './router';
-import './bus';
-import './infotext';
-import './infomodal';
+
+import '@/bus/bus';
+import '@/bus/infotext';
+import '@/bus/infomodal';
+
 import currencyFilter from './filters/currency';
 import VueI18n from 'vue-i18n';
 
