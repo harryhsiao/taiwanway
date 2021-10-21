@@ -1,5 +1,5 @@
 <template>
-  <div class="card-msg" :class="{ 'opacity-0': fadeout, 'opacity-5': !fadeout }">
+  <div class="message_text_transition" :class="{ 'opacity-0': fadeout, 'opacity-5': !fadeout }">
     <p id="error" :class="'text-' + status">
       <i class="fas fa-check-circle" v-if="isCanUse == 'yes'"></i>
       <i class="fas fa-times-circle" v-else-if="isCanUse == 'no'"></i>
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.card-msg {
+.message_text_transition {
   transition: opacity ease-out 2s;
 }
 </style>

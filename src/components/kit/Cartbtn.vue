@@ -3,12 +3,15 @@
     <router-link
       tag="button"
       to="/Addcart"
-      class=" position-fixed border-0 p-3 topbutton rounded-circle d-md-block d-none"
+      class="position-fixed CartButton-position CartButton border-0 p-3 rounded-circle d-md-block d-none"
     >
       <i class="fas fa-shopping-cart"></i>
       <p class="mb-0">購物車</p>
 
-      <span class="position-absolute badge badge-pill badge-danger btnnum" v-if="cartnum > 0">
+      <span
+        class="position-absolute badge badge-pill badge-danger CartButton-number"
+        v-if="cartnum > 0"
+      >
         {{ cartnum }}
       </span>
     </router-link>
@@ -32,23 +35,21 @@ export default {
 </script>
 
 <style scoped>
-.topbutton {
-  bottom: 180px;
-  right: 10px;
-  z-index: 99999;
-  outline: none;
+.CartButton {
   transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.2s;
 }
 
-.rwdbtn {
+.CartButton-position {
   bottom: 180px;
-}
-
-.topbutton:hover {
-  background-color: rgb(158, 222, 174);
-}
-
-.btnnum {
   right: 10px;
+  z-index: 99999;
+}
+
+.CartButton-number {
+  right: 10px;
+}
+
+.CartButton:hover {
+  background-color: rgb(158, 222, 174);
 }
 </style>

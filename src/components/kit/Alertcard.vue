@@ -17,7 +17,7 @@
         <div class="modal-body px-5 mx-auto text-center">
           <svg width="200" height="200">
             <circle
-              class="circle"
+              class="check_effect_circle"
               fill="none"
               stroke="#9edeae"
               stroke-width="10"
@@ -27,7 +27,7 @@
               transform="rotate(-90,100,100)"
             />
             <polyline
-              class="tick"
+              class="check_effect_tick"
               fill="none"
               stroke="#9edeae"
               stroke-width="24"
@@ -71,12 +71,12 @@ export default {
 </script>
 
 <style scoped>
-.circle {
+.check_effect_circle {
   stroke-dasharray: 1194;
   stroke-dashoffset: 0;
   animation: circle ease-in-out 1s;
 }
-.tick {
+.check_effect_tick {
   stroke-dasharray: 350;
   stroke-dashoffset: 0;
   animation: tick ease-out 0.8s;

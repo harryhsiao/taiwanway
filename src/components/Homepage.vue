@@ -45,8 +45,8 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/ipq25Q.jpg" class="img-fluid" alt="蔬果" />
               <ul
-                class="furittext position-absolute w-100 p-md-4 py-2 text-white"
-                style="height: 100%; backdrop-filter: blur(10px)"
+                class="h-100 furittext position-absolute w-100 p-md-4 py-2 text-white"
+                style="backdrop-filter: blur(10px)"
               >
                 <li class="d-flex align-items-center">
                   <img
@@ -88,8 +88,8 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/tkUBCb.jpg" class="img-fluid" alt="海產" />
               <ul
-                class="furittext position-absolute w-100 p-4 text-white"
-                style="height: 100%; backdrop-filter: blur(10px)"
+                class="h-100 furittext position-absolute w-100 p-4 text-white"
+                style="backdrop-filter: blur(10px)"
               >
                 <li class="d-flex align-items-center">
                   <img
@@ -123,8 +123,8 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/QyxrEl.jpg" class="img-fluid" alt="肉品" />
               <ul
-                class="furittext position-absolute w-100 p-md-4 py-2 text-white"
-                style="height: 100%; backdrop-filter: blur(10px)"
+                class="h-100 furittext position-absolute w-100 p-md-4 py-2 text-white"
+                style="backdrop-filter: blur(10px)"
               >
                 <li class="d-flex align-items-center">
                   <img
