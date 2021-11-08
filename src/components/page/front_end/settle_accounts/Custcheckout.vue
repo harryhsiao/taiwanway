@@ -15,7 +15,7 @@
                   :class="{ 'text-maincolor': Discount !== 100 }"
                   v-else
                 >
-                  {{ ((total_price * ( Discount / 100)) + shipping) | currency }}
+                  {{ (total_price * (Discount / 100) + shipping) | currency }}
                 </p>
                 <a
                   href="#collapseOne"
@@ -50,7 +50,11 @@
               <tbody v-for="item in custcart" :key="item.id">
                 <tr>
                   <td class="align-middle text-center" data-th="預覽圖">
-                    <img :src="item.product.imageUrl" alt="suit" class="img-thumbnail" />
+                    <img
+                      :src="item.product.imageUrl"
+                      :alt="item.product.title"
+                      class="img-thumbnail"
+                    />
                   </td>
                   <td class="align-middle text-center" colspan="10" data-th="商品名稱">
                     {{ item.product.title }}
@@ -86,10 +90,7 @@
               <p v-if="Discount !== 100">
                 本次消費您省了
                 <span class="text-danger">
-                  {{
-                    (total_price - (total_price * ( Discount / 100) ))
-                      | currency
-                  }}
+                  {{ (total_price - total_price * (Discount / 100)) | currency }}
                 </span>
               </p>
               <p
@@ -98,7 +99,7 @@
                 v-if="Discount !== 100"
               >
                 合計
-                {{ ((total_price * ( Discount / 100)) + shipping) | currency }}
+                {{ (total_price * (Discount / 100) + shipping) | currency }}
               </p>
               <p class="h2 mb-0 ml-md-3 mx-auto" v-else>
                 合計
@@ -134,10 +135,10 @@
           </table>
 
           <div class="text-right">
-            <button class="btn btn-secondary mr-3" @click="$router.go(-1)">
+            <button type="button" class="btn btn-secondary mr-3" @click="$router.go(-1)">
               上一步
             </button>
-            <button class="btn btn-maincolor" @click="postinfo()">
+            <button type="button" class="btn btn-maincolor" @click="postinfo()">
               確認結帳
             </button>
           </div>
@@ -149,6 +150,7 @@
 
 <script>
 export default {
+  name: 'FinalCheck',
   data() {
     return {
       custdata: JSON.parse(localStorage.getItem('custinfo')) || [],

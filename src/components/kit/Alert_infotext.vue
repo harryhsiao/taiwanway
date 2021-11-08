@@ -1,6 +1,6 @@
 <template>
   <div class="message_text_transition" :class="{ 'opacity-0': fadeout, 'opacity-5': !fadeout }">
-    <p id="error" :class="'text-' + status">
+    <p id="error" :class="`text-${status}`">
       <i class="fas fa-check-circle" v-if="isCanUse == 'yes'"></i>
       <i class="fas fa-times-circle" v-else-if="isCanUse == 'no'"></i>
       {{ msg }}
@@ -10,7 +10,6 @@
 
 <script>
 export default {
-  name: 'Navbar',
   data() {
     return {
       msg: '',

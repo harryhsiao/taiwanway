@@ -3,7 +3,7 @@
     <nav
       class="navbar navbar-expand-lg w-100 px-md-5"
       :class="[stylechange, { 'bg-maincolor': hambtn }]"
-      style="z-index:9999;"
+      style="z-index:110;"
     >
       <router-link to="/" class="navbar-brand bg-transparent shadow-none" :class="logoapper">
         <img width="30" height="50" src="https://upload.cc/i1/2021/03/17/DuLmv7.png" alt="logo" />
@@ -65,11 +65,19 @@
 
 <script>
 export default {
+  name: 'NavBar',
   data() {
     return {
       windowTop: 0,
       memberin: false,
       hambtn: false,
+      motion: {
+        text: '',
+        bgColor: '',
+        positionType: '',
+        positionVal: '',
+        paddingVal: '',
+      },
       logoapper: 'd-none',
     };
   },
@@ -82,21 +90,24 @@ export default {
   created() {
     this.islogin();
   },
-  computed: {
+  compute: {
     stylechange() {
       const vm = this;
-      let homePath = vm.$route.path;
-      switch (homePath) {
+      // const homePath = vm.$route.path;
+      switch (vm.$route.path) {
         case '/':
           if (vm.windowTop > 150) {
             vm.logoapper = 'd-inline-block';
             return 'navbar-light bg-maincolor position-fixed top-0 py-lg-2';
-          } else if (vm.windowTop > 100) {
+          }
+
+          if (vm.windowTop > 100) {
             vm.logoapper = 'd-none';
             return 'navbar-light bg-maincolor position-absolute top-miner-100 py-lg-2';
-          } else {
-            return 'navbar-dark position-absolute py-lg-2';
           }
+
+          return 'navbar-dark position-absolute py-lg-2';
+
         default:
           vm.logoapper = 'd-inline-block';
           return 'navbar-light bg-maincolor fixed-top p-2';
@@ -106,9 +117,8 @@ export default {
       const vm = this;
       if (vm.hambtn) {
         return 'bg-transparent';
-      } else {
-        return 'bg-maincolor';
       }
+      return 'bg-maincolor';
     },
   },
   methods: {

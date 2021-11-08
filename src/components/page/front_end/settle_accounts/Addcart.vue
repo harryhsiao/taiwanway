@@ -10,7 +10,14 @@
 
               <ul class="list-group list-group-flush">
                 <li
-                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                  class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                  border-0
+                  px-0
+                  pb-0"
                 >
                   金額
                   <span>{{ mytotalprice | currency }}</span>
@@ -68,7 +75,7 @@
                 </li>
               </ul>
 
-              <button class="btn btn-maincolor py-3 btn-block" @click="postcart()">
+              <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
                 結帳去
               </button>
               <router-link to="/cart" class="btn btn-secondary py-2 btn-block">
@@ -118,7 +125,7 @@
                 清空購物車
               </a>
             </div>
-            <div class="card-body overflow-md-auto hvh-7">
+            <div class="card-body overflow-auto hvh-7">
               <div class="noneProductMessage text-center" v-show="isnone">
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
@@ -148,8 +155,16 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <button
+                            type="button"
                             @click="minercart(item)"
-                            class="btn btn-outline-secondary minus border-right-0 border border-secondary rounded-left"
+                            class="
+                            btn
+                            btn-outline-secondary
+                            minus
+                            border-right-0
+                            border
+                            border-secondary
+                            rounded-left"
                             :disabled="item.qty < 2"
                           >
                             <i class="fas fa-minus"></i>
@@ -164,8 +179,15 @@
                         />
                         <div class="input-group-prepend">
                           <button
+                            type="button"
                             @click="pluscart(item)"
-                            class="btn btn-outline-secondary plus border border-left-0 border-secondary rounded-right"
+                            class="
+                            btn
+                            btn-outline-secondary
+                            plus border
+                            border-left-0
+                            border-secondary
+                            rounded-right"
                           >
                             <i class="fas fa-plus"></i>
                           </button>
@@ -204,7 +226,14 @@
 
               <ul class="list-group list-group-flush">
                 <li
-                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                  class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                  border-0
+                  px-0
+                  pb-0"
                 >
                   金額
                   <span>{{ mytotalprice | currency }}</span>
@@ -262,7 +291,7 @@
                 </li>
               </ul>
 
-              <button class="btn btn-maincolor py-3 btn-block" @click="postcart()">
+              <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
                 結帳去
               </button>
               <router-link to="/cart" class="btn btn-secondary py-2 btn-block">
@@ -302,6 +331,7 @@
 
 <script>
 export default {
+  name: 'AddCart',
   data() {
     return {
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
@@ -325,13 +355,10 @@ export default {
   computed: {
     changestyle() {
       const vm = this;
-      switch (vm.isnext) {
-        case true:
-          return 'text-info';
-
-        default:
-          return 'text-secondary';
+      if (vm.isnext) {
+        return 'text-info';
       }
+      return 'text-secondary';
     },
   },
   methods: {
@@ -378,7 +405,7 @@ export default {
             cacheID.forEach((item) => {
               vm.$http
                 .delete(
-                  `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`
+                  `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`,
                 )
                 .then(() => {
                   console.log('購物車已經清空');
@@ -395,13 +422,10 @@ export default {
                 vm.incart = [];
                 localStorage.removeItem('mycart');
                 vm.isLoading = false;
-                vm.$router.push('/checkpage/custinfo').catch(()=>{});
+                vm.$router.push('/checkpage/custinfo').catch(() => {});
               });
             });
-          }) /*
-          .then(() => {
-            vm.$router.push('/checkpage/custinfo');
-          })*/;
+          });
       } else {
         alert('購物車是空的噢');
       }
@@ -418,12 +442,12 @@ export default {
             description: data.description,
             id: data.id,
             imageUrl: data.imageUrl,
-            origin_price: parseInt(data.origin_price),
-            price: parseInt(data.price),
+            origin_price: parseInt(data.origin_price, 10),
+            price: parseInt(data.price, 10),
             title: data.title,
             unit: data.unit,
             product_id: data.id,
-            qty: parseInt((qty += 1)),
+            qty: parseInt((qty += 1), 10),
           };
           vm.incart.splice(keys, 1, cache);
         }
@@ -443,12 +467,12 @@ export default {
             description: data.description,
             id: data.id,
             imageUrl: data.imageUrl,
-            origin_price: parseInt(data.origin_price),
-            price: parseInt(data.price),
+            origin_price: parseInt(data.origin_price, 10),
+            price: parseInt(data.price, 10),
             title: data.title,
             unit: data.unit,
             product_id: data.id,
-            qty: parseInt((qty -= 1)),
+            qty: parseInt((qty -= 1), 10),
           };
           vm.incart.splice(keys, 1, cache);
         }
@@ -480,6 +504,7 @@ export default {
       const vm = this;
       vm.incart = [];
       vm.cartlong = 0;
+      vm.isLoading = false;
       localStorage.removeItem('mycart');
       vm.isnone = true;
       vm.mytotalprice = 0;

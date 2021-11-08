@@ -1,12 +1,16 @@
 <template>
   <div>
     <nav class="col-md-2 bg-light sidebar" :class="{ showSidebar: !tran, hideSidebar: tran }">
-      <div class="d-flex justify-content-between align-items-center mt-4">
+      <div class="d-flex justify-content-between align-items-center pt-7">
         <h6 class="h2 px-3 mb-1 text-muted w-80">
           管理員項目
         </h6>
         <div class="w-20">
-          <button class="text-muted py-4 d-md-none d-block w-100 border-0 " @click="onsider">
+          <button
+            type="button"
+            class="text-muted py-4 d-md-none d-block w-100 border-0 "
+            @click="onsider"
+          >
             <i class="fas fa-chevron-left"></i>
           </button>
         </div>
@@ -58,7 +62,12 @@
         </ul>
       </div>
     </nav>
-    <button class="btn btn-light px-0 pl-2 pr-1 scrollbtn-sticky text-muted d-md-none d-block" @click="onsider" :class="{ showSidebarbtn: tran, hideSidebarbtn: !tran }">
+    <button
+      type="button"
+      class="btn btn-light px-0 pl-2 pr-1 scrollbtn-sticky text-muted d-md-none d-block"
+      @click="onsider"
+      :class="{ showSidebarbtn: tran, hideSidebarbtn: !tran }"
+    >
       <i class="fas fa-chevron-right"></i>
     </button>
   </div>
@@ -66,6 +75,7 @@
 
 <script>
 export default {
+  name: 'SideBar',
   data() {
     return {
       tran: false,

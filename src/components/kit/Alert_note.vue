@@ -16,7 +16,6 @@
 
 <script>
 export default {
-  name: 'Navbar',
   data() {
     return {
       messages: [],
@@ -50,7 +49,7 @@ export default {
   },
   created() {
     const vm = this;
-    vm.$bus.$on('messsage:push', (message, status = 'warning') => {
+    vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
     });
   },
@@ -61,7 +60,7 @@ export default {
 .message-alert {
   position: fixed;
   max-width: 50%;
-  top: 50%;
+  top: 20%;
   right: 20px;
   z-index: 1100;
 }

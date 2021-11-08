@@ -50,7 +50,11 @@
               <tbody v-for="item in custcart" :key="item.id">
                 <tr>
                   <td class="align-middle text-center" data-th="預覽圖">
-                    <img :src="item.product.imageUrl" alt="suit" class="img-thumbnail" />
+                    <img
+                      :src="item.product.imageUrl"
+                      :alt="item.product.title"
+                      class="img-thumbnail"
+                    />
                   </td>
                   <td class="align-middle text-center" colspan="10" data-th="商品名稱">
                     {{ item.product.title }}
@@ -113,8 +117,8 @@
                   />
                   <div class="input-group-append">
                     <button
-                      class="btn btn-outline-secondary"
                       type="button"
+                      class="btn btn-outline-secondary"
                       id="button-addon2"
                       @click="addcoupon"
                     >
@@ -198,7 +202,7 @@
                     class="form-control"
                     v-model="form.user.city"
                   >
-                  <option value="">選擇一個城市</option>
+                    <option value="">選擇一個城市</option>
                     <option v-for="(item, index) in countorys" :key="index">
                       {{ item }}
                     </option>
@@ -246,9 +250,10 @@
 </template>
 
 <script>
-import Alertinfotext from '@/components/kit/Alert_info_text';
+import Alertinfotext from '../../../kit/Alert_infotext.vue';
 
 export default {
+  name: 'CustomInfo',
   data() {
     return {
       countorys: [
@@ -307,10 +312,10 @@ export default {
   methods: {
     getcart() {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
       vm.$http
-        .get(`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`)
+        .get(api)
         .then((resp) => {
           vm.custcart = resp.data.data.carts;
         })
@@ -339,7 +344,6 @@ export default {
       };
       vm.$http.post(api, { data: coupon }).then((response) => {
         if (response.data.success) {
-          //顯示
           vm.$infotext.$emit('messsage:push', '已套用優惠券', 'success', 'yes');
         } else {
           vm.$infotext.$emit('messsage:push', '無效的優惠券', 'danger', 'no');

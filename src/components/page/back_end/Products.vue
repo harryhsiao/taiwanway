@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>產品管理</h2>
-      <button class="btn btn-primary" @click="openmodel(true)">新增產品</button>
+      <button type="button" class="btn btn-primary" @click="openmodel(true)">新增產品</button>
     </div>
 
     <table class="table mb-4 rwd-table">
@@ -90,7 +90,7 @@
             </span>
           </td>
           <td class="text-md-center" data-th="產品圖">
-            <img v-bind:src="item.imageUrl" alt="產品圖" class="img-fluid w-50" />
+            <img v-bind:src="item.imageUrl" :alt="item.title" class="img-fluid w-50" />
           </td>
           <td class="text-md-center" data-th="產品名稱">{{ item.title }}</td>
           <td class="text-md-center" data-th="原價">
@@ -101,11 +101,19 @@
           </td>
           <td class="text-md-center" data-th="單位">{{ item.unit }}</td>
           <td class="text-md-center">
-            <button class="btn btn-maincolor btn-sm mb-2" @click="openmodel(false, item)">
+            <button
+              type="button"
+              class="btn btn-maincolor btn-sm mb-2"
+              @click="openmodel(false, item)"
+            >
               編輯
             </button>
             <br />
-            <button class="btn btn-outline-danger btn-sm" @click="openremovemodel(item)">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openremovemodel(item)"
+            >
               刪除
             </button>
           </td>
@@ -158,7 +166,7 @@
                   <img
                     img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
                     class="img-fluid"
-                    alt="產品預覽"
+                    :alt="tempProduct.title"
                     :src="tempProduct.imageUrl"
                   />
                 </div>
@@ -190,7 +198,7 @@
                   <img
                     img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
                     class="img-fluid"
-                    alt="產品預覽"
+                    :alt="tempProduct.title"
                     :src="tempProduct.image2"
                   />
                 </div>
@@ -222,7 +230,7 @@
                   <img
                     img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
                     class="img-fluid"
-                    alt="產品預覽"
+                    :alt="tempProduct.title"
                     :src="tempProduct.image3"
                   />
                 </div>
@@ -254,7 +262,7 @@
                   <img
                     img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
                     class="img-fluid"
-                    alt="產品預覽"
+                    :alt="tempProduct.title"
                     :src="tempProduct.image4"
                   />
                 </div>
@@ -414,9 +422,10 @@
 
 <script>
 import $ from 'jquery';
-import Pagination from '@/components/kit/Pagination';
+import Pagination from '../../kit/Pagination.vue';
 
 export default {
+  name: 'ProductsEdit',
   data() {
     return {
       products: [],
@@ -443,12 +452,12 @@ export default {
   computed: {
     rankmethod() {
       const vm = this;
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return vm.products.sort((a, b) => {
-        if (vm.isReverse == true) {
+        if (vm.isReverse === true) {
           return a[vm.rankwith] - b[vm.rankwith];
-        } else {
-          return b[vm.rankwith] - a[vm.rankwith];
         }
+        return b[vm.rankwith] - a[vm.rankwith];
       });
     },
     rankarrow_direction() {

@@ -5,16 +5,24 @@
     <div class="container mb-5">
       <div class="row">
         <div class="col-12 px-0 mb-5">
-          <div class="accordion" id="accordionExample">
+          <div class="accordion" id="bill">
             <div class="card">
               <div
                 class="card-header d-flex justify-content-between align-items-center"
                 id="headingOne"
               >
-                <h2 class="text-danger" v-if="!order.is_paid">
-                  <i class="far fa-times-circle"></i>未付款
-                </h2>
-                <h2 class="text-success" v-else><i class="far fa-check-circle"></i>已付款</h2>
+                <div v-if="!order.is_paid">
+                  <h2 class="text-danger">
+                    <i class="far fa-times-circle"></i>
+                    未付款
+                  </h2>
+                </div>
+                <div v-else>
+                  <h2 class="text-success">
+                    <i class="far fa-check-circle"></i>
+                    已付款
+                  </h2>
+                </div>
                 <button
                   class="btn btn-link text-earthy"
                   type="button"
@@ -32,7 +40,7 @@
                 id="collapseOne"
                 class="collapse show"
                 aria-labelledby="headingOne"
-                data-parent="#accordionExample"
+                data-parent="#bill"
               >
                 <div class="card-body">
                   <table class="table">
@@ -63,7 +71,7 @@
         </div>
         <div class="col-12 border mb-5 p-4">
           <article>
-            <h3 class="text-center my-4">付款須知</h3>
+            <h3 class="my-4">付款須知</h3>
             <p>
               本網站為練習之用,不具商業功能,故要完成付款功能,請點擊下方 "模擬付款" 按鈕來模擬
             </p>
@@ -73,10 +81,11 @@
             </p>
           </article>
           <div class="text-right">
-            <button class="btn btn-secondary" @click="$router.push('/cart')">
+            <button type="button" class="btn btn-secondary" @click="$router.push('/cart')">
               回到購物頁
             </button>
             <button
+              type="button"
               class="btn btn-maincolor ml-3"
               data-toggle="modal"
               data-target="#exampleModalCenter"
@@ -93,9 +102,10 @@
 </template>
 
 <script>
-import Alertcard from '@/components/kit/Alertcard';
+import Alertcard from '../../../kit/Alert_card.vue';
 
 export default {
+  name: 'CheckComplete',
   data() {
     return {
       order: {
@@ -131,7 +141,7 @@ export default {
           vm.getorder();
         }
         vm.isLoading = false;
-        vm.$infomodal.$emit('messsage:push', '付款成功', 'success');
+        vm.$infomodal.$emit('message:push', '付款成功', 'success');
       });
     },
     totalPricecal() {

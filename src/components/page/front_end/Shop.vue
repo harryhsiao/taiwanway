@@ -13,10 +13,14 @@
               台南前鋒店&nbsp;<span class="font-weight-normal">( 總店 )</span>
             </h5>
             <div class="card border-0">
-              <img src="https://upload.cc/i1/2021/08/01/jGzNB1.jpg" alt="" class="img-fluid" />
+              <img
+                src="https://upload.cc/i1/2021/08/01/jGzNB1.jpg"
+                alt="台南前鋒店"
+                class="img-fluid"
+              />
               <div class="card-body d-flex px-0">
                 <div class="shopinfo-zhtw w-50">
-                  <p>TEL&nbsp;:&nbsp;&nbsp;(06)000000</p>
+                  <a href="tel:+886-6-000000">TEL&nbsp;:&nbsp;&nbsp;(06)000000</a>
                   <p>11:00 - 21:00</p>
                   <p>台南市東區<br />前鋒路XXX號1樓</p>
                 </div>
@@ -32,10 +36,14 @@
           <div class="col-md-4 mb-3">
             <h5 class="text-center font-weight-bold">新北泰林店</h5>
             <div class="card border-0">
-              <img src="https://upload.cc/i1/2021/08/01/DyTqs7.jpg" alt="" class="img-fluid" />
+              <img
+                src="https://upload.cc/i1/2021/08/01/DyTqs7.jpg"
+                alt="新北泰林店"
+                class="img-fluid"
+              />
               <div class="card-body d-flex px-0">
                 <div class="shopinfo-zhtw w-50">
-                  <p>TEL&nbsp;:&nbsp;&nbsp;(02)000000</p>
+                  <a href="tel:+886-2-000000">TEL&nbsp;:&nbsp;&nbsp;(02)000000</a>
                   <p>12:00 - 22:00</p>
                   <p>新北市泰山區<br />泰林路二段XXX號 B1</p>
                 </div>
@@ -51,10 +59,14 @@
           <div class="col-md-4 mb-3">
             <h5 class="text-center font-weight-bold">台北信義店</h5>
             <div class="card border-0">
-              <img src="https://upload.cc/i1/2021/08/01/ApeJgG.jpg" alt="" class="img-fluid" />
+              <img
+                src="https://upload.cc/i1/2021/08/01/ApeJgG.jpg"
+                alt="台北信義店"
+                class="img-fluid"
+              />
               <div class="card-body d-flex px-0">
                 <div class="shopinfo-zhtw w-50">
-                  <p>TEL&nbsp;:&nbsp;&nbsp;(02)000000</p>
+                  <a href="tel:+886-2-000000">TEL&nbsp;:&nbsp;&nbsp;(02)000000</a>
                   <p>11:00 - 24:00</p>
                   <p>台北市信義區<br />仁愛路四段XXX號 2樓</p>
                 </div>
@@ -70,10 +82,14 @@
           <div class="col-md-4 mb-3">
             <h5 class="text-center font-weight-bold">羅東傳藝店</h5>
             <div class="card border-0">
-              <img src="https://upload.cc/i1/2021/08/01/5EGINU.jpg" alt="" class="img-fluid" />
+              <img
+                src="https://upload.cc/i1/2021/08/01/5EGINU.jpg"
+                alt="羅東傳藝店"
+                class="img-fluid"
+              />
               <div class="card-body d-flex px-0">
                 <div class="shopinfo-zhtw w-50">
-                  <p>TEL&nbsp;:&nbsp;&nbsp;(03)000000</p>
+                  <a href="tel:+886-3-000000">TEL&nbsp;:&nbsp;&nbsp;(03)000000</a>
                   <p>
                     12:00 - 20:00<br />
                     例假日 - 21:00
@@ -92,10 +108,14 @@
           <div class="col-md-4 mb-3">
             <h5 class="text-center font-weight-bold">高雄前鎮店</h5>
             <div class="card border-0">
-              <img src="https://upload.cc/i1/2021/08/01/BFGoOY.jpg" alt="" class="img-fluid" />
+              <img
+                src="https://upload.cc/i1/2021/08/01/BFGoOY.jpg"
+                alt="高雄前鎮店"
+                class="img-fluid"
+              />
               <div class="card-body d-flex px-0">
                 <div class="shopinfo-zhtw w-50">
-                  <p>TEL&nbsp;:&nbsp;&nbsp;(07)000000</p>
+                  <a href="tel:+886-7-000000">TEL&nbsp;:&nbsp;&nbsp;(07)000000</a>
                   <p>12:00 - 22:00<br /></p>
                   <p>高雄市前鎮區<br />擴建路XXX號</p>
                 </div>
@@ -113,3 +133,9 @@
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'StoreInfo',
+};
+</script>

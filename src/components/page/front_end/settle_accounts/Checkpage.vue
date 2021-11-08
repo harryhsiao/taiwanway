@@ -40,9 +40,10 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar';
+import Navbar from '../../../Navbar.vue';
 
 export default {
+  name: 'CheckPage',
   components: {
     Navbar,
   },
@@ -65,7 +66,7 @@ export default {
   methods: {
     getcurraddress() {
       const vm = this;
-      let homePath = vm.$route.path;
+      const homePath = vm.$route.path;
       vm.alertopen = '';
       if (homePath === '/checkpage/custinfo' || homePath === '/checkpage/custcheckout') {
         vm.alertopen = homePath;
@@ -75,8 +76,7 @@ export default {
     },
   },
   mounted() {
-    //動態設置內容高度 讓footer始終居底   header+footer的高度是100
-    this.Height = document.documentElement.clientHeight - 100; //監聽瀏覽器窗口變化
+    this.Height = document.documentElement.clientHeight - 100;
     window.onresize = () => {
       this.Height = document.documentElement.clientHeight - 100;
     };

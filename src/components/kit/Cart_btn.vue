@@ -3,7 +3,15 @@
     <router-link
       tag="button"
       to="/Addcart"
-      class="position-fixed CartButton-position CartButton border-0 p-3 rounded-circle d-md-block d-none"
+      class="
+      position-fixed
+      CartButton-position
+      CartButton
+      border-0
+      p-3
+      rounded-circle
+      d-md-block
+      d-none"
     >
       <i class="fas fa-shopping-cart"></i>
       <p class="mb-0">購物車</p>
@@ -29,7 +37,6 @@
 
 <script>
 export default {
-  name: 'pages',
   props: ['cartnum'],
 };
 </script>
@@ -42,7 +49,7 @@ export default {
 .CartButton-position {
   bottom: 180px;
   right: 10px;
-  z-index: 99999;
+  z-index: 1020;
 }
 
 .CartButton-number {

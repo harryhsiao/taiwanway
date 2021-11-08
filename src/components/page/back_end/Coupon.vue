@@ -1,9 +1,10 @@
+/* eslint-disable import/no-unresolved */
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>優惠券管理</h2>
-      <button class="btn btn-primary my-4" @click="openCouponmodal(true)">
+      <button type="button" class="btn btn-primary my-4" @click="openCouponmodal(true)">
         新增優惠券
       </button>
     </div>
@@ -43,13 +44,18 @@
           <td class="text-md-center">
             <span
               ><button
+                type="button"
                 class="btn btn-outline-coffemilk btn-maincolor btn-sm mb-2"
                 @click="openCouponmodal(false, item)"
               >
                 編輯
               </button>
               <br />
-              <button class="btn btn-outline-danger btn-sm" @click="openremovemodel(item)">
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                @click="openremovemodel(item)"
+              >
                 刪除
               </button>
             </span>
@@ -175,9 +181,10 @@
 
 <script>
 import $ from 'jquery';
-import Pagination from '@/components/kit/Pagination';
+import Pagination from '../../kit/Pagination.vue';
 
 export default {
+  name: 'CouponPage',
   data() {
     return {
       coupons: [],
@@ -201,16 +208,18 @@ export default {
     this.dateAndTime = Math.floor(new Date().getTime() / 1000);
   },
   computed: {
-    // 過濾到期日
     filterdate() {
       const vm = this;
-      return vm.coupons.filter((el) => {
-        if (el.due_date > vm.dateAndTime) {
-          el.is_enabled = 1;
+      return vm.coupons.filter((element) => {
+        if (element.due_date > vm.dateAndTime) {
+          const elements = element;
+          elements.is_enabled = 1;
         } else {
-          el.is_enabled = 0;
+          const elements = element;
+          elements.is_enabled = 0;
         }
-        return el;
+        const elements = element;
+        return elements;
       });
     },
   },
@@ -225,7 +234,7 @@ export default {
     },
   },
   filters: {
-    dateFilter: function(time) {
+    dateFilter(time) {
       const date = new Date(time * 1000);
       return date.toLocaleDateString();
     },
@@ -250,7 +259,7 @@ export default {
       } else {
         vm.tempcoupon = { ...item };
         const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
-        vm.due_date = dateAndTime[0];
+        vm.due_date = [dateAndTime];
       }
     },
     updateCoupon() {

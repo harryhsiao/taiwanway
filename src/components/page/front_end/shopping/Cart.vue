@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 <template>
   <div>
     <Alertnote />
@@ -48,7 +49,18 @@
           </select>
           <a
             href="#"
-            class="btn btn-outline-dark d-sm-inline-block d-none py-3 px-5 mr-3 badge-pill rounded-pill h3 chselection"
+            class="
+            btn
+            btn-outline-dark
+            d-sm-inline-block
+            d-none
+            py-3
+            px-5
+            mr-3
+            badge-pill
+            rounded-pill
+            h3
+            chselection"
             v-for="(item, index) in categorys"
             :key="index"
             :class="{ active: optiontext === item }"
@@ -113,9 +125,9 @@
       </div>
       <div class="row justify-content-center">
         <div class="pagination pg-num my-6">
-          <ul class="d-flex m-0 p-0">
+          <ul class="d-flex justify-content-between m-0 p-0">
             <li>
-              <a href="#" @click.prevent="prev">
+              <a href="#" @click.prevent="prev" v-if="currentpage !== 0">
                 <i class="fas fa-chevron-left"></i>
               </a>
             </li>
@@ -131,7 +143,9 @@
               </a>
             </li>
             <li>
-              <a href="#" @click.prevent="next"> <i class="fas fa-chevron-right"></i></a>
+              <a href="#" @click.prevent="next" v-if="currentpage !== filtersdata.length - 1 ">
+                <i class="fas fa-chevron-right"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -142,10 +156,11 @@
 </template>
 
 <script>
-import Alertnote from '@/components/kit/Alertnote';
-import Cartbtn from '@/components/kit/Cartbtn';
+import Alertnote from '../../../kit/Alert_note.vue';
+import Cartbtn from '../../../kit/Cart_btn.vue';
 
 export default {
+  name: 'CartPage',
   data() {
     return {
       custproducts: [],
@@ -153,9 +168,10 @@ export default {
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
       cartnum: [],
       cartid: [],
+      onenabled: [],
       categorys: ['全部商品'],
       selected: 0,
-      currentpage: 1,
+      currentpage: 0,
       productsearch: '',
       cartlong: '',
       optiontext: '全部商品',
@@ -196,7 +212,13 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.isLoading = true;
       vm.$http.get(api).then((resp) => {
-        vm.custproducts = resp.data.products;
+        vm.onenabled = resp.data.products;
+        vm.onenabled.forEach((item) => {
+          if (item.is_enabled === 1) {
+            vm.custproducts.push(item);
+          }
+        });
+        // vm.custproducts = resp.data.products;
         vm.getoption(vm.custproducts);
         vm.isLoading = false;
       });
@@ -218,8 +240,8 @@ export default {
           description: data.description,
           id: data.id,
           imageUrl: data.imageUrl,
-          origin_price: parseInt(data.origin_price),
-          price: parseInt(data.price),
+          origin_price: parseInt(data.origin_price, 10),
+          price: parseInt(data.price, 10),
           title: data.title,
           unit: data.unit,
           product_id: data.id,
@@ -228,13 +250,13 @@ export default {
         vm.incart.push(cartContent);
         localStorage.setItem('mycart', JSON.stringify(vm.incart));
       } else {
-        vm.$bus.$emit('messsage:push', '已經在購物車囉~', 'warning');
+        vm.$bus.$emit('message:push', '已經在購物車囉~', 'warning');
       }
       vm.cartlong = vm.incart.length;
     },
     getoption(element) {
       const vm = this;
-      element.forEach(function(el) {
+      element.forEach((el) => {
         if (vm.categorys.indexOf(el.category) === -1 && el.is_enabled === 1) {
           vm.categorys.push(el.category);
         }
@@ -257,7 +279,7 @@ export default {
       if (vm.currentpage === 0) {
         vm.currentpage = 0;
       } else {
-        vm.currentpage--;
+        vm.currentpage -= 1;
       }
     },
     next() {
@@ -265,7 +287,7 @@ export default {
       if (vm.currentpage === vm.filtersproducts.length - 1) {
         vm.currentpage = vm.filtersproducts.length - 1;
       } else {
-        vm.currentpage++;
+        vm.currentpage += 1;
       }
     },
   },
@@ -284,26 +306,22 @@ export default {
     filtersdata() {
       const vm = this;
       let tempData = [];
-      vm.currentpage = 0;
-      vm.filtersproducts = [];
       tempData = vm.custproducts.filter((item) => {
-        if (item.is_enabled === 1) {
-          if (vm.productsearch === '') {
-            if (vm.optiontext === '全部商品' || vm.optiontext === '') {
-              return vm.custproducts;
-            } else if (vm.optiontext === item.category) {
-              return item;
-            }
-          } else {
-            return item.title.match(vm.productsearch);
+        if (vm.productsearch === '') {
+          if (vm.optiontext === '全部商品' || vm.optiontext === '') {
+            return vm.custproducts;
+          }
+          if (vm.optiontext === item.category) {
+            return item;
           }
         }
+        return item.title.match(vm.productsearch);
       });
       tempData.forEach((item, i) => {
-        if (i % 10 == 0) {
+        if (i % 10 === 0) {
           vm.filtersproducts.push([]);
         }
-        const pagenum = parseInt(i / 10);
+        const pagenum = parseInt(i / 10, 10);
         vm.filtersproducts[pagenum].push(item);
       });
 

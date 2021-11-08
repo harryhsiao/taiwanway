@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'pages',
+  name: 'pagination-number',
   props: ['pgnum'],
   data() {
     return {
@@ -77,15 +77,14 @@ export default {
     getpg(page, curpage) {
       const vm = this;
       if (page === 'pre') {
-        vm.pageText = vm.pageText - 1;
+        vm.pageText -= 1;
         vm.$emit('getpgnum', vm.pageText);
       } else if (page === 'next') {
-        vm.pageText = vm.pageText + 1;
+        vm.pageText += 1;
         vm.$emit('getpgnum', vm.pageText);
       } else {
         vm.$emit('getpgnum', curpage);
       }
-      //vm.$emit('getpgnum', curpage);
     },
   },
 };

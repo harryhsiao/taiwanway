@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Back2top from '@/components/kit/Back2top';
-import Navbar from '@/components/Navbar';
+import Back2top from './components/kit/Goto_top.vue';
+import Navbar from './components/Navbar.vue';
 
 export default {
   name: 'App',
@@ -39,5 +39,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/all';
+@import './assets/scss/all';
 </style>

@@ -63,7 +63,7 @@ export default {
   },
   created() {
     const vm = this;
-    vm.$infomodal.$on('messsage:push', (message, status = 'warning') => {
+    vm.$infomodal.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
     });
   },

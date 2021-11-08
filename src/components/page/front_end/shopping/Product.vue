@@ -108,7 +108,12 @@
             <div class="accordion" id="info_accordion">
               <div class="card border-top-0 border-right-0 border-bottom border-left-0 mb-3">
                 <div
-                  class="card-header bg-transparent d-flex align-items-center justify-content-between"
+                  class="
+                  card-header
+                  bg-transparent
+                  d-flex
+                  align-items-center
+                  justify-content-between"
                   data-toggle="collapse"
                   data-target="#product_info_one"
                   aria-expanded="true"
@@ -136,7 +141,12 @@
 
               <div class="card border-top-0 border-right-0 border-bottom border-left-0 mb-3">
                 <div
-                  class="card-header bg-transparent d-flex align-items-center justify-content-between"
+                  class="
+                  card-header
+                  bg-transparent
+                  d-flex
+                  align-items-center
+                  justify-content-between"
                   data-toggle="collapse"
                   data-target="#product_info_two"
                   aria-expanded="true"
@@ -164,7 +174,12 @@
 
               <div class="card border-top-0 border-right-0 border-bottom border-left-0 mb-3">
                 <div
-                  class="card-header bg-transparent d-flex align-items-center justify-content-between"
+                  class="
+                  card-header
+                  bg-transparent
+                  d-flex
+                  align-items-center
+                  justify-content-between"
                   data-toggle="collapse"
                   data-target="#product_info_three"
                   aria-expanded="true"
@@ -266,7 +281,12 @@
 
             <div class="input-group my-4">
               <div class="input-group-prepend">
-                <button @click="qty--" class="minus btn btn-maincolor px-3" :disabled="qty < 2">
+                <button
+                  type="button"
+                  @click="qty--"
+                  class="minus btn btn-maincolor px-3"
+                  :disabled="qty < 2"
+                >
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
@@ -279,7 +299,7 @@
                 type="number"
               />
               <div class="input-group-prepend">
-                <button @click="qty++" class="plus btn btn-maincolor px-3">
+                <button type="button" @click="qty++" class="plus btn btn-maincolor px-3">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
@@ -434,10 +454,11 @@
 
 <script>
 import $ from 'jquery';
-import Footer from '@/components/Footer';
-import Cartbtn from '@/components/kit/Cartbtn';
+import Footer from '../../../Footer.vue';
+import Cartbtn from '../../../kit/Cart_btn.vue';
 
 export default {
+  name: 'ProductDetialPage',
   components: {
     Footer,
     Cartbtn,
@@ -481,13 +502,13 @@ export default {
       swiperThumbs.controller.control = swiperTop;
     });
     $('.collapse')
-      .on('show.bs.collapse', function() {
+      .on('show.bs.collapse', function show() {
         $(this)
           .parent()
           .find('.collapseicon')
           .toggleClass('isopen');
       })
-      .on('hidden.bs.collapse', function() {
+      .on('hidden.bs.collapse', function hidden() {
         $(this)
           .parent()
           .find('.collapseicon')
@@ -504,7 +525,7 @@ export default {
     getsameproduct() {
       const vm = this;
       return vm.custproducts.filter(
-        (item) => item.id !== vm.product.id && item.category === vm.product.category
+        (item) => item.id !== vm.product.id && item.category === vm.product.category,
       );
     },
   },
@@ -580,12 +601,12 @@ export default {
       vm.cartlong = vm.incart.length;
     },
     currentSlide(n) {
-      let slides = document.querySelectorAll('.mySlides');
-      let dots = document.querySelectorAll('.demo');
-      for (let i = 0; i < slides.length; i++) {
+      const slides = document.querySelectorAll('.mySlides');
+      const dots = document.querySelectorAll('.demo');
+      for (let i = 0; i < slides.length; i += 1) {
         slides[i].style.opacity = '0';
       }
-      for (let i = 0; i < dots.length; i++) {
+      for (let i = 0; i < dots.length; i += 1) {
         dots[i].className = dots[i].className.replace('activee', '');
       }
       slides[n].style.opacity = '1';
