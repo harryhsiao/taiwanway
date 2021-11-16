@@ -6,7 +6,7 @@
         <div class="col-lg-4 d-block d-md-none">
           <div class="card mb-4">
             <div class="card-body">
-              <h5 class="mb-3">結帳</h5>
+              <h3 class="mb-3">結帳</h3>
 
               <ul class="list-group list-group-flush">
                 <li
@@ -125,7 +125,7 @@
                 清空購物車
               </a>
             </div>
-            <div class="card-body overflow-auto hvh-70">
+            <div class="card-body">
               <div class="noneProductMessage text-center" v-show="isnone">
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
@@ -137,7 +137,7 @@
                   <span class="ml-3">來去買點東西吧</span>
                 </router-link>
               </div>
-              <div class="row mb-4 border-bottom" v-for="item in incart" :key="item.id">
+              <div class="row mt-3 border-bottom" v-for="item in incart" :key="item.id">
                 <div class="col-md-5 col-lg-3">
                   <div class="mb-3 mb-md-0">
                     <img class="img-fluid w-100" :src="item.imageUrl" :alt="item.category" />
@@ -151,7 +151,7 @@
                         {{ item.category }}
                       </p>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 px-md-3 px-2">
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <button
@@ -220,13 +220,14 @@
           </div>
         </div>
         <div class="col-lg-4 d-none d-md-block">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="mb-3">結帳</h5>
+          <div class="position-fixed top-px-100">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="mb-3">結帳</h5>
 
-              <ul class="list-group list-group-flush">
-                <li
-                  class="
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="
                   list-group-item
                   d-flex
                   justify-content-between
@@ -234,25 +235,25 @@
                   border-0
                   px-0
                   pb-0"
-                >
-                  金額
-                  <span>{{ mytotalprice | currency }}</span>
-                </li>
-                <li
-                  class="
+                  >
+                    金額
+                    <span>{{ mytotalprice | currency }}</span>
+                  </li>
+                  <li
+                    class="
                     list-group-item
                     d-flex
                     justify-content-between
                     align-items-center
                     px-0
                   "
-                  v-if="mytotalprice < 3000 && mytotalprice > 0"
-                >
-                  運費
-                  <span>{{ 60 | currency }}</span>
-                </li>
-                <li
-                  class="
+                    v-if="mytotalprice < 3000 && mytotalprice > 0"
+                  >
+                    運費
+                    <span>{{ 60 | currency }}</span>
+                  </li>
+                  <li
+                    class="
                     list-group-item
                     d-flex
                     justify-content-between
@@ -260,13 +261,13 @@
                     px-0
                     text-success
                   "
-                  v-else
-                >
-                  運費
-                  <span>{{ 0 | currency }}</span>
-                </li>
-                <li
-                  class="
+                    v-else
+                  >
+                    運費
+                    <span>{{ 0 | currency }}</span>
+                  </li>
+                  <li
+                    class="
                     list-group-item
                     d-flex
                     justify-content-between
@@ -275,52 +276,53 @@
                     px-0
                     mb-3
                   "
-                >
-                  <div>
-                    <strong class="h3">總價</strong>
-                    <strong>
-                      <p class="mb-0">(含稅)</p>
-                    </strong>
-                  </div>
-                  <span class="h2" v-if="mytotalprice < 3000 && mytotalprice > 0">
-                    <strong>{{ (mytotalprice + 60) | currency }}</strong>
-                  </span>
-                  <span class="h2" v-else>
-                    <strong>{{ mytotalprice | currency }}</strong>
-                  </span>
-                </li>
-              </ul>
+                  >
+                    <div>
+                      <strong class="h3">總價</strong>
+                      <strong>
+                        <p class="mb-0">(含稅)</p>
+                      </strong>
+                    </div>
+                    <span class="h2" v-if="mytotalprice < 3000 && mytotalprice > 0">
+                      <strong>{{ (mytotalprice + 60) | currency }}</strong>
+                    </span>
+                    <span class="h2" v-else>
+                      <strong>{{ mytotalprice | currency }}</strong>
+                    </span>
+                  </li>
+                </ul>
 
-              <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
-                結帳去
-              </button>
-              <router-link to="/Store" class="btn btn-secondary py-2 btn-block">
-                繼續購物
-              </router-link>
+                <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
+                  結帳去
+                </button>
+                <router-link to="/Store" class="btn btn-secondary py-2 btn-block">
+                  繼續購物
+                </router-link>
+              </div>
             </div>
-          </div>
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="mb-4">我們接受以下付款方式</h5>
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="mb-4">我們接受以下付款方式</h5>
 
-              <img
-                class="mr-2"
-                width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                alt="Visa"
-              />
-              <img
-                class="mr-2"
-                width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                alt="American Express"
-              />
-              <img
-                class="mr-2"
-                width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                alt="Mastercard"
-              />
+                <img
+                  class="mr-2"
+                  width="45px"
+                  src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                  alt="Visa"
+                />
+                <img
+                  class="mr-2"
+                  width="45px"
+                  src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                  alt="American Express"
+                />
+                <img
+                  class="mr-2"
+                  width="45px"
+                  src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                  alt="Mastercard"
+                />
+              </div>
             </div>
           </div>
         </div>

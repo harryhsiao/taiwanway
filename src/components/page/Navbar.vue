@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg w-100 px-md-5 zindex-100"
+      class="navbar navbar-expand-lg w-100 px-md-5 zindex-200"
       :class="[stylechange, { 'bg-maincolor': hambtn }]"
     >
       <router-link to="/" class="navbar-brand bg-transparent shadow-none" :class="`d-${logoapper}`">

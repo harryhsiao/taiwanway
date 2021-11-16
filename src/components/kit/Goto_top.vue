@@ -2,7 +2,7 @@
   <div>
     <button
       type="button"
-      class=" position-fixed border-0 p-3 topbutton rounded-circle"
+      class=" position-fixed border-0 p-3 topbutton zindex-20 rounded-circle"
       :class="stylechange"
       @click="gotop"
       v-if="windowTop > 790"
@@ -49,9 +49,8 @@ export default {
 
 <style scoped>
 .topbutton {
-  bottom: 85px;
+  bottom: 10px;
   right: 10px;
-  z-index: 10;
   outline: none;
   transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.2s;
 }

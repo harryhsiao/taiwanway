@@ -17,23 +17,23 @@
       </div>
       <div class="sidebar-sticky pt-0">
         <ul class="nav flex-column d-md-block d-none">
-          <li class="nav-item border py-4">
-            <router-link class="nav-link h4" to="/dashboard/products">
+          <li class="nav-item border">
+            <router-link class="nav-link h4 py-4 mb-0" to="/dashboard/products">
               <i class="fas fa-box-open fa-fw"></i>&nbsp;&nbsp;產品列表
             </router-link>
           </li>
-          <li class="nav-item border py-4">
-            <router-link class="nav-link h4" to="/dashboard/orders">
+          <li class="nav-item border">
+            <router-link class="nav-link h4 py-4 mb-0" to="/dashboard/orders">
               <i class="fas fa-clipboard-list fa-fw"></i>&nbsp;&nbsp;訂單列表
             </router-link>
           </li>
-          <li class="nav-item border py-4">
-            <router-link class="nav-link h4" to="/dashboard/coupon">
+          <li class="nav-item border">
+            <router-link class="nav-link h4 py-4 mb-0" to="/dashboard/coupon">
               <i class="fas fa-ticket-alt fa-fw"></i>&nbsp;&nbsp;優惠券
             </router-link>
           </li>
-          <li class="nav-item border py-4">
-            <a class="nav-link h4" href="#" @click.prevent="logout()">
+          <li class="nav-item border">
+            <a class="nav-link h4 py-4 mb-0" href="#" @click.prevent="logout()">
               <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;登出
             </a>
           </li>
