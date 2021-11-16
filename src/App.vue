@@ -8,7 +8,7 @@
 
 <script>
 import Back2top from './components/kit/Goto_top.vue';
-import Navbar from './components/Navbar.vue';
+import Navbar from './components/page/Navbar.vue';
 
 export default {
   name: 'App',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron jumbotron-fluid shop-image image-cover hvh-3">
+    <div class="jumbotron jumbotron-fluid shop-image image-cover hvh-30">
       <div class="container">
         <h2 class="text-center mx-auto my-4 p-4 jumbtitle">實體店面<br />FIND US</h2>
       </div>

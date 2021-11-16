@@ -1,0 +1,30 @@
+.chselection {
+  position: relative;
+  transition: .5s ease-in;
+  overflow: hidden;
+  outline: none;
+}
+
+.fill:hover {
+  color: #edf9ff;
+}
+
+.fill:before {
+  content: '';
+  position: absolute;
+  background: #383736;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: -1;
+  transition: top 0.2s ease-in;
+}
+
+.fill:hover:before {
+  top: 0;
+}
+
+.active {
+  color: #343a40;
+}

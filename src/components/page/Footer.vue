@@ -79,7 +79,7 @@
                 <router-link to="/Login" class="text-dimegray">登入</router-link>
               </li>
               <li class="mb-2"><router-link to="/Menu" class="text-dimegray">菜單</router-link></li>
-              <li class="mb-2"><router-link to="/Cart" class="text-dimegray">商品</router-link></li>
+              <li class="mb-2"><router-link to="/Store" class="text-dimegray">商品</router-link></li>
             </ul>
           </div>
           <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">

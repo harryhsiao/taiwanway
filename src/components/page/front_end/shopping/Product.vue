@@ -11,30 +11,30 @@
     </nav>
     <header class="py-4 py-lg-5">
       <div class="container mt-7">
-        <router-link class="text-secondary h4 mb-5" to="/Cart">
+        <router-link class="text-secondary h4 mb-5" to="/Store">
           <i class="fas fa-chevron-left"></i>
           返回商城
         </router-link>
         <div class="row my-4">
           <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
-            <swiper class="swiper w-100 hvh-3" :options="swiperOptionTop" ref="swiperTop">
+            <swiper class="swiper w-100 hvh-30" :options="swiperOptionTop" ref="swiperTop">
               <swiper-slide
-                class="image-cover hvh-3"
+                class="image-cover hvh-30"
                 :style="`background-image:url(${product.imageUrl})`"
                 v-if="product.imageUrl"
               ></swiper-slide>
               <swiper-slide
-                class="image-cover hvh-3"
+                class="image-cover hvh-30"
                 :style="`background-image:url(${product.image2})`"
                 v-if="product.image2"
               ></swiper-slide>
               <swiper-slide
-                class="image-cover hvh-3"
+                class="image-cover hvh-30"
                 :style="`background-image:url(${product.image3})`"
                 v-if="product.image3"
               ></swiper-slide>
               <swiper-slide
-                class="image-cover hvh-3"
+                class="image-cover hvh-30"
                 :style="`background-image:url(${product.image4})`"
                 v-if="product.image4"
               ></swiper-slide>
@@ -454,7 +454,7 @@
 
 <script>
 import $ from 'jquery';
-import Footer from '../../../Footer.vue';
+import Footer from '../../Footer.vue';
 import Cartbtn from '../../../kit/Cart_btn.vue';
 
 export default {

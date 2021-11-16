@@ -1,0 +1,12 @@
+$sites: (top, left, bottom, right);
+$units: (px, rem, '%');
+
+@each $sitesin in $sites {
+  @each $unit in $units {
+    @for $i from 1 through 100 {
+      .#{$sites}-#{$unit}-#{$i} {
+        #{$sites}: #{$i}#{$unit};
+      }
+    }
+  }
+}

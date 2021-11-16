@@ -60,7 +60,8 @@ extend('zhtw_name', (value) => {
   return '無效的姓名';
 });
 
-Vue.component('isLoading', Loading);
+// eslint-disable-next-line vue/multi-word-component-names
+Vue.component('Loading', Loading);
 
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;

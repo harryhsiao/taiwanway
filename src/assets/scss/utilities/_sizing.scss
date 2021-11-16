@@ -98,6 +98,9 @@ $hrems: map-merge(
         10: (
             $hrem * 10,
         ),
+        15: (
+            $hrem * 15,
+        ),
         20: (
             $hrem * 20,
         ),
@@ -126,30 +129,33 @@ $hvhs: ();
 $hvhs: map-merge(
     (
         0: 0,
-        1: $hvh,
-        2: (
+        10: $hvh,
+        20: (
             $hvh * 2,
         ),
-        3: (
+        30: (
             $hvh * 3,
         ),
-        4: (
+        40: (
             $hvh * 4,
         ),
-        5: (
+        50: (
             $hvh * 5,
         ),
-        6: (
+        60: (
             $hvh * 6,
         ),
-        7: (
+        70: (
             $hvh * 7,
         ),
-        8: (
+        80: (
             $hvh * 8,
         ),
-        9: (
+        90: (
             $hvh * 9,
+        ),
+        100: (
+            $hvh * 10,
         ),
     ),
     $hvhs
@@ -159,6 +165,53 @@ $hvhs: map-merge(
 @each $prop, $abbrev in (height: hvh) {
     @each $hvh, $length in $hvhs {
         .#{$abbrev}-#{$hvh} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// 單位(unit): vw
+$hvw: 10vw;
+$hvws: ();
+$hvws: map-merge(
+    (
+        0: 0,
+        10: $hvw,
+        20: (
+            $hvw * 2,
+        ),
+        30: (
+            $hvw * 3,
+        ),
+        40: (
+            $hvw * 4,
+        ),
+        50: (
+            $hvw * 5,
+        ),
+        60: (
+            $hvw * 6,
+        ),
+        70: (
+            $hvw * 7,
+        ),
+        80: (
+            $hvw * 8,
+        ),
+        90: (
+            $hvw * 9,
+        ),
+        100: (
+            $hvw * 10,
+        ),
+    ),
+    $hvws
+);
+
+// ex. hvw-1 , hvw-2 , ...
+@each $prop, $abbrev in (height: hvw) {
+    @each $hvw, $length in $hvws {
+        .#{$abbrev}-#{$hvw} {
             #{$prop}: $length !important;
         }
     }

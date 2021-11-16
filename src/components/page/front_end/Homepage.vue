@@ -4,7 +4,7 @@
       <div
         class="
           main-image
-          hvh-6
+          hvh-60
           image-text-combo
           bg-attachment
           image-cover
@@ -45,8 +45,15 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/ipq25Q.jpg" class="img-fluid" alt="蔬果" />
               <ul
-                class="h-100 furittext position-absolute w-100 p-md-4 py-2 text-white"
-                style="backdrop-filter: blur(10px)"
+                class="
+                h-100
+                furittext
+                position-absolute
+                w-100
+                p-md-4
+                py-2
+                text-white
+                backdropFilter-blur-10px"
               >
                 <li class="d-flex align-items-center">
                   <img
@@ -88,8 +95,8 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/tkUBCb.jpg" class="img-fluid" alt="海產" />
               <ul
-                class="h-100 furittext position-absolute w-100 p-4 text-white"
-                style="backdrop-filter: blur(10px)"
+                class="h-100 furittext position-absolute w-100 p-4
+                text-white backdropFilter-blur-10px"
               >
                 <li class="d-flex align-items-center">
                   <img
@@ -101,7 +108,7 @@
                 </li>
                 <li class="d-flex align-items-center mt-3">
                   <img
-                    style="height: 3rem"
+                    class="hrem-3"
                     src="https://upload.cc/i1/2021/07/10/3uPRaL.png"
                     alt="歐盟標章"
                   />
@@ -123,8 +130,15 @@
             <div class="img-hover-text position-relative overflow-hidden">
               <img src="https://upload.cc/i1/2021/08/01/QyxrEl.jpg" class="img-fluid" alt="肉品" />
               <ul
-                class="h-100 furittext position-absolute w-100 p-md-4 py-2 text-white"
-                style="backdrop-filter: blur(10px)"
+                class="
+                h-100
+                furittext
+                position-absolute
+                w-100
+                p-md-4
+                py-2
+                text-white
+                backdropFilter-blur-10px"
               >
                 <li class="d-flex align-items-center">
                   <img
@@ -144,7 +158,7 @@
                 </li>
                 <li class="d-flex align-items-center mt-3 hrem-2">
                   <img
-                    style="width: 2rem"
+                    class="wrem-2"
                     src="https://upload.cc/i1/2021/07/10/PZFJRQ.jpg"
                     alt="合格肉品"
                   />
@@ -205,7 +219,7 @@
             data-aos-offset="50"
           >
             <router-link
-              to="/cart"
+              to="/Store"
               class="btn btn-outline-dark py-3 px-5 badge-pill rounded-pill h3 mt-sm-4"
             >
               了解更多
@@ -220,7 +234,7 @@
       </h2>
       <div class="container">
         <div
-          class="menu-image hvh-4 image-cover mb-3 my-auto"
+          class="menu-image hvh-40 image-cover mb-3 my-auto"
           data-aos="fade-in"
           data-aos-delay="50"
           data-aos-offset="110"
@@ -258,13 +272,13 @@
         </div>
       </div>
     </section>
-    <section class="py-md-8 py-4 hvh-7">
+    <section class="py-md-8 py-4 hvh-70">
       <h2 class="text-center mb-3" data-aos="fade-in" data-aos-delay="50" data-aos-offset="50">
         相關店鋪<br />FIND US
       </h2>
       <div class="container">
         <div
-          class="shop-image hvh-3 image-cover mb-3"
+          class="shop-image hvh-30 image-cover mb-3"
           data-aos="fade-in"
           data-aos-delay="50"
           data-aos-offset="305"
@@ -291,7 +305,7 @@
 
 <script>
 import $ from 'jquery';
-import Footer from './Footer.vue';
+import Footer from '../Footer.vue';
 
 export default {
   name: 'HomePage',

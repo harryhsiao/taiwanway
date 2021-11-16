@@ -5,6 +5,16 @@
   backdrop-filter: blur(2px);
 }
 
+/* resize */
+$resizes: (none, both, horizontal, vertical, block, inline, inherit, initial, unset);
+@each $prop, $abbrev in (resize: 'resize') {
+  @each $resize in $resizes {
+    .#{$abbrev}-#{$resize} {
+      #{$prop}: $resize !important;
+    }
+  }
+}
+
 /* 字距 lettersp */
 
 $lettersp: 1px;

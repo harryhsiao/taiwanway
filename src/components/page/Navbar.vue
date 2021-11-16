@@ -1,11 +1,10 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg w-100 px-md-5"
+      class="navbar navbar-expand-lg w-100 px-md-5 zindex-100"
       :class="[stylechange, { 'bg-maincolor': hambtn }]"
-      style="z-index:110;"
     >
-      <router-link to="/" class="navbar-brand bg-transparent shadow-none" :class="logoapper">
+      <router-link to="/" class="navbar-brand bg-transparent shadow-none" :class="`d-${logoapper}`">
         <img width="30" height="50" src="https://upload.cc/i1/2021/03/17/DuLmv7.png" alt="logo" />
       </router-link>
       <button
@@ -28,14 +27,14 @@
         <div class="navbar-nav ml-auto navtext">
           <router-link class="nav-item nav-link" to="/">品牌介紹</router-link>
           <router-link class="nav-item nav-link" to="/menu">美味菜單</router-link>
-          <router-link class="nav-item nav-link" to="/cart">線上訂購</router-link>
+          <router-link class="nav-item nav-link" to="/Store">線上訂購</router-link>
           <router-link class="nav-item nav-link" to="/shop">門市據點</router-link>
           <router-link
             tag="button"
             class="btn btn-secondary badge-pill ml-3"
             to="/login"
             href="#"
-            v-if="memberin == false"
+            v-if="memberin === false"
           >
             登入
           </router-link>
@@ -71,14 +70,6 @@ export default {
       windowTop: 0,
       memberin: false,
       hambtn: false,
-      motion: {
-        text: '',
-        bgColor: '',
-        positionType: '',
-        positionVal: '',
-        paddingVal: '',
-      },
-      logoapper: 'd-none',
     };
   },
   mounted() {
@@ -90,27 +81,43 @@ export default {
   created() {
     this.islogin();
   },
-  compute: {
+  computed: {
     stylechange() {
       const vm = this;
-      // const homePath = vm.$route.path;
-      switch (vm.$route.path) {
+      const homePath = vm.$route.path;
+      switch (homePath) {
         case '/':
           if (vm.windowTop > 150) {
-            vm.logoapper = 'd-inline-block';
-            return 'navbar-light bg-maincolor position-fixed top-0 py-lg-2';
+            return 'navbar-light bg-maincolor position-fixed bar-top py-lg-2';
           }
 
           if (vm.windowTop > 100) {
-            vm.logoapper = 'd-none';
-            return 'navbar-light bg-maincolor position-absolute top-miner-100 py-lg-2';
+            return 'navbar-light bg-maincolor position-absolute bar-top-miner py-lg-2';
           }
 
           return 'navbar-dark position-absolute py-lg-2';
 
         default:
-          vm.logoapper = 'd-inline-block';
           return 'navbar-light bg-maincolor fixed-top p-2';
+      }
+    },
+    logoapper() {
+      const vm = this;
+      const homePath = vm.$route.path;
+      switch (homePath) {
+        case '/':
+          if (vm.windowTop > 150) {
+            return 'inline-block';
+          }
+
+          if (vm.windowTop > 100) {
+            return 'none';
+          }
+
+          return 'none';
+
+        default:
+          return 'inline-block';
       }
     },
     hambtncontrol() {
@@ -140,24 +147,13 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
       vm.$http.post(api).then((response) => {
-        if (!response.data.success) {
-          vm.memberin = false;
-        } else {
+        if (response.data.success) {
           vm.memberin = true;
+        } else {
+          vm.memberin = false;
         }
       });
     },
   },
 };
 </script>
-
-<style scoped>
-.top-0 {
-  top: 0;
-  transition: top cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
-}
-.top-miner-100 {
-  top: -100px;
-  transition: top cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
-}
-</style>

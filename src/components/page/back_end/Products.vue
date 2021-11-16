@@ -15,11 +15,8 @@
             @click="(isReverse = !isReverse), (rankwith = 'num')"
           >
             編號
-            <span>
-              <i
-                class="fas fa-angle-up text-success"
-                :class="{ rankarrow_down: rankwith == 'num' && isReverse }"
-              ></i>
+            <span class="icon" :class="{ inverse: isReverse && rankwith === 'num' }">
+              <i class=" fas fa-angle-up text-success"></i>
             </span>
           </th>
           <th
@@ -28,13 +25,9 @@
             @click="(isReverse = !isReverse), (rankwith = 'is_enabled')"
           >
             上架狀態
-            <span>
-              <i
-                class="fas fa-angle-up text-success"
-                :class="{
-                  rankarrow_down: rankwith == 'is_enabled' && isReverse,
-                }"
-              ></i>
+
+            <span class="icon" :class="{ inverse: isReverse && rankwith === 'is_enabled' }">
+              <i class=" fas fa-angle-up text-success"></i>
             </span>
           </th>
           <th class="text-md-center d-md-table-cell d-none" width="120">
@@ -47,13 +40,9 @@
             @click="(isReverse = !isReverse), (rankwith = 'origin_price')"
           >
             原價
-            <span>
-              <i
-                class="fas fa-angle-up text-success"
-                :class="{
-                  rankarrow_down: rankwith == 'origin_price' && isReverse,
-                }"
-              ></i>
+
+            <span class="icon" :class="{ inverse: isReverse && rankwith === 'origin_price' }">
+              <i class=" fas fa-angle-up text-success"></i>
             </span>
           </th>
           <th
@@ -62,11 +51,8 @@
             @click="(isReverse = !isReverse), (rankwith = 'price')"
           >
             售價
-            <span class="icon">
-              <i
-                class="fas fa-angle-up text-success"
-                :class="{ rankarrow_down: rankwith == 'price' && isReverse }"
-              ></i>
+            <span class="icon" :class="{ inverse: isReverse && rankwith === 'price' }">
+              <i class=" fas fa-angle-up text-success"></i>
             </span>
           </th>
           <th class="text-md-center" width="80">單位</th>
@@ -452,24 +438,12 @@ export default {
   computed: {
     rankmethod() {
       const vm = this;
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return vm.products.sort((a, b) => {
+      return vm.products.slice(0).sort((a, b) => {
         if (vm.isReverse === true) {
           return a[vm.rankwith] - b[vm.rankwith];
         }
         return b[vm.rankwith] - a[vm.rankwith];
       });
-    },
-    rankarrow_direction() {
-      const vm = this;
-      switch (vm.isReverse) {
-        case 0:
-          return 'rankarrow_down';
-        case 1:
-          return 'rankarrow_up';
-        default:
-          return 'none';
-      }
     },
   },
   methods: {
@@ -630,5 +604,11 @@ export default {
 <style scoped>
 textarea {
   white-space: pre;
+}
+.icon {
+  display: inline-block;
+}
+.icon.inverse {
+  transform: rotate(180deg);
 }
 </style>

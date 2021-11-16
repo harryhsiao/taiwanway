@@ -78,7 +78,7 @@
               <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
                 結帳去
               </button>
-              <router-link to="/cart" class="btn btn-secondary py-2 btn-block">
+              <router-link to="/Store" class="btn btn-secondary py-2 btn-block">
                 繼續購物
               </router-link>
             </div>
@@ -125,13 +125,13 @@
                 清空購物車
               </a>
             </div>
-            <div class="card-body overflow-auto hvh-7">
+            <div class="card-body overflow-auto hvh-70">
               <div class="noneProductMessage text-center" v-show="isnone">
                 <p class="mt-9">購物車是空的...</p>
                 <router-link
                   tag="button"
                   class="btn btn-outline-secondary p-4 mt-5 d-inline-flex align-items-center"
-                  to="/cart"
+                  to="/Store"
                 >
                   <i class="fas fa-directions fa-2x"></i>
                   <span class="ml-3">來去買點東西吧</span>
@@ -294,7 +294,7 @@
               <button type="button" class="btn btn-maincolor py-3 btn-block" @click="postcart()">
                 結帳去
               </button>
-              <router-link to="/cart" class="btn btn-secondary py-2 btn-block">
+              <router-link to="/Store" class="btn btn-secondary py-2 btn-block">
                 繼續購物
               </router-link>
             </div>

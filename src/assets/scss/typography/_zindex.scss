@@ -1,0 +1,48 @@
+$zindex: 10;
+$zindexs: ();
+$zindexs: map-merge(
+  (
+    0: 0,
+    10: $zindex,
+    20: (
+      $zindex * 2,
+    ),
+    30: (
+      $zindex * 3,
+    ),
+    40: (
+      $zindex * 4,
+    ),
+    50: (
+      $zindex * 5,
+    ),
+    60: (
+      $zindex * 6,
+    ),
+    70: (
+      $zindex * 7,
+    ),
+    80: (
+      $zindex * 8,
+    ),
+    90: (
+      $zindex * 9,
+    ),
+    100: (
+      $zindex * 10,
+    ),
+    200: (
+      $zindex * 20,
+    ),
+  ),
+  $zindexs
+);
+
+// ex. zindex-1 , zindex-2 , ...
+@each $prop, $abbrev in (z-index: zindex) {
+  @each $zindex, $length in $zindexs {
+    .#{$abbrev}-#{$zindex} {
+      #{$prop}: $length !important;
+    }
+  }
+}

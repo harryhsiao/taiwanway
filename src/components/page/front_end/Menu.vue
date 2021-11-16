@@ -23,7 +23,7 @@
           :key="index"
         >
           <div class="cards w-100 d-flex mt-3 mr-3 p-3">
-            <div class="limage card-img-top hvh-1 w-25"></div>
+            <div class="limage card-img-top hvh-10 w-25"></div>
             <div class="infobox ml-3 w-75">
               <h3 class="isload p-3 mt-2"></h3>
               <h3 class="isload p-3 mt-2"></h3>
@@ -33,7 +33,7 @@
         <div class="col-md-6" v-for="item in main_dish" :key="item.id">
           <div class="menucard d-flex mt-3 mr-3 p-3">
             <div class="photobox w-25">
-              <img class="w-100" :src="item.imageUrl" :alt="item.title" style="height: 10vh;" />
+              <img class="w-100 hvh-10" :src="item.imageUrl" :alt="item.title" />
             </div>
             <div class="infobox ml-3 w-75">
               <div class="d-flex justify-content-between align-items-center">
@@ -53,7 +53,7 @@
           </div>
           <div class="mb-3" :class="{ 'd-none': !isLoading }" v-for="index in 5" :key="index">
             <div class="cards w-100 d-flex mt-3 mr-3 p-3">
-              <div class="limage card-img-top hvh-1 w-25"></div>
+              <div class="limage card-img-top hvh-10 w-25"></div>
               <div class="infobox ml-3 w-75">
                 <h3 class="isload p-3 mt-2"></h3>
                 <h3 class="isload p-3 mt-2"></h3>
@@ -82,7 +82,7 @@
           </div>
           <div class="mb-3" :class="{ 'd-none': !isLoading }" v-for="index in 5" :key="index">
             <div class="cards w-100 d-flex mt-3 mr-3 p-3">
-              <div class="limage card-img-top hvh-1 w-25"></div>
+              <div class="limage card-img-top hvh-10 w-25"></div>
               <div class="infobox ml-3 w-75">
                 <h3 class="isload p-3 mt-2"></h3>
                 <h3 class="isload p-3 mt-2"></h3>
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import Footer from '../../Footer.vue';
+import Footer from '../Footer.vue';
 
 export default {
   name: 'MenuPage',

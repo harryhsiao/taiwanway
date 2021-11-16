@@ -230,11 +230,10 @@
                 <div class="col-md-12 mb-3">
                   <label for="validationTextarea">給賣家的話</label>
                   <textarea
-                    class="form-control"
+                    class="form-control resize-none"
                     id="validationTextarea"
                     placeholder="(非必填)"
                     v-model="form.message"
-                    style="resize: none"
                   ></textarea>
                 </div>
               </div>

@@ -81,7 +81,7 @@
             </p>
           </article>
           <div class="text-right">
-            <button type="button" class="btn btn-secondary" @click="$router.push('/cart')">
+            <button type="button" class="btn btn-secondary" @click="$router.push('/Store')">
               回到購物頁
             </button>
             <button

@@ -1,16 +1,17 @@
-@import './stylesheet/_opacity';
-@import './stylesheet/_articalgrid';
-@import './stylesheet/_custpagination';
-@import './stylesheet/_productcard';
-@import './stylesheet/_heightnwidth';
-@import './_img';
+@import './utilities/_opacity';
+@import './utilities/_sizing';
+@import './utilities/_img';
+@import './typography/_typography';
+@import './typography/_zindex';
+@import './stylesheet/_background';
+@import './stylesheet/_buttonMotion';
 
 /* html tag 滿版尺寸 */
 
 .section {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 .section-footer {
-    min-height: 88vh;
+  min-height: 88vh;
 }

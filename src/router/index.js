@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Homepage from '../components/Homepage.vue';
+import Homepage from '../components/page/front_end/Homepage.vue';
 import Menu from '../components/page/front_end/Menu.vue';
 import Shop from '../components/page/front_end/Shop.vue';
 
@@ -12,7 +12,7 @@ import Products from '../components/page/back_end/Products.vue';
 import Orders from '../components/page/back_end/Orders.vue';
 import Coupon from '../components/page/back_end/Coupon.vue';
 
-import Cart from '../components/page/front_end/shopping/Cart.vue';
+import Store from '../components/page/front_end/shopping/Store.vue';
 import Product from '../components/page/front_end/shopping/Product.vue';
 
 import Checkpage from '../components/page/front_end/settle_accounts/Checkpage.vue';
@@ -39,9 +39,9 @@ export default new Router({
       component: Menu,
     },
     {
-      path: '/Cart',
-      name: 'Cart',
-      component: Cart,
+      path: '/Store',
+      name: 'Store',
+      component: Store,
     },
     {
       path: '/Addcart',

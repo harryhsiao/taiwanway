@@ -1,0 +1,12 @@
+$stylesheets: (blur, brightness, contrast);
+$units: (px, rem);
+
+@each $stylesheet in $stylesheets {
+  @each $unit in $units {
+    @for $i from 1 through 10 {
+      .backdropFilter-#{$stylesheet}-#{$i}#{$unit} {
+        backdrop-filter: #{$stylesheet }'(#{$i}#{$unit})';
+      }
+    }
+  }
+}

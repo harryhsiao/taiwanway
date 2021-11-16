@@ -33,10 +33,10 @@
         <div class="border-top w-40"></div>
       </div>
     </div>
-    <div class="bg-white sticky-top w-100" style="top: 4rem;">
+    <div class="bg-white sticky-top w-100" style="top: 4rem; z-index: 100;">
       <div class="container">
-        <div class="pt-5 pb-4">
-          <p class="text-center h3 mb-5">看看有什麼好咪亞</p>
+        <div class="pt-md-5 pb-md-4 py-3">
+          <p class="text-center h3 mb-md-5 mb-3">看看有什麼好咪亞</p>
           <select
             name="fliter_option"
             id="fliter_option"
@@ -60,13 +60,16 @@
             badge-pill
             rounded-pill
             h3
-            chselection"
+            chselection
+            fill
+            "
             v-for="(item, index) in categorys"
             :key="index"
             :class="{ active: optiontext === item }"
             @click.prevent="changeoption"
-            >{{ item }}</a
           >
+            {{ item }}
+          </a>
         </div>
       </div>
     </div>
@@ -89,30 +92,41 @@
           v-for="item in filtersdata[currentpage]"
           :key="item.id"
         >
-          <div class="card thumbnail">
+          <div class="card rounded thumbnail h-100">
             <router-link :to="{ path: `/product/${item.id}` }">
-              <img class="card-img-top hpx-15" :src="item.imageUrl" :alt="item.category" />
-            </router-link>
-            <div class="card-body">
-              <router-link class="text-dark" :to="{ path: `/product/${item.id}` }">
-                <span class="badge badge-info">
-                  {{ item.category }}
-                </span>
-                <h5>{{ item.title }}</h5>
-              </router-link>
-              <div class="d-flex justify-content-between">
-                <p v-if="item.price">
-                  {{ item.price | currency }}
-                  <span class="price-unit"> /{{ item.unit }} </span>
-                </p>
-                <p v-else>
-                  {{ item.origin_price | currency }}
-                  <span class="price-unit"> /{{ item.unit }} </span>
-                </p>
+              <img
+                class="card-img position-relative hrem-15"
+                :src="item.imageUrl"
+                :alt="item.category"
+              />
+              <div class="card-img-overlay">
+                <div class="d-flex align-items-center justify-content-between">
+                  <h2
+                    class="
+                    text-white
+                    jumbtitle
+                    px-3
+                    py-2
+                    font-weight-bold"
+                  >
+                    {{ item.title }}
+                  </h2>
+                  <p class="badge badge-maincolor text-white py-2 lettersp-3 px-3">
+                    {{ item.category }}
+                  </p>
+                </div>
+                <div class="position-absolute" style="right: 5%; bottom: 20%;">
+                  <p class="h2 text-white jumbtitle text-right" v-if="item.price">
+                    {{ item.price | currency }}
+                  </p>
+                  <p class="h2 text-danger jumbtitle text-right" v-else>
+                    {{ item.origin_price | currency }}
+                  </p>
+                </div>
               </div>
-            </div>
+            </router-link>
             <button
-              class="btn btn-outline-secondary rounded-0 cartbtn"
+              class="btn btn-outline-secondary rounded-0 py-3 cartbtn zindex-10"
               id="add_cart_btn"
               type="button"
               @click="addcart(item)"
@@ -123,7 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" v-if="filtersdata.length > 1">
         <div class="pagination pg-num my-6">
           <ul class="d-flex justify-content-between m-0 p-0">
             <li>
@@ -143,7 +157,7 @@
               </a>
             </li>
             <li>
-              <a href="#" @click.prevent="next" v-if="currentpage !== filtersdata.length - 1 ">
+              <a href="#" @click.prevent="next" v-if="currentpage !== filtersdata.length - 1">
                 <i class="fas fa-chevron-right"></i>
               </a>
             </li>
@@ -164,11 +178,10 @@ export default {
   data() {
     return {
       custproducts: [],
-      filtersproducts: [],
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
       cartnum: [],
       cartid: [],
-      onenabled: [],
+      onEnabled: [],
       categorys: ['全部商品'],
       selected: 0,
       currentpage: 0,
@@ -212,13 +225,12 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.isLoading = true;
       vm.$http.get(api).then((resp) => {
-        vm.onenabled = resp.data.products;
-        vm.onenabled.forEach((item) => {
+        vm.onEnabled = resp.data.products;
+        vm.onEnabled.forEach((item) => {
           if (item.is_enabled === 1) {
             vm.custproducts.push(item);
           }
         });
-        // vm.custproducts = resp.data.products;
         vm.getoption(vm.custproducts);
         vm.isLoading = false;
       });
@@ -264,7 +276,8 @@ export default {
     },
     changeoption(e) {
       const vm = this;
-      vm.optiontext = e.target.text;
+      const optioncontent = e.target.text;
+      vm.optiontext = optioncontent.split(' ').join('');
     },
     changeValue(e) {
       const vm = this;
@@ -284,67 +297,43 @@ export default {
     },
     next() {
       const vm = this;
-      if (vm.currentpage === vm.filtersproducts.length - 1) {
-        vm.currentpage = vm.filtersproducts.length - 1;
+      if (vm.currentpage === vm.filtersdata.length - 1) {
+        vm.currentpage = vm.filtersdata.length - 1;
       } else {
         vm.currentpage += 1;
       }
     },
   },
   computed: {
-    categoryData() {
-      const vm = this;
-      let category = '';
-      return vm.custproducts.reduce((prev, curr) => {
-        if (curr.category !== category) {
-          prev.push(curr.category);
-        }
-        category = curr.category;
-        return prev;
-      }, []);
-    },
     filtersdata() {
       const vm = this;
       let tempData = [];
-      tempData = vm.custproducts.filter((item) => {
-        if (vm.productsearch === '') {
+      const filtersproducts = [];
+      const search = vm.custproducts.filter((item) => item.title.includes(vm.productsearch));
+      const option = vm.custproducts.filter((item) => vm.optiontext === item.category);
+      switch (vm.productsearch) {
+        case '':
           if (vm.optiontext === '全部商品' || vm.optiontext === '') {
-            return vm.custproducts;
+            tempData = vm.custproducts;
+          } else {
+            tempData = option;
           }
-          if (vm.optiontext === item.category) {
-            return item;
-          }
+          break;
+        default:
+          tempData = search;
+          break;
+      }
+
+      tempData.forEach((item, index) => {
+        if (index % 12 === 0) {
+          filtersproducts.push([]);
         }
-        return item.title.match(vm.productsearch);
-      });
-      tempData.forEach((item, i) => {
-        if (i % 10 === 0) {
-          vm.filtersproducts.push([]);
-        }
-        const pagenum = parseInt(i / 10, 10);
-        vm.filtersproducts[pagenum].push(item);
+        const pagenum = parseInt(index / 12, 10);
+        filtersproducts[pagenum].push(item);
       });
 
-      return vm.filtersproducts;
+      return filtersproducts;
     },
   },
 };
 </script>
-
-<style scoped>
-.chselection {
-  background: linear-gradient(to left, transparent 50%, #343a40 50%) right;
-  background-size: 200%;
-  transition: 0.5s ease-out;
-  outline: none;
-}
-
-.chselection:hover {
-  background-position: left;
-  color: #edf9ff;
-}
-
-.active {
-  color: #343a40;
-}
-</style>
