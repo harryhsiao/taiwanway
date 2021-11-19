@@ -1,8 +1,18 @@
-/* eslint-disable import/no-unresolved */
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div
+      class="
+        d-flex
+        justify-content-between
+        align-items-center
+        mb-3
+        py-4
+        h-20
+        position-sticky
+        top-percent-8
+        bg-white"
+    >
       <h2>優惠券管理</h2>
       <button type="button" class="btn btn-primary my-4" @click="openCouponmodal(true)">
         新增優惠券

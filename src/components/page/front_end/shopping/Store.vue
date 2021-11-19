@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 <template>
   <div>
     <Alertnote />
@@ -33,7 +32,7 @@
         <div class="border-top w-40"></div>
       </div>
     </div>
-    <div class="bg-white sticky-top w-100" style="top: 4rem; z-index: 100;">
+    <div class="bg-white w-100 position-sticky top-rem-4 zindex-100">
       <div class="container">
         <div class="pt-md-5 pb-md-4 py-3">
           <p class="text-center h3 mb-md-5 mb-3">看看有什麼好咪亞</p>
@@ -73,7 +72,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mb-6">
       <div class="row">
         <div
           class="col-md-4 mb-3"
@@ -115,7 +114,7 @@
                     {{ item.category }}
                   </p>
                 </div>
-                <div class="position-absolute" style="right: 5%; bottom: 20%;">
+                <div class="position-absolute right-percent-5 bottom-percent-20">
                   <p class="h2 text-white jumbtitle text-right" v-if="item.price">
                     {{ item.price | currency }}
                   </p>

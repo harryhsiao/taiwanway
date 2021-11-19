@@ -34,7 +34,7 @@
             class="btn btn-secondary badge-pill ml-3"
             to="/login"
             href="#"
-            v-if="memberin === false"
+            v-if="isLogin === false"
           >
             登入
           </router-link>
@@ -65,10 +65,11 @@
 <script>
 export default {
   name: 'NavBar',
+  props: ['isLogin'],
   data() {
     return {
       windowTop: 0,
-      memberin: false,
+      LoginState: this.isLogin,
       hambtn: false,
     };
   },
@@ -77,9 +78,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onScroll);
-  },
-  created() {
-    this.islogin();
   },
   computed: {
     stylechange() {
@@ -134,25 +132,14 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/logout`;
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
-          vm.memberin = false;
-          vm.$router.push('/');
+          vm.LoginState = false;
+          vm.$router.push('/').catch(() => {});
         }
       });
     },
     onScroll() {
       const vm = this;
       vm.windowTop = window.top.scrollY;
-    },
-    islogin() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
-      vm.$http.post(api).then((response) => {
-        if (response.data.success) {
-          vm.memberin = true;
-        } else {
-          vm.memberin = false;
-        }
-      });
     },
   },
 };

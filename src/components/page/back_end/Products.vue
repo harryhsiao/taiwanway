@@ -1,7 +1,19 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div
+      class="
+        d-flex
+        justify-content-between
+        align-items-center
+        mb-3
+        py-4
+        h-20
+        position-sticky
+        top-percent-8
+        bg-white
+        "
+    >
       <h2>產品管理</h2>
       <button type="button" class="btn btn-primary" @click="openmodel(true)">新增產品</button>
     </div>

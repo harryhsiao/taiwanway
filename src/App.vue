@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column" id="app">
-    <Navbar />
+    <Navbar :isLogin="memberin" />
     <Back2top />
     <router-view class="position-relative flex-grow-1 flex-shrink-0" v-if="isRouterAlive" />
   </div>
@@ -24,8 +24,22 @@ export default {
   data() {
     return {
       isRouterAlive: true,
+      memberin: false,
     };
   },
+  watch: {
+    $route() {
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
+      vm.$http.post(api).then((response) => {
+        console.log(response.data.success);
+        vm.memberin = response.data.success;
+      });
+    },
+  },
+  /* created() {
+    this.islogin();
+  }, */
   methods: {
     reload() {
       const vm = this;
@@ -34,6 +48,14 @@ export default {
         vm.isRouterAlive = true;
       });
     },
+    /* islogin() {
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
+      vm.$http.post(api).then((response) => {
+        console.log(response.data.success);
+        vm.memberin = response.data.success;
+      });
+    }, */
   },
 };
 </script>

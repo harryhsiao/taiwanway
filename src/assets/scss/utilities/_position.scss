@@ -1,11 +1,14 @@
 $sites: (top, left, bottom, right);
-$units: (px, rem, '%');
+$units: (px, rem);
 
 @each $site in $sites {
   @each $unit in $units {
     @for $i from 1 through 100 {
       .#{$site}-#{$unit}-#{$i} {
         #{$site}: #{$i}#{$unit};
+      }
+      .#{$site}-percent-#{$i} {
+        #{$site}: #{$i}#{'%'};
       }
     }
   }

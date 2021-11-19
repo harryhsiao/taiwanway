@@ -47,7 +47,7 @@ export default {
 }
 
 .CartButton-position {
-  bottom: 180px;
+  bottom: 110px;
   right: 10px;
   z-index: 1020;
 }

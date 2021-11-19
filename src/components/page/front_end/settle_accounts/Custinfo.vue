@@ -317,6 +317,7 @@ export default {
         .get(api)
         .then((resp) => {
           vm.custcart = resp.data.data.carts;
+          console.log('hi');
         })
         .then(() => {
           vm.totalPricecal();

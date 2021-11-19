@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 .topbutton {
-  bottom: 10px;
+  bottom: 22%;
   right: 10px;
   outline: none;
   transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.2s;
@@ -57,5 +57,14 @@ export default {
 
 .topbutton:hover {
   background-color: rgb(158, 222, 174);
+}
+
+@media screen and (max-width: 414px) {
+  .topbutton {
+    bottom: 30%;
+    right: 10px;
+    outline: none;
+    transition: opacity ease-in-out 0.2s;
+  }
 }
 </style>

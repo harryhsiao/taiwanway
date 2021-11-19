@@ -1,7 +1,17 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <h2>顧客訂單管理</h2>
+    <div
+      class="
+        mb-3
+        py-4
+        h-20
+        position-sticky
+        top-percent-8
+        bg-white"
+    >
+      <h2>顧客訂單管理</h2>
+    </div>
     <table class="table rwd-table">
       <thead>
         <tr>
