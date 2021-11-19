@@ -32,7 +32,6 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
       vm.$http.post(api).then((response) => {
-        console.log(response.data.success);
         vm.memberin = response.data.success;
       });
     },
