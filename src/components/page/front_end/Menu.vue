@@ -111,14 +111,14 @@
 </template>
 
 <script>
-import Footer from '../Footer.vue';
+import Footer from '../Footer.vue'
 
 export default {
   name: 'MenuPage',
   components: {
-    Footer,
+    Footer
   },
-  data() {
+  data () {
     return {
       custproducts: [],
       menuproducts: [],
@@ -129,44 +129,44 @@ export default {
       status: {
         barValue: 0,
         isLoading: false,
-        fileuploading: false,
-      },
-    };
+        fileuploading: false
+      }
+    }
   },
-  created() {
-    this.getproducts();
+  created () {
+    this.getproducts()
   },
   methods: {
-    getproducts() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+    getproducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       setTimeout(() => {
         vm.$http
           .get(api)
           .then((resp) => {
-            vm.custproducts = resp.data.products;
-            vm.isLoading = false;
+            vm.custproducts = resp.data.products
+            vm.isLoading = false
           })
           .then(() => {
-            vm.isSwitchOn();
-          });
-      }, 4000);
+            vm.isSwitchOn()
+          })
+      }, 4000)
     },
-    isSwitchOn() {
-      const vm = this;
+    isSwitchOn () {
+      const vm = this
       vm.custproducts.forEach((item) => {
         if (item.category === '點心') {
-          vm.dessert.push(item);
+          vm.dessert.push(item)
         } else if (item.category === '調味料') {
-          vm.on_the_side.push(item);
+          vm.on_the_side.push(item)
         } else {
-          vm.main_dish.push(item);
+          vm.main_dish.push(item)
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

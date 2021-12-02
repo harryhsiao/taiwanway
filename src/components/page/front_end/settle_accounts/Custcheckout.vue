@@ -151,7 +151,7 @@
 <script>
 export default {
   name: 'FinalCheck',
-  data() {
+  data () {
     return {
       custdata: JSON.parse(localStorage.getItem('custinfo')) || [],
       custcart: {},
@@ -159,64 +159,64 @@ export default {
       Discount: 100,
       total_price: 0,
       shipping: 0,
-      isLoading: false,
-    };
+      isLoading: false
+    }
   },
-  created() {
-    this.getcart();
+  created () {
+    this.getcart()
   },
   methods: {
-    getcart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getcart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http
         .get(api)
         .then((resp) => {
-          vm.custcart = resp.data.data.carts;
+          vm.custcart = resp.data.data.carts
         })
         .then(() => {
-          vm.totalPricecal();
-          vm.ShippingFee();
-          vm.isLoading = false;
-        });
+          vm.totalPricecal()
+          vm.ShippingFee()
+          vm.isLoading = false
+        })
     },
-    postinfo() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-      vm.isLoading = true;
+    postinfo () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      vm.isLoading = true
       vm.$http.post(api, { data: vm.custdata[0] }).then((response) => {
         if (response.data.success) {
-          vm.isLoading = false;
-          localStorage.removeItem('custinfo');
-          this.$router.push(`/checkpage/checkcomp/${response.data.orderId}`);
+          vm.isLoading = false
+          localStorage.removeItem('custinfo')
+          this.$router.push(`/checkpage/checkcomp/${response.data.orderId}`)
         }
-      });
+      })
     },
-    totalPricecal() {
-      const vm = this;
-      vm.totalPricePack = [];
+    totalPricecal () {
+      const vm = this
+      vm.totalPricePack = []
       vm.custcart.forEach((item) => {
         if (item.coupon) {
-          vm.Discount = item.coupon.percent;
-          vm.Coupontitle = item.coupon.title;
+          vm.Discount = item.coupon.percent
+          vm.Coupontitle = item.coupon.title
         }
         if (item.product.price) {
-          vm.totalPricePack.push(item.product.price * item.qty);
+          vm.totalPricePack.push(item.product.price * item.qty)
         } else {
-          vm.totalPricePack.push(item.product.origin_price * item.qty);
+          vm.totalPricePack.push(item.product.origin_price * item.qty)
         }
-      });
-      vm.total_price = vm.totalPricePack.reduce((a, b) => a + b, 0);
+      })
+      vm.total_price = vm.totalPricePack.reduce((a, b) => a + b, 0)
     },
-    ShippingFee() {
-      const vm = this;
+    ShippingFee () {
+      const vm = this
       if (vm.total_price < 3000) {
-        vm.shipping = 60;
+        vm.shipping = 60
       } else {
-        vm.shipping = 0;
+        vm.shipping = 0
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

@@ -48,26 +48,26 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       msg: '',
-      status: '',
-    };
+      status: ''
+    }
   },
   methods: {
-    updateMessage(message, status) {
-      const vm = this;
-      vm.msg = message;
-      vm.status = status;
-    },
+    updateMessage (message, status) {
+      const vm = this
+      vm.msg = message
+      vm.status = status
+    }
   },
-  created() {
-    const vm = this;
+  created () {
+    const vm = this
     vm.$infomodal.$on('message:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status);
-    });
-  },
-};
+      vm.updateMessage(message, status)
+    })
+  }
+}
 </script>
 
 <style scoped>

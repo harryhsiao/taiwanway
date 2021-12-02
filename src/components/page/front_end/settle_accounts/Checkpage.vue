@@ -40,46 +40,46 @@
 </template>
 
 <script>
-import Navbar from '../../Navbar.vue';
+import Navbar from '../../Navbar.vue'
 
 export default {
   name: 'CheckPage',
   components: {
-    Navbar,
+    Navbar
   },
-  data() {
+  data () {
     return {
       Height: 0,
       isLoading: false,
       alertopen: '',
-      currentTitle: '',
-    };
+      currentTitle: ''
+    }
   },
   watch: {
-    $route() {
-      this.getcurraddress();
-    },
+    $route () {
+      this.getcurraddress()
+    }
   },
-  created() {
-    this.getcurraddress();
+  created () {
+    this.getcurraddress()
   },
   methods: {
-    getcurraddress() {
-      const vm = this;
-      const homePath = vm.$route.path;
-      vm.alertopen = '';
+    getcurraddress () {
+      const vm = this
+      const homePath = vm.$route.path
+      vm.alertopen = ''
       if (homePath === '/checkpage/custinfo' || homePath === '/checkpage/custcheckout') {
-        vm.alertopen = homePath;
+        vm.alertopen = homePath
       } else {
-        vm.alertopen = 'complete';
+        vm.alertopen = 'complete'
       }
-    },
+    }
   },
-  mounted() {
-    this.Height = document.documentElement.clientHeight - 100;
+  mounted () {
+    this.Height = document.documentElement.clientHeight - 100
     window.onresize = () => {
-      this.Height = document.documentElement.clientHeight - 100;
-    };
-  },
-};
+      this.Height = document.documentElement.clientHeight - 100
+    }
+  }
+}
 </script>

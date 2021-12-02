@@ -1,3 +1,3 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-Vue.prototype.$infomodal = new Vue();
+Vue.prototype.$infomodal = new Vue()

@@ -66,81 +66,81 @@
 export default {
   name: 'NavBar',
   props: ['isLogin'],
-  data() {
+  data () {
     return {
       windowTop: 0,
       LoginState: this.isLogin,
-      hambtn: false,
-    };
+      hambtn: false
+    }
   },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   computed: {
-    stylechange() {
-      const vm = this;
-      const homePath = vm.$route.path;
+    stylechange () {
+      const vm = this
+      const homePath = vm.$route.path
       switch (homePath) {
         case '/':
           if (vm.windowTop > 150) {
-            return 'navbar-light bg-maincolor position-fixed bar-top py-lg-2';
+            return 'navbar-light bg-maincolor position-fixed bar-top py-lg-2'
           }
 
           if (vm.windowTop > 100) {
-            return 'navbar-light bg-maincolor position-absolute bar-top-miner py-lg-2';
+            return 'navbar-light bg-maincolor position-absolute bar-top-miner py-lg-2'
           }
 
-          return 'navbar-dark position-absolute py-lg-2';
+          return 'navbar-dark position-absolute py-lg-2'
 
         default:
-          return 'navbar-light bg-maincolor fixed-top p-2';
+          return 'navbar-light bg-maincolor fixed-top p-2'
       }
     },
-    logoapper() {
-      const vm = this;
-      const homePath = vm.$route.path;
+    logoapper () {
+      const vm = this
+      const homePath = vm.$route.path
       switch (homePath) {
         case '/':
           if (vm.windowTop > 150) {
-            return 'inline-block';
+            return 'inline-block'
           }
 
           if (vm.windowTop > 100) {
-            return 'none';
+            return 'none'
           }
 
-          return 'none';
+          return 'none'
 
         default:
-          return 'inline-block';
+          return 'inline-block'
       }
     },
-    hambtncontrol() {
-      const vm = this;
+    hambtncontrol () {
+      const vm = this
       if (vm.hambtn) {
-        return 'bg-transparent';
+        return 'bg-transparent'
       }
-      return 'bg-maincolor';
-    },
+      return 'bg-maincolor'
+    }
   },
   methods: {
-    logout() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/logout`;
+    logout () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/logout`
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
-          vm.LoginState = false;
-          vm.$router.push('/').catch(() => {});
+          vm.LoginState = false
+          vm.$router.push('/').catch(() => {})
         }
-      });
+      })
     },
-    onScroll() {
-      const vm = this;
-      vm.windowTop = window.top.scrollY;
-    },
-  },
-};
+    onScroll () {
+      const vm = this
+      vm.windowTop = window.top.scrollY
+    }
+  }
+}
 </script>

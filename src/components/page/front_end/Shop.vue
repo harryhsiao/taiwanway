@@ -136,6 +136,6 @@
 
 <script>
 export default {
-  name: 'StoreInfo',
-};
+  name: 'StoreInfo'
+}
 </script>

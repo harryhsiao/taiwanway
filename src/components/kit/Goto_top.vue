@@ -15,36 +15,36 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      windowTop: 0,
-    };
+      windowTop: 0
+    }
   },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   computed: {
-    stylechange() {
-      const vm = this;
+    stylechange () {
+      const vm = this
       if (document.body.scrollTop > 800 || vm.windowTop > 800) {
-        return 'opacity-5';
+        return 'opacity-5'
       }
-      return 'opacity-0';
-    },
+      return 'opacity-0'
+    }
   },
   methods: {
-    gotop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    gotop () {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     },
-    onScroll() {
-      const vm = this;
-      vm.windowTop = window.top.scrollY;
-    },
-  },
-};
+    onScroll () {
+      const vm = this
+      vm.windowTop = window.top.scrollY
+    }
+  }
+}
 </script>
 
 <style scoped>

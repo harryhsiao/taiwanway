@@ -330,117 +330,117 @@
 </template>
 
 <script>
-import Alertnote from '../../../kit/Alert_note.vue';
+import Alertnote from '../../../kit/Alert_note.vue'
 
 export default {
   name: 'AddCart',
-  data() {
+  data () {
     return {
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
       isnext: false,
       isLoading: false,
       isnone: true,
       cartlong: 0,
-      mytotalprice: 0,
-    };
+      mytotalprice: 0
+    }
   },
   components: {
-    Alertnote,
+    Alertnote
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    });
+      window.addEventListener('resize', this.onResize)
+    })
   },
 
-  created() {
-    this.pricecal();
-    this.incartnum();
+  created () {
+    this.pricecal()
+    this.incartnum()
   },
   computed: {
-    changestyle() {
-      const vm = this;
+    changestyle () {
+      const vm = this
       if (vm.isnext) {
-        return 'text-info';
+        return 'text-info'
       }
-      return 'text-secondary';
-    },
+      return 'text-secondary'
+    }
   },
   methods: {
-    pricecal() {
-      const vm = this;
-      const pricepack = [];
+    pricecal () {
+      const vm = this
+      const pricepack = []
       vm.incart.forEach((item) => {
         if (item.price) {
-          pricepack.push(item.price * item.qty);
+          pricepack.push(item.price * item.qty)
         } else {
-          pricepack.push(item.origin_price * item.qty);
+          pricepack.push(item.origin_price * item.qty)
         }
-      });
+      })
       if (pricepack.length > 0) {
-        vm.mytotalprice = pricepack.reduce((a, b) => a + b, 0);
+        vm.mytotalprice = pricepack.reduce((a, b) => a + b, 0)
       } else {
-        vm.mytotalprice = 0;
+        vm.mytotalprice = 0
       }
     },
-    incartnum() {
-      const vm = this;
-      vm.cartlong = vm.incart.length;
+    incartnum () {
+      const vm = this
+      vm.cartlong = vm.incart.length
       if (vm.cartlong === 0) {
-        vm.isnone = true;
+        vm.isnone = true
       } else {
-        vm.isnone = false;
+        vm.isnone = false
       }
     },
-    postcart() {
-      const vm = this;
+    postcart () {
+      const vm = this
       if (vm.incart.length > 0) {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-        const cacheID = [];
-        vm.isLoading = true;
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+        const cacheID = []
+        vm.isLoading = true
         vm.$http
           .get(api)
           .then((resp) => {
-            const cacheData = resp.data.data.carts;
+            const cacheData = resp.data.data.carts
             cacheData.forEach((item) => {
-              cacheID.push(item.id);
-            });
+              cacheID.push(item.id)
+            })
           })
-          .then(() => {
-            cacheID.forEach((item) => {
-              vm.$http.delete(`${api}/${item}`).then(() => {
-                console.log('購物車已經清空');
-              });
-            });
+          .then(async () => {
+            await Promise.all(
+              cacheID.map((item) => vm.$http.delete(`${api}/${item}`).then(() => {}))
+            )
           })
-          .then(() => {
-            vm.incart.forEach((item) => {
-              const cache = {
-                product_id: item.product_id,
-                qty: item.qty,
-              };
-              vm.$http
-                .post(api, { data: cache })
-                .then(() => {
-                  vm.incart = [];
-                  localStorage.removeItem('mycart');
-                  vm.isLoading = false;
-                })
-                .then(() => {
-                  vm.$router.push('/checkpage/custinfo').catch(() => {});
-                });
-            });
-          });
+          .then(async () => {
+            await Promise.all(
+              vm.incart.map((item) => {
+                const cache = {
+                  product_id: item.product_id,
+                  qty: item.qty
+                }
+                return vm.$http
+                  .post(api, { data: cache })
+                  .then(() => {
+                    vm.incart = []
+                    localStorage.removeItem('mycart')
+                  })
+                  .then(() => {
+                    vm.isLoading = false
+                    vm.$router.push('/checkpage/custinfo').catch(() => {})
+                  })
+              })
+            )
+          })
       } else {
-        vm.$bus.$emit('message:push', '購物車是空的噢', 'danger');
+        vm.$bus.$emit('message:push', '購物車是空的噢', 'danger')
       }
     },
-    pluscart(data) {
-      const vm = this;
-      let cache = {};
+    pluscart (data) {
+      const vm = this
+      let cache = {}
       vm.incart.forEach((item, keys) => {
         if (item.product_id === data.id) {
-          let { qty } = item;
+          let { qty } = item
           cache = {
             category: data.category,
             content: data.content,
@@ -452,20 +452,20 @@ export default {
             title: data.title,
             unit: data.unit,
             product_id: data.id,
-            qty: parseInt((qty += 1), 10),
-          };
-          vm.incart.splice(keys, 1, cache);
+            qty: parseInt((qty += 1), 10)
+          }
+          vm.incart.splice(keys, 1, cache)
         }
-      });
-      localStorage.setItem('mycart', JSON.stringify(vm.incart));
-      vm.pricecal();
+      })
+      localStorage.setItem('mycart', JSON.stringify(vm.incart))
+      vm.pricecal()
     },
-    minercart(data) {
-      const vm = this;
-      let cache = {};
+    minercart (data) {
+      const vm = this
+      let cache = {}
       vm.incart.forEach((item, keys) => {
         if (item.product_id === data.id && data.qty > 1) {
-          let { qty } = item;
+          let { qty } = item
           cache = {
             category: data.category,
             content: data.content,
@@ -477,43 +477,43 @@ export default {
             title: data.title,
             unit: data.unit,
             product_id: data.id,
-            qty: parseInt((qty -= 1), 10),
-          };
-          vm.incart.splice(keys, 1, cache);
+            qty: parseInt((qty -= 1), 10)
+          }
+          vm.incart.splice(keys, 1, cache)
         }
-      });
-      localStorage.setItem('mycart', JSON.stringify(vm.incart));
-      vm.pricecal();
+      })
+      localStorage.setItem('mycart', JSON.stringify(vm.incart))
+      vm.pricecal()
     },
-    deletedcart(id) {
-      const vm = this;
+    deletedcart (id) {
+      const vm = this
       vm.incart.forEach((item, keys) => {
         if (item.product_id === id) {
-          vm.incart.splice(keys, 1);
+          vm.incart.splice(keys, 1)
         }
-      });
+      })
       switch (vm.incart.length) {
         case 0:
-          localStorage.removeItem('mycart');
-          break;
+          localStorage.removeItem('mycart')
+          break
 
         default:
-          localStorage.setItem('mycart', JSON.stringify(vm.incart));
-          break;
+          localStorage.setItem('mycart', JSON.stringify(vm.incart))
+          break
       }
 
-      vm.pricecal();
-      vm.incartnum();
+      vm.pricecal()
+      vm.incartnum()
     },
-    killall() {
-      const vm = this;
-      vm.incart = [];
-      vm.cartlong = 0;
-      vm.isLoading = false;
-      localStorage.removeItem('mycart');
-      vm.isnone = true;
-      vm.mytotalprice = 0;
-    },
-  },
-};
+    killall () {
+      const vm = this
+      vm.incart = []
+      vm.cartlong = 0
+      vm.isLoading = false
+      localStorage.removeItem('mycart')
+      vm.isnone = true
+      vm.mytotalprice = 0
+    }
+  }
+}
 </script>

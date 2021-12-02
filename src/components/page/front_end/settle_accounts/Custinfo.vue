@@ -249,11 +249,11 @@
 </template>
 
 <script>
-import Alertinfotext from '../../../kit/Alert_infotext.vue';
+import Alertinfotext from '../../../kit/Alert_infotext.vue'
 
 export default {
   name: 'CustomInfo',
-  data() {
+  data () {
     return {
       countorys: [
         '台北市',
@@ -277,7 +277,7 @@ export default {
         '金門縣',
         '屏東縣',
         '台東縣',
-        '花蓮縣',
+        '花蓮縣'
       ],
       custcart: {},
       form: {
@@ -286,9 +286,9 @@ export default {
           email: '',
           tel: '',
           city: '',
-          address: '',
+          address: ''
         },
-        message: '',
+        message: ''
       },
       custdata: JSON.parse(localStorage.getItem('custinfo')) || [],
       totalPricePack: [],
@@ -298,94 +298,93 @@ export default {
       isLoading: false,
       Discount: 100,
       total_price: 0,
-      shipping: 0,
-    };
+      shipping: 0
+    }
   },
-  created() {
-    this.getcart();
-    this.getcustinfo();
+  created () {
+    this.getcart()
+    this.getcustinfo()
   },
   components: {
-    Alertinfotext,
+    Alertinfotext
   },
   methods: {
-    getcart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getcart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http
         .get(api)
         .then((resp) => {
-          vm.custcart = resp.data.data.carts;
-          console.log('hi');
+          vm.custcart = resp.data.data.carts
         })
         .then(() => {
-          vm.totalPricecal();
-          vm.ShippingFee();
-          vm.isLoading = false;
-        });
+          vm.totalPricecal()
+          vm.ShippingFee()
+          vm.isLoading = false
+        })
     },
-    getcustinfo() {
-      const vm = this;
+    getcustinfo () {
+      const vm = this
       vm.custdata.forEach((item) => {
-        vm.form.user.name = item.user.name;
-        vm.form.user.email = item.user.email;
-        vm.form.user.tel = item.user.tel;
-        vm.form.user.city = item.user.city;
-        vm.form.user.address = item.user.address;
-        vm.form.message = item.message;
-      });
+        vm.form.user.name = item.user.name
+        vm.form.user.email = item.user.email
+        vm.form.user.tel = item.user.tel
+        vm.form.user.city = item.user.city
+        vm.form.user.address = item.user.address
+        vm.form.message = item.message
+      })
     },
-    addcoupon() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+    addcoupon () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       const coupon = {
-        code: vm.couponcode,
-      };
+        code: vm.couponcode
+      }
       vm.$http.post(api, { data: coupon }).then((response) => {
         if (response.data.success) {
-          vm.$infotext.$emit('messsage:push', '已套用優惠券', 'success', 'yes');
+          vm.$infotext.$emit('messsage:push', '已套用優惠券', 'success', 'yes')
         } else {
-          vm.$infotext.$emit('messsage:push', '無效的優惠券', 'danger', 'no');
+          vm.$infotext.$emit('messsage:push', '無效的優惠券', 'danger', 'no')
         }
-        vm.getcart();
-        vm.couponcode = '';
-      });
+        vm.getcart()
+        vm.couponcode = ''
+      })
     },
-    totalPricecal() {
-      const vm = this;
-      vm.totalPricePack = [];
+    totalPricecal () {
+      const vm = this
+      vm.totalPricePack = []
       vm.custcart.forEach((item) => {
         if (item.coupon) {
-          vm.isCoupon = true;
-          vm.Discount = item.coupon.percent;
+          vm.isCoupon = true
+          vm.Discount = item.coupon.percent
         }
         if (item.product.price) {
-          vm.totalPricePack.push(item.product.price * item.qty);
+          vm.totalPricePack.push(item.product.price * item.qty)
         } else {
-          vm.totalPricePack.push(item.product.origin_price * item.qty);
+          vm.totalPricePack.push(item.product.origin_price * item.qty)
         }
-      });
-      vm.total_price = vm.totalPricePack.reduce((a, b) => a + b, 0);
+      })
+      vm.total_price = vm.totalPricePack.reduce((a, b) => a + b, 0)
     },
-    ShippingFee() {
-      const vm = this;
+    ShippingFee () {
+      const vm = this
       if (vm.total_price < 3000) {
-        vm.shipping = 60;
+        vm.shipping = 60
       } else {
-        vm.shipping = 0;
+        vm.shipping = 0
       }
-      vm.isLoading = false;
+      vm.isLoading = false
     },
-    subOrder() {
-      const vm = this;
-      vm.isLoading = true;
-      vm.custdata.splice(0, 1);
-      vm.custdata.push(vm.form);
-      localStorage.setItem('custinfo', JSON.stringify(vm.custdata));
-      vm.$router.push('/checkpage/custcheckout');
-      vm.isLoading = false;
-    },
-  },
-};
+    subOrder () {
+      const vm = this
+      vm.isLoading = true
+      vm.custdata.splice(0, 1)
+      vm.custdata.push(vm.form)
+      localStorage.setItem('custinfo', JSON.stringify(vm.custdata))
+      vm.$router.push('/checkpage/custcheckout')
+      vm.isLoading = false
+    }
+  }
+}
 </script>

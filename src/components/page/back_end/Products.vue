@@ -419,198 +419,198 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Pagination from '../../kit/Pagination.vue';
+import $ from 'jquery'
+import Pagination from '../../kit/Pagination.vue'
 
 export default {
   name: 'ProductsEdit',
-  data() {
+  data () {
     return {
       products: [],
       tempProduct: {
         image2: '',
         image3: '',
         image4: '',
-        is_enabled: 0,
+        is_enabled: 0
       },
       pagination: {},
       newdatas: false,
       isLoading: false,
       isReverse: false,
       status: { uploading: false },
-      rankwith: '',
-    };
+      rankwith: ''
+    }
   },
   components: {
-    Pagination,
+    Pagination
   },
-  created() {
-    this.getproducts();
+  created () {
+    this.getproducts()
   },
   computed: {
-    rankmethod() {
-      const vm = this;
+    rankmethod () {
+      const vm = this
       return vm.products.slice(0).sort((a, b) => {
         if (vm.isReverse === true) {
-          return a[vm.rankwith] - b[vm.rankwith];
+          return a[vm.rankwith] - b[vm.rankwith]
         }
-        return b[vm.rankwith] - a[vm.rankwith];
-      });
-    },
+        return b[vm.rankwith] - a[vm.rankwith]
+      })
+    }
   },
   methods: {
-    getproducts(page = 1) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
-      vm.isLoading = true;
+    getproducts (page = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.products = response.data.products;
-        vm.pagination = response.data.pagination;
-        vm.isLoading = false;
-      });
+        vm.products = response.data.products
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
     },
-    uploadfile() {
-      const vm = this;
-      const uploadedfile = this.$refs.files.files[0];
-      const formdata = new FormData();
-      formdata.append('file-to-upload', uploadedfile);
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      vm.status.uploading = true;
+    uploadfile () {
+      const vm = this
+      const uploadedfile = this.$refs.files.files[0]
+      const formdata = new FormData()
+      formdata.append('file-to-upload', uploadedfile)
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      vm.status.uploading = true
 
       vm.$http
         .post(api, formdata, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((resp) => {
-          vm.status.uploading = false;
+          vm.status.uploading = false
 
           if (resp.data.success) {
-            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl);
+            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl)
           } else {
-            this.$bus.$emit('messsage:push', resp.data.message, 'danger');
+            this.$bus.$emit('messsage:push', resp.data.message, 'danger')
           }
-        });
+        })
     },
-    uploadfile2() {
-      const vm = this;
-      const uploadedfile2 = this.$refs.files2.files[0];
-      const formdata = new FormData();
-      formdata.append('file-to-upload', uploadedfile2);
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      vm.status.uploading = true;
+    uploadfile2 () {
+      const vm = this
+      const uploadedfile2 = this.$refs.files2.files[0]
+      const formdata = new FormData()
+      formdata.append('file-to-upload', uploadedfile2)
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      vm.status.uploading = true
 
       vm.$http
         .post(api, formdata, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((resp) => {
-          vm.status.uploading = false;
+          vm.status.uploading = false
 
           if (resp.data.success) {
-            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl);
+            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl)
           } else {
-            this.$bus.$emit('messsage:push', resp.data.message, 'danger');
+            this.$bus.$emit('messsage:push', resp.data.message, 'danger')
           }
-        });
+        })
     },
-    uploadfile3() {
-      const vm = this;
-      const uploadedfile3 = this.$refs.files3.files[0];
-      const formdata = new FormData();
-      formdata.append('file-to-upload', uploadedfile3);
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      vm.status.uploading = true;
+    uploadfile3 () {
+      const vm = this
+      const uploadedfile3 = this.$refs.files3.files[0]
+      const formdata = new FormData()
+      formdata.append('file-to-upload', uploadedfile3)
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      vm.status.uploading = true
 
       vm.$http
         .post(api, formdata, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((resp) => {
-          vm.status.uploading = false;
+          vm.status.uploading = false
 
           if (resp.data.success) {
-            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl);
+            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl)
           } else {
-            this.$bus.$emit('messsage:push', resp.data.message, 'danger');
+            this.$bus.$emit('messsage:push', resp.data.message, 'danger')
           }
-        });
+        })
     },
-    uploadfile4() {
-      const vm = this;
-      const uploadedfile4 = this.$refs.files4.files[0];
-      const formdata = new FormData();
-      formdata.append('file-to-upload', uploadedfile4);
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      vm.status.uploading = true;
+    uploadfile4 () {
+      const vm = this
+      const uploadedfile4 = this.$refs.files4.files[0]
+      const formdata = new FormData()
+      formdata.append('file-to-upload', uploadedfile4)
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      vm.status.uploading = true
 
       vm.$http
         .post(api, formdata, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((resp) => {
-          vm.status.uploading = false;
+          vm.status.uploading = false
 
           if (resp.data.success) {
-            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl);
+            vm.$set(vm.tempProduct, 'imageUrl', resp.data.imageUrl)
           } else {
-            this.$bus.$emit('messsage:push', resp.data.message, 'danger');
+            this.$bus.$emit('messsage:push', resp.data.message, 'danger')
           }
-        });
+        })
     },
-    openmodel(newdatas, item) {
-      const vm = this;
+    openmodel (newdatas, item) {
+      const vm = this
       if (newdatas) {
         vm.tempProduct = {
           image2: '',
           image3: '',
           image4: '',
-          is_enabled: 0,
-        };
-        vm.newdatas = true;
+          is_enabled: 0
+        }
+        vm.newdatas = true
       } else {
-        vm.tempProduct = { ...item };
-        vm.newdatas = false;
+        vm.tempProduct = { ...item }
+        vm.newdatas = false
       }
-      $('#productsModal').modal('show');
+      $('#productsModal').modal('show')
     },
-    updateproduct() {
-      const vm = this;
-      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
-      let httpmethod = 'post';
+    updateproduct () {
+      const vm = this
+      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`
+      let httpmethod = 'post'
       if (!vm.newdatas) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        httpmethod = 'put';
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
+        httpmethod = 'put'
       }
       vm.$http[httpmethod](api, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
-          $('#productsModal').modal('hide');
-          vm.getproducts();
+          $('#productsModal').modal('hide')
+          vm.getproducts()
         } else {
-          alert('新增失敗');
-          vm.getproducts();
+          alert('新增失敗')
+          vm.getproducts()
         }
-      });
+      })
     },
-    openremovemodel(item) {
-      const vm = this;
-      vm.tempProduct = { ...item };
-      $('#delProductModal').modal('show');
+    openremovemodel (item) {
+      const vm = this
+      vm.tempProduct = { ...item }
+      $('#delProductModal').modal('show')
     },
-    removedata() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
+    removedata () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
       vm.$http.delete(api, { data: vm.tempProduct.id }).then((response) => {
         if (response.data.success) {
-          $('#delProductModal').modal('hide');
-          vm.getproducts();
+          $('#delProductModal').modal('hide')
+          vm.getproducts()
         } else {
-          $('#delProductModal').modal('hide');
-          vm.getproducts();
+          $('#delProductModal').modal('hide')
+          vm.getproducts()
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

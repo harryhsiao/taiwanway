@@ -16,44 +16,44 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      messages: [],
-    };
+      messages: []
+    }
   },
   methods: {
-    updateMessage(message, status) {
-      const vm = this;
-      const timestamp = Math.floor(new Date() / 1000);
+    updateMessage (message, status) {
+      const vm = this
+      const timestamp = Math.floor(new Date() / 1000)
       vm.messages.push({
         message,
         status,
-        timestamp,
-      });
-      vm.removeMessageWithTiming(timestamp);
+        timestamp
+      })
+      vm.removeMessageWithTiming(timestamp)
     },
-    removeMessage(num) {
-      const vm = this;
-      vm.messages.splice(num, 1);
+    removeMessage (num) {
+      const vm = this
+      vm.messages.splice(num, 1)
     },
-    removeMessageWithTiming(timestamp) {
-      const vm = this;
+    removeMessageWithTiming (timestamp) {
+      const vm = this
       setTimeout(() => {
         vm.messages.forEach((item, i) => {
           if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
+            vm.messages.splice(i, 1)
           }
-        });
-      }, 5000);
-    },
+        })
+      }, 5000)
+    }
   },
-  created() {
-    const vm = this;
+  created () {
+    const vm = this
     vm.$bus.$on('message:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status);
-    });
-  },
-};
+      vm.updateMessage(message, status)
+    })
+  }
+}
 </script>
 
 <style scope>

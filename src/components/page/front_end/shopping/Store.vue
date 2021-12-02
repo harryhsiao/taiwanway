@@ -169,12 +169,12 @@
 </template>
 
 <script>
-import Alertnote from '../../../kit/Alert_note.vue';
-import Cartbtn from '../../../kit/Cart_btn.vue';
+import Alertnote from '../../../kit/Alert_note.vue'
+import Cartbtn from '../../../kit/Cart_btn.vue'
 
 export default {
   name: 'CartPage',
-  data() {
+  data () {
     return {
       custproducts: [],
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
@@ -188,62 +188,62 @@ export default {
       cartlong: '',
       optiontext: '全部商品',
       searchtext: '',
-      isLoading: false,
-    };
+      isLoading: false
+    }
   },
   components: {
     Alertnote,
-    Cartbtn,
+    Cartbtn
   },
-  created() {
-    this.getproducts();
-    this.getcart();
-    this.cartnums();
+  created () {
+    this.getproducts()
+    this.getcart()
+    this.cartnums()
   },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
-    getcart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getcart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http.get(api).then((resp) => {
-        vm.cartnum = resp.data.data.carts;
+        vm.cartnum = resp.data.data.carts
         vm.cartnum.forEach((item) => {
-          vm.cartid.push(item.product_id);
-        });
-        vm.isLoading = false;
-      });
+          vm.cartid.push(item.product_id)
+        })
+        vm.isLoading = false
+      })
     },
-    getproducts() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+    getproducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       vm.$http.get(api).then((resp) => {
-        vm.onEnabled = resp.data.products;
+        vm.onEnabled = resp.data.products
         vm.onEnabled.forEach((item) => {
           if (item.is_enabled === 1) {
-            vm.custproducts.push(item);
+            vm.custproducts.push(item)
           }
-        });
-        vm.getoption(vm.custproducts);
-        vm.isLoading = false;
-      });
+        })
+        vm.getoption(vm.custproducts)
+        vm.isLoading = false
+      })
     },
-    cartnums() {
-      const vm = this;
-      vm.cartlong = vm.incart.length;
+    cartnums () {
+      const vm = this
+      vm.cartlong = vm.incart.length
     },
-    addcart(data) {
-      const vm = this;
-      const cacheCarID = [];
+    addcart (data) {
+      const vm = this
+      const cacheCarID = []
       vm.incart.forEach((item) => {
-        cacheCarID.push(item.product_id);
-      });
+        cacheCarID.push(item.product_id)
+      })
       if (cacheCarID.indexOf(data.id) === -1) {
         const cartContent = {
           category: data.category,
@@ -256,83 +256,83 @@ export default {
           title: data.title,
           unit: data.unit,
           product_id: data.id,
-          qty: 1,
-        };
-        vm.incart.push(cartContent);
-        localStorage.setItem('mycart', JSON.stringify(vm.incart));
+          qty: 1
+        }
+        vm.incart.push(cartContent)
+        localStorage.setItem('mycart', JSON.stringify(vm.incart))
       } else {
-        vm.$bus.$emit('message:push', '已經在購物車囉~', 'warning');
+        vm.$bus.$emit('message:push', '已經在購物車囉~', 'warning')
       }
-      vm.cartlong = vm.incart.length;
+      vm.cartlong = vm.incart.length
     },
-    getoption(element) {
-      const vm = this;
+    getoption (element) {
+      const vm = this
       element.forEach((el) => {
         if (vm.categorys.indexOf(el.category) === -1 && el.is_enabled === 1) {
-          vm.categorys.push(el.category);
+          vm.categorys.push(el.category)
         }
-      });
+      })
     },
-    changeoption(e) {
-      const vm = this;
-      const optioncontent = e.target.text;
-      vm.optiontext = optioncontent.split(' ').join('');
+    changeoption (e) {
+      const vm = this
+      const optioncontent = e.target.text
+      vm.optiontext = optioncontent.split(' ').join('')
     },
-    changeValue(e) {
-      const vm = this;
-      vm.optiontext = e.target.value;
+    changeValue (e) {
+      const vm = this
+      vm.optiontext = e.target.value
     },
-    onScroll() {
-      const vm = this;
-      vm.windowTop = window.top.scrollY;
+    onScroll () {
+      const vm = this
+      vm.windowTop = window.top.scrollY
     },
-    prev() {
-      const vm = this;
+    prev () {
+      const vm = this
       if (vm.currentpage === 0) {
-        vm.currentpage = 0;
+        vm.currentpage = 0
       } else {
-        vm.currentpage -= 1;
+        vm.currentpage -= 1
       }
     },
-    next() {
-      const vm = this;
+    next () {
+      const vm = this
       if (vm.currentpage === vm.filtersdata.length - 1) {
-        vm.currentpage = vm.filtersdata.length - 1;
+        vm.currentpage = vm.filtersdata.length - 1
       } else {
-        vm.currentpage += 1;
+        vm.currentpage += 1
       }
-    },
+    }
   },
   computed: {
-    filtersdata() {
-      const vm = this;
-      let tempData = [];
-      const filtersproducts = [];
-      const search = vm.custproducts.filter((item) => item.title.includes(vm.productsearch));
-      const option = vm.custproducts.filter((item) => vm.optiontext === item.category);
+    filtersdata () {
+      const vm = this
+      let tempData = []
+      const filtersproducts = []
+      const search = vm.custproducts.filter((item) => item.title.includes(vm.productsearch))
+      const option = vm.custproducts.filter((item) => vm.optiontext === item.category)
       switch (vm.productsearch) {
         case '':
           if (vm.optiontext === '全部商品' || vm.optiontext === '') {
-            tempData = vm.custproducts;
+            tempData = vm.custproducts
           } else {
-            tempData = option;
+            tempData = option
           }
-          break;
+          break
         default:
-          tempData = search;
-          break;
+          tempData = search
+          break
       }
 
       tempData.forEach((item, index) => {
         if (index % 12 === 0) {
-          filtersproducts.push([]);
+          filtersproducts.push([])
         }
-        const pagenum = parseInt(index / 12, 10);
-        filtersproducts[pagenum].push(item);
-      });
+        const pagenum = parseInt(index / 12, 10)
+        filtersproducts[pagenum].push(item)
+      })
 
-      return filtersproducts;
-    },
-  },
-};
+      return filtersproducts
+    }
+  }
+}
 </script>

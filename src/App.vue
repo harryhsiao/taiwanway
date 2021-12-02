@@ -7,56 +7,45 @@
 </template>
 
 <script>
-import Back2top from './components/kit/Goto_top.vue';
-import Navbar from './components/page/Navbar.vue';
+import Back2top from './components/kit/Goto_top.vue'
+import Navbar from './components/page/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Back2top,
+    Back2top
   },
-  provide() {
+  provide () {
     return {
-      reload: this.reload(),
-    };
+      reload: this.reload()
+    }
   },
-  data() {
+  data () {
     return {
       isRouterAlive: true,
-      memberin: false,
-    };
+      memberin: false
+    }
   },
   watch: {
-    $route() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
+    $route () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
       vm.$http.post(api).then((response) => {
-        vm.memberin = response.data.success;
-      });
-    },
+        vm.memberin = response.data.success
+      })
+    }
   },
-  /* created() {
-    this.islogin();
-  }, */
   methods: {
-    reload() {
-      const vm = this;
-      vm.isRouterAlive = false;
+    reload () {
+      const vm = this
+      vm.isRouterAlive = false
       vm.$nextTick(() => {
-        vm.isRouterAlive = true;
-      });
-    },
-    /* islogin() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
-      vm.$http.post(api).then((response) => {
-        console.log(response.data.success);
-        vm.memberin = response.data.success;
-      });
-    }, */
-  },
-};
+        vm.isRouterAlive = true
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">

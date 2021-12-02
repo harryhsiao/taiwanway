@@ -10,42 +10,42 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       msg: '',
       status: '',
       isCanUse: '',
-      fadeout: false,
-    };
+      fadeout: false
+    }
   },
   methods: {
-    updateMessage(message, status, isCanUse) {
-      const vm = this;
-      vm.msg = message;
-      vm.status = status;
-      vm.isCanUse = isCanUse;
-      vm.removeMessageWithTiming();
+    updateMessage (message, status, isCanUse) {
+      const vm = this
+      vm.msg = message
+      vm.status = status
+      vm.isCanUse = isCanUse
+      vm.removeMessageWithTiming()
     },
-    removeMessageWithTiming() {
-      const vm = this;
+    removeMessageWithTiming () {
+      const vm = this
       setTimeout(() => {
-        vm.fadeout = true;
-      }, 3000);
+        vm.fadeout = true
+      }, 3000)
       setTimeout(() => {
-        vm.msg = '';
-        vm.status = '';
-        vm.isCanUse = '';
-      }, 5000);
-    },
+        vm.msg = ''
+        vm.status = ''
+        vm.isCanUse = ''
+      }, 5000)
+    }
   },
-  created() {
-    const vm = this;
+  created () {
+    const vm = this
     vm.$infotext.$on('messsage:push', (message, status, isCanUse) => {
-      vm.fadeout = false;
-      vm.updateMessage(message, status, isCanUse);
-    });
-  },
-};
+      vm.fadeout = false
+      vm.updateMessage(message, status, isCanUse)
+    })
+  }
+}
 </script>
 
 <style scoped>

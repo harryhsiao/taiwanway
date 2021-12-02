@@ -58,34 +58,34 @@
 export default {
   name: 'pagination-number',
   props: ['pgnum'],
-  data() {
+  data () {
     return {
-      pageText: 1,
-    };
+      pageText: 1
+    }
   },
   methods: {
-    getpgnums(page, curpage) {
-      const vm = this;
+    getpgnums (page, curpage) {
+      const vm = this
       if (page === 'pre') {
-        vm.$emit('getpgnum', vm.pgnum.current_page - 1);
+        vm.$emit('getpgnum', vm.pgnum.current_page - 1)
       } else if (page === 'next') {
-        vm.$emit('getpgnum', vm.pgnum.current_page + 1);
+        vm.$emit('getpgnum', vm.pgnum.current_page + 1)
       } else {
-        vm.$emit('getpgnum', curpage);
+        vm.$emit('getpgnum', curpage)
       }
     },
-    getpg(page, curpage) {
-      const vm = this;
+    getpg (page, curpage) {
+      const vm = this
       if (page === 'pre') {
-        vm.pageText -= 1;
-        vm.$emit('getpgnum', vm.pageText);
+        vm.pageText -= 1
+        vm.$emit('getpgnum', vm.pageText)
       } else if (page === 'next') {
-        vm.pageText += 1;
-        vm.$emit('getpgnum', vm.pageText);
+        vm.pageText += 1
+        vm.$emit('getpgnum', vm.pageText)
       } else {
-        vm.$emit('getpgnum', curpage);
+        vm.$emit('getpgnum', curpage)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

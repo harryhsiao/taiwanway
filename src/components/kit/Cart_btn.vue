@@ -37,8 +37,8 @@
 
 <script>
 export default {
-  props: ['cartnum'],
-};
+  props: ['cartnum']
+}
 </script>
 
 <style scoped>

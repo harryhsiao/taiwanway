@@ -50,29 +50,29 @@
 <script>
 export default {
   name: 'user-Login',
-  data() {
+  data () {
     return {
       user: {
         username: '',
-        password: '',
-      },
-    };
+        password: ''
+      }
+    }
   },
   methods: {
-    login() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
+    login () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       vm.$http.post(api, vm.user).then((response) => {
         if (response.data.success) {
-          const { token } = response.data;
-          const { expired } = response.data;
-          document.cookie = `custToken=${token};expires=${new Date(expired)};`;
-          vm.$router.push('/dashboard/products');
+          const { token } = response.data
+          const { expired } = response.data
+          document.cookie = `custToken=${token};expires=${new Date(expired)};`
+          vm.$router.push('/dashboard/products')
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

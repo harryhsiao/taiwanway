@@ -30,7 +30,7 @@
                   data-target="#collapseOne"
                   aria-expanded="true"
                   aria-controls="collapseOne"
-                  style="font-size: 2em;"
+                  style="font-size: 2em"
                 >
                   訂單明細 <i class="fas fa-caret-down"></i>
                 </button>
@@ -102,66 +102,66 @@
 </template>
 
 <script>
-import Alertcard from '../../../kit/Alert_card.vue';
+import Alertcard from '../../../kit/Alert_card.vue'
 
 export default {
   name: 'CheckComplete',
-  data() {
+  data () {
     return {
       order: {
-        user: {},
+        user: {}
       },
       totalPricePack: [],
       orderId: '',
       isLoading: false,
       total_price: 0,
-      Discount: 100,
-    };
+      Discount: 100
+    }
   },
   components: {
-    Alertcard,
+    Alertcard
   },
   methods: {
-    getorder() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      vm.isLoading = true;
+    getorder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
+      vm.isLoading = true
       vm.$http.get(api).then((resp) => {
-        vm.order = resp.data.order;
-        vm.total_price = Math.ceil(resp.data.order.total);
-        vm.isLoading = false;
-      });
+        vm.order = resp.data.order
+        vm.total_price = Math.ceil(resp.data.order.total)
+        vm.isLoading = false
+      })
     },
-    letPay() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
+    letPay () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
+      vm.isLoading = true
       vm.$http.post(api).then((resp) => {
         if (resp.data.success) {
-          vm.getorder();
+          vm.getorder()
         }
-        vm.isLoading = false;
-        vm.$infomodal.$emit('message:push', '付款成功', 'success');
-      });
+        vm.isLoading = false
+        vm.$infomodal.$emit('message:push', '付款成功', 'success')
+      })
     },
-    totalPricecal() {
-      const vm = this;
+    totalPricecal () {
+      const vm = this
       vm.order.forEach((item) => {
-        vm.total_price = item.total;
-      });
+        vm.total_price = item.total
+      })
     },
-    ShippingFee() {
-      const vm = this;
+    ShippingFee () {
+      const vm = this
       if (vm.total_price < 3000) {
-        vm.shipping = 60;
+        vm.shipping = 60
       } else {
-        vm.shipping = 0;
+        vm.shipping = 0
       }
-    },
+    }
   },
-  created() {
-    this.orderId = this.$route.params.order_id;
-    this.getorder();
-  },
-};
+  created () {
+    this.orderId = this.$route.params.order_id
+    this.getorder()
+  }
+}
 </script>

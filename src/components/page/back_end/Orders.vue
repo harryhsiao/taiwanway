@@ -93,55 +93,55 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Pagination from '../../kit/Pagination.vue';
+import $ from 'jquery'
+import Pagination from '../../kit/Pagination.vue'
 
 export default {
   name: 'CustomOrder',
-  data() {
+  data () {
     return {
       orders: {
-        user: {},
+        user: {}
       },
       pagination: {},
-      isLoading: false,
-    };
+      isLoading: false
+    }
   },
-  created() {
-    this.getorders();
+  created () {
+    this.getorders()
   },
   components: {
-    Pagination,
+    Pagination
   },
   methods: {
-    getorders(page = 1) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
-      vm.isLoading = true;
+    getorders (page = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.orders = response.data.orders;
-        vm.pagination = response.data.pagination;
-        vm.isLoading = false;
-      });
+        vm.orders = response.data.orders
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
     },
-    openremovemodel(item) {
-      const vm = this;
-      vm.orders = { ...item };
-      $('#delProductModal').modal('show');
+    openremovemodel (item) {
+      const vm = this
+      vm.orders = { ...item }
+      $('#delProductModal').modal('show')
     },
-    removedata() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orders.id}`;
+    removedata () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orders.id}`
       vm.$http.delete(api, { data: vm.orders.id }).then((response) => {
         if (response.data.success) {
-          $('#delProductModal').modal('hide');
-          vm.getorders();
+          $('#delProductModal').modal('hide')
+          vm.getorders()
         } else {
-          $('#delProductModal').modal('hide');
-          vm.getorders();
+          $('#delProductModal').modal('hide')
+          vm.getorders()
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>

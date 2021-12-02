@@ -1,3 +1,3 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-Vue.prototype.$alertcard = new Vue();
+Vue.prototype.$alertcard = new Vue()

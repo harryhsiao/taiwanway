@@ -111,6 +111,6 @@
 
 <script>
 export default {
-  name: 'page-Footer',
-};
+  name: 'page-Footer'
+}
 </script>

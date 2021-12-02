@@ -304,22 +304,22 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Footer from '../Footer.vue';
+import $ from 'jquery'
+import Footer from '../Footer.vue'
 
 export default {
   name: 'HomePage',
   components: {
-    Footer,
+    Footer
   },
-  mounted() {
-    $('[data-toggle="tooltip"]').tooltip();
+  mounted () {
+    $('[data-toggle="tooltip"]').tooltip()
   },
   methods: {
-    goto() {
-      const ingred = document.getElementById('ingred');
-      ingred.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    },
-  },
-};
+    goto () {
+      const ingred = document.getElementById('ingred')
+      ingred.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+}
 </script>

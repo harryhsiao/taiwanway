@@ -190,12 +190,12 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Pagination from '../../kit/Pagination.vue';
+import $ from 'jquery'
+import Pagination from '../../kit/Pagination.vue'
 
 export default {
   name: 'CouponPage',
-  data() {
+  data () {
     return {
       coupons: [],
       pagination: {},
@@ -204,108 +204,108 @@ export default {
         is_enabled: 0,
         percent: 100,
         due_date: 0,
-        code: '',
+        code: ''
       },
       isNew: false,
       isadd: false,
       dateAndTime: '',
       isLoading: false,
-      due_date: new Date(),
-    };
+      due_date: new Date()
+    }
   },
-  created() {
-    this.getcoupons();
-    this.dateAndTime = Math.floor(new Date().getTime() / 1000);
+  created () {
+    this.getcoupons()
+    this.dateAndTime = Math.floor(new Date().getTime() / 1000)
   },
   computed: {
-    filterdate() {
-      const vm = this;
+    filterdate () {
+      const vm = this
       return vm.coupons.filter((element) => {
         if (element.due_date > vm.dateAndTime) {
-          const elements = element;
-          elements.is_enabled = 1;
+          const elements = element
+          elements.is_enabled = 1
         } else {
-          const elements = element;
-          elements.is_enabled = 0;
+          const elements = element
+          elements.is_enabled = 0
         }
-        const elements = element;
-        return elements;
-      });
-    },
+        const elements = element
+        return elements
+      })
+    }
   },
   components: {
-    Pagination,
+    Pagination
   },
   watch: {
-    due_date() {
-      const vm = this;
-      const timestamp = Math.floor(new Date(vm.due_date) / 1000);
-      vm.tempcoupon.due_date = timestamp;
-    },
+    due_date () {
+      const vm = this
+      const timestamp = Math.floor(new Date(vm.due_date) / 1000)
+      vm.tempcoupon.due_date = timestamp
+    }
   },
   filters: {
-    dateFilter(time) {
-      const date = new Date(time * 1000);
-      return date.toLocaleDateString();
-    },
+    dateFilter (time) {
+      const date = new Date(time * 1000)
+      return date.toLocaleDateString()
+    }
   },
   methods: {
-    getcoupons(page = 1) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      vm.isLoading = true;
+    getcoupons (page = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.coupons = response.data.coupons;
-        vm.pagination = response.data.pagination;
-        vm.isLoading = false;
-      });
+        vm.coupons = response.data.coupons
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
     },
-    openCouponmodal(isNew, item) {
-      const vm = this;
-      $('#couponModal').modal('show');
-      vm.isNew = isNew;
+    openCouponmodal (isNew, item) {
+      const vm = this
+      $('#couponModal').modal('show')
+      vm.isNew = isNew
       if (vm.isNew) {
-        vm.tempcoupon = {};
+        vm.tempcoupon = {}
       } else {
-        vm.tempcoupon = { ...item };
-        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
-        vm.due_date = [dateAndTime];
+        vm.tempcoupon = { ...item }
+        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T')
+        vm.due_date = [dateAndTime]
       }
     },
-    updateCoupon() {
-      const vm = this;
+    updateCoupon () {
+      const vm = this
       if (vm.isNew) {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
         vm.$http.post(api, { data: vm.tempcoupon }).then(() => {
-          $('#couponModal').modal('hide');
-          this.getcoupons();
-        });
+          $('#couponModal').modal('hide')
+          this.getcoupons()
+        })
       } else {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempcoupon.id}`;
-        vm.due_date = new Date(vm.tempcoupon.due_date * 1000);
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempcoupon.id}`
+        vm.due_date = new Date(vm.tempcoupon.due_date * 1000)
         vm.$http.put(api, { data: vm.tempcoupon }).then(() => {
-          $('#couponModal').modal('hide');
-          this.getcoupons();
-        });
+          $('#couponModal').modal('hide')
+          this.getcoupons()
+        })
       }
     },
-    openremovemodel(item) {
-      this.tempcoupon = { ...item };
-      $('#delProductModal').modal('show');
+    openremovemodel (item) {
+      this.tempcoupon = { ...item }
+      $('#delProductModal').modal('show')
     },
-    removedata() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempcoupon.id}`;
+    removedata () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempcoupon.id}`
       vm.$http.delete(api, { data: vm.tempcoupon.id }).then((response) => {
         if (response.data.success) {
-          $('#delProductModal').modal('hide');
-          vm.getcoupons();
+          $('#delProductModal').modal('hide')
+          vm.getcoupons()
         } else {
-          $('#delProductModal').modal('hide');
-          vm.getcoupons();
+          $('#delProductModal').modal('hide')
+          vm.getcoupons()
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>

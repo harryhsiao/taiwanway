@@ -76,27 +76,27 @@
 <script>
 export default {
   name: 'SideBar',
-  data() {
+  data () {
     return {
-      tran: false,
-    };
+      tran: false
+    }
   },
   methods: {
-    logout() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/logout`;
+    logout () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/logout`
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
-          vm.$router.push('/');
+          vm.$router.push('/')
         }
-      });
+      })
     },
-    onsider() {
-      const vm = this;
-      vm.tran = !vm.tran;
-    },
-  },
-};
+    onsider () {
+      const vm = this
+      vm.tran = !vm.tran
+    }
+  }
+}
 </script>
 
 <style scoped>

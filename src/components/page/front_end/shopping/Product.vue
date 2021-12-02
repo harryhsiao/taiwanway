@@ -453,28 +453,28 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Footer from '../../Footer.vue';
-import Cartbtn from '../../../kit/Cart_btn.vue';
+import $ from 'jquery'
+import Footer from '../../Footer.vue'
+import Cartbtn from '../../../kit/Cart_btn.vue'
 
 export default {
   name: 'ProductDetialPage',
   components: {
     Footer,
-    Cartbtn,
+    Cartbtn
   },
   inject: ['reload'],
-  data() {
+  data () {
     return {
       product: {
         content: '',
-        description: '',
+        description: ''
       },
       swiperOptionTop: {
         loop: false,
         loopedSlides: 5,
         spaceBetween: 10,
-        watchOverflow: true,
+        watchOverflow: true
       },
       swiperOptionThumbs: {
         loop: false,
@@ -484,79 +484,79 @@ export default {
         slidesPerView: 'auto',
         touchRatio: 0.2,
         slideToClickedSlide: true,
-        watchOverflow: true,
+        watchOverflow: true
       },
       custproducts: [],
       imagepack: [],
       incart: JSON.parse(localStorage.getItem('mycart')) || [],
       cartlong: 0,
       qty: 1,
-      isLoading: false,
-    };
+      isLoading: false
+    }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      const swiperTop = this.$refs.swiperTop.$swiper;
-      const swiperThumbs = this.$refs.swiperThumbs.$swiper;
-      swiperTop.controller.control = swiperThumbs;
-      swiperThumbs.controller.control = swiperTop;
-    });
+      const swiperTop = this.$refs.swiperTop.$swiper
+      const swiperThumbs = this.$refs.swiperThumbs.$swiper
+      swiperTop.controller.control = swiperThumbs
+      swiperThumbs.controller.control = swiperTop
+    })
     $('.collapse')
-      .on('show.bs.collapse', function show() {
+      .on('show.bs.collapse', function show () {
         $(this)
           .parent()
           .find('.collapseicon')
-          .toggleClass('isopen');
+          .toggleClass('isopen')
       })
-      .on('hidden.bs.collapse', function hidden() {
+      .on('hidden.bs.collapse', function hidden () {
         $(this)
           .parent()
           .find('.collapseicon')
-          .removeClass('isopen');
-      });
-    $('#info_accordion').collapse();
-    $('.collapse').collapse();
+          .removeClass('isopen')
+      })
+    $('#info_accordion').collapse()
+    $('.collapse').collapse()
   },
-  created() {
-    this.getproduct(this.$route.params.productId);
-    this.getproducts();
+  created () {
+    this.getproduct(this.$route.params.productId)
+    this.getproducts()
   },
   computed: {
-    getsameproduct() {
-      const vm = this;
+    getsameproduct () {
+      const vm = this
       return vm.custproducts.filter(
-        (item) => item.id !== vm.product.id && item.category === vm.product.category,
-      );
-    },
+        (item) => item.id !== vm.product.id && item.category === vm.product.category
+      )
+    }
   },
   methods: {
-    getproducts() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+    getproducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.$http.get(api).then((resp) => {
-        vm.custproducts = resp.data.products;
-      });
+        vm.custproducts = resp.data.products
+      })
     },
-    getproduct(id) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-      vm.isLoading = true;
-      vm.cartlong = vm.incart.length;
+    getproduct (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.isLoading = true
+      vm.cartlong = vm.incart.length
       vm.$http.get(api).then((response) => {
-        vm.product = response.data.product;
-        vm.product.description = response.data.product.description.replace(/\n/g, '<br/>');
-        vm.product.content = response.data.product.content.replace(/\n/g, '<br/>');
-        window.scrollTo({ top: 0, Left: 0, behavior: 'smooth' });
-        vm.isLoading = false;
-      });
+        vm.product = response.data.product
+        vm.product.description = response.data.product.description.replace(/\n/g, '<br/>')
+        vm.product.content = response.data.product.content.replace(/\n/g, '<br/>')
+        window.scrollTo({ top: 0, Left: 0, behavior: 'smooth' })
+        vm.isLoading = false
+      })
     },
-    addcart(data) {
-      const vm = this;
-      const cacheCarID = [];
-      vm.isLoading = true;
+    addcart (data) {
+      const vm = this
+      const cacheCarID = []
+      vm.isLoading = true
       vm.incart.forEach((item) => {
-        cacheCarID.push(item.product_id);
-      });
+        cacheCarID.push(item.product_id)
+      })
       if (cacheCarID.indexOf(data.id) === -1) {
         const cartContent = {
           category: data.category,
@@ -569,16 +569,16 @@ export default {
           title: data.title,
           unit: data.unit,
           product_id: data.id,
-          qty: vm.qty,
-        };
-        vm.incart.push(cartContent);
-        localStorage.setItem('mycart', JSON.stringify(vm.incart));
-        vm.isLoading = false;
+          qty: vm.qty
+        }
+        vm.incart.push(cartContent)
+        localStorage.setItem('mycart', JSON.stringify(vm.incart))
+        vm.isLoading = false
       } else {
-        let cache = {};
+        let cache = {}
         vm.incart.forEach((item, keys) => {
           if (item.product_id === data.id) {
-            let { qty } = item;
+            let { qty } = item
             cache = {
               category: data.category,
               content: data.content,
@@ -590,30 +590,30 @@ export default {
               title: data.title,
               unit: data.unit,
               product_id: data.id,
-              qty: (qty += vm.qty),
-            };
-            vm.incart.splice(keys, 1, cache);
+              qty: (qty += vm.qty)
+            }
+            vm.incart.splice(keys, 1, cache)
           }
-        });
-        localStorage.setItem('mycart', JSON.stringify(vm.incart));
-        vm.isLoading = false;
+        })
+        localStorage.setItem('mycart', JSON.stringify(vm.incart))
+        vm.isLoading = false
       }
-      vm.cartlong = vm.incart.length;
+      vm.cartlong = vm.incart.length
     },
-    currentSlide(n) {
-      const slides = document.querySelectorAll('.mySlides');
-      const dots = document.querySelectorAll('.demo');
+    currentSlide (n) {
+      const slides = document.querySelectorAll('.mySlides')
+      const dots = document.querySelectorAll('.demo')
       for (let i = 0; i < slides.length; i += 1) {
-        slides[i].style.opacity = '0';
+        slides[i].style.opacity = '0'
       }
       for (let i = 0; i < dots.length; i += 1) {
-        dots[i].className = dots[i].className.replace('activee', '');
+        dots[i].className = dots[i].className.replace('activee', '')
       }
-      slides[n].style.opacity = '1';
-      dots[n].className += ' activee';
-    },
-  },
-};
+      slides[n].style.opacity = '1'
+      dots[n].className += ' activee'
+    }
+  }
+}
 </script>
 
 <style scoped>
