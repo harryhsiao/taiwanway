@@ -9,6 +9,7 @@
   結帳/下單<br/>
 
   * 後台:<br/>
+    (Account: harryasiao@gmail.com passWord:test123)<br/>
     管理者登入<br/>
     控制介面<br/>
     商品管理(CRUD)<br/>
