@@ -13,11 +13,11 @@
           text-center
           align-items-center"
       >
-        <img
+        <!--img
           class="img-fluid mb-2 hrem-9"
           src="https://upload.cc/i1/2021/03/17/DuLmv7.png"
           alt="logo"
-        />
+        /-->
         <p class="text-white border-top pt-4 h3">台灣特色料理餐廳</p>
       </div>
       <div class="text-center pt-5" data-aos="fade-in" data-aos-delay="100" data-aos-offset="50">
